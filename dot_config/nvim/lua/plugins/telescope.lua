@@ -7,7 +7,7 @@ return {
       },
     },
     keys = {
-      { "<leader><leader>", false },
+      -- { "<leader><leader>", false },
       { "<leader>ff", LazyVim.pick("files", { no_ignore = true, hidden = true }), desc = "Find Files (Root Dir)" },
       {
         "<leader>fv",
@@ -27,23 +27,23 @@ return {
       },
     },
   },
-  {
-    "danielfalk/smart-open.nvim",
-    branch = "0.2.x",
-    config = function()
-      require("telescope").load_extension("smart_open")
-    end,
-    dependencies = {
-      "kkharji/sqlite.lua",
-      { "nvim-telescope/telescope-fzy-native.nvim" },
-    },
-    keys = {
-      {
-        "<leader><leader>",
-        function()
-          require("telescope").extensions.smart_open.smart_open()
-        end,
-      },
-    },
-  },
+  -- {
+  --   "danielfalk/smart-open.nvim",
+  --   branch = "0.2.x",
+  --   config = function()
+  --     require("telescope").load_extension("smart_open")
+  --   end,
+  --   dependencies = {
+  --     "kkharji/sqlite.lua",
+  --     { "nvim-telescope/telescope-fzy-native.nvim" },
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader><leader>",
+  --       function()
+  --         require("telescope").extensions.smart_open.smart_open()
+  --       end,
+  --     },
+  --   },
+  -- },
 }

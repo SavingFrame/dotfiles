@@ -35,7 +35,6 @@ return {
             end
 
             if value == path then
-              vim.print(path)
               return {
                 text = string.format(" ⥤ %d", i), -- <-- Add your favorite harpoon like arrow here
                 highlight = config.highlight or "NeoTreeDirectoryIcon",
