@@ -37,6 +37,7 @@ function M.getTelescopeOpts(state, path)
     search_dirs = { path },
     no_ignore = true,
     hidden = true,
+    additional_args = { "--hidden", "--no-ignore" },
     attach_mappings = function(prompt_bufnr, map)
       local actions = require("telescope.actions")
       actions.select_default:replace(function()

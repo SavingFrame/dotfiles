@@ -1,22 +1,18 @@
 return {
-  { "lukas-reineke/cmp-under-comparator" },
   {
     -- "iguanacucumber/magazine.nvim",
     "hrsh7th/nvim-cmp",
-    dependencies = {
-      "lukas-reineke/cmp-under-comparator",
-    },
     name = "nvim-cmp", -- Otherwise highlighting gets messed up
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
       opts.performance = {
 
-        ce = 0, -- default is 60ms
+        debounce = 0, -- default is 60ms
         throttle = 0, -- default is 30ms
       }
       opts.sorting = {
-        priority_weight = 1,
+        priority_weight = 2,
         comparators = {
           cmp.config.compare.offset,
           cmp.config.compare.exact,

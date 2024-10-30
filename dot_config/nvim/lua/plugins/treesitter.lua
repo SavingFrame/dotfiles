@@ -4,7 +4,7 @@ return {
 
     indent = {
       enable = true,
-      disable = { "python" }, -- Disable Tree-sitter indent for Python
+      -- disable = { "python" }, -- Disable Tree-sitter indent for Python
     },
     ensure_installed = {
       "bash",
