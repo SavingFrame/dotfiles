@@ -4,12 +4,14 @@ font-family-italic = "JetBrainsMono Nerd Font Mono Italic"
 font-family-bold-italic = "JetBrainsMono Nerd Font Mono ExtraBold Italic"
 
 font-size = 14
-theme = rose-pine
+# theme = rose-pine
+# selection-background = 403d52
+theme = onedark
 macos-titlebar-style = hidden
 confirm-close-surface = false
 window-padding-x = 6
-background-opacity = 0.95
-
+background-opacity = 0.90
+background-blur-radius = 20
 
 cursor-style = block
 cursor-style-blink = true
@@ -19,7 +21,6 @@ copy-on-select = clipboard
 
 adjust-cell-height = 35%
 background-blur-radius = 10
-selection-background = 403d52
 
 bold-is-bright = true
 link-url = true
@@ -36,4 +37,3 @@ keybind = super+physical:eight=text:\x02\x38
 keybind = super+physical:nine=text:\x02\x39
 keybind = super+t=text:\x02\x63
 keybind = super+j=text:\x02\x54
-# command = /bin/zsh -c '/opt/homebrew/bin/tmux attach-session || /opt/homebrew/bin/tmux new-session'

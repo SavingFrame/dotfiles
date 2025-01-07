@@ -4,7 +4,7 @@ return {
     events = { "BufWritePost", "BufReadPost" },
     linters_by_ft = {
       -- python = { "flake8", "mypy" },
-      python = { "dmypy" },
+      python = { "mypy" },
     },
   },
 }
