@@ -1,6 +1,6 @@
 return {
   { "microsoft/python-type-stubs" },
-  -- { "Vimjas/vim-python-pep8-indent", ft = "python" },
+  { "Vimjas/vim-python-pep8-indent", ft = "python" },
   {
     "ranelpadon/python-copy-reference.vim",
     keys = {

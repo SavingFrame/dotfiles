@@ -43,3 +43,10 @@ vim.keymap.set(
 )
 
 vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, silent = true, desc = "Paste without rewrite buffer" })
+--
+vim.keymap.set("n", "<leader>gb", function()
+  Snacks.git.blame_line()
+end, { desc = "Git Blame Line" })
+vim.keymap.set("n", "<leader>gB", function()
+  Snacks.picker.git_log_line()
+end, { desc = "Git Blame Line" })
