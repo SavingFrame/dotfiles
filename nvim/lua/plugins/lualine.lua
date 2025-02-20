@@ -1,13 +1,13 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "navarasu/onedark.nvim",
-    },
+    -- dependencies = {
+    --   "navarasu/onedark.nvim",
+    -- },
     event = "VeryLazy",
     opts = function(_, opts)
       -- opts.options.theme = "rose-pine"
-      opts.options.theme = "onedark"
+      -- opts.options.theme = "onedark"
       opts.sections.lualine_c[4] = {
         LazyVim.lualine.pretty_path({
           length = 10,

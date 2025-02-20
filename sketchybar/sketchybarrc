@@ -59,12 +59,12 @@ $SKETCHBAR_BIN --bar height=50                                                  
 $SKETCHBAR_BIN --add event window_focus
 $SKETCHBAR_BIN --add event title_change 
 $SKETCHBAR_BIN --add event aerospace_workspace_change
-#. "$ITEM_DIR/spaces.sh"
-. "$ITEM_DIR/aerospace.sh"
+. "$ITEM_DIR/spaces.sh"
+#. "$ITEM_DIR/aerospace.sh"
 #. "$ITEM_DIR/music.sh"
-# . "$ITEM_DIR/yabai.sh"
+ . "$ITEM_DIR/yabai.sh"
 
-#. "$ITEM_DIR/window_title.sh"
+. "$ITEM_DIR/window_title.sh"
 
 . "$ITEM_DIR/system.sh"
 . "$ITEM_DIR/mic.sh"
