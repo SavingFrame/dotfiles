@@ -13,28 +13,28 @@ return {
     end
 
     -- Return the key mappings to be configured by LazyVim
-    -- return {
-    --   {
-    --     "<leader>gdd",
-    --     function()
-    --       toggleDiffView("DiffviewOpen")
-    --     end,
-    --     desc = "Toggle Diff view",
-    --   },
-    --   {
-    --     "<leader>gdD",
-    --     function()
-    --       toggleDiffView("DiffviewOpen -- %")
-    --     end,
-    --     desc = "Toggle Diff view for current file",
-    --   },
-    --   {
-    --     "<leader>gdf",
-    --     function()
-    --       toggleDiffView("DiffviewFileHistory %")
-    --     end,
-    --     desc = "File history",
-    --   },
-    -- }
+    return {
+      {
+        "<leader>gdd",
+        function()
+          toggleDiffView("DiffviewOpen")
+        end,
+        desc = "Toggle Diff view",
+      },
+      {
+        "<leader>gdD",
+        function()
+          toggleDiffView("DiffviewOpen -- %")
+        end,
+        desc = "Toggle Diff view for current file",
+      },
+      {
+        "<leader>gdf",
+        function()
+          toggleDiffView("DiffviewFileHistory %")
+        end,
+        desc = "File history",
+      },
+    }
   end,
 }
