@@ -1,0 +1,37 @@
+return {
+
+  --   {
+  --     "sainnhe/gruvbox-material",
+  --     lazy = false,
+  --     priority = 1000,
+  --     config = function()
+  --       -- Optionally configure and load the colorscheme
+  --       -- directly inside the plugin declaration.
+  --       vim.g.gruvbox_material_enable_italic = true
+  --       vim.g.gruvbox_material_transparent_background = true
+  --       vim.g.gruvbox_material_diagnostic_text_highlight = true
+  --       vim.g.gruvbox_material_diagnostic_text_highlight = true
+  --     end,
+  --   },
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   opts = {
+  --     options = {
+  --       highlights = {
+  --         fill = {
+  --           bg = {
+  --             attribute = "fg",
+  --             highlight = "Pmenu",
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  --   -- opts = function(_, opts)
+  --   --   local bufferline = require("bufferline")
+  --   --   opts.style_preset = bufferline.style_preset.default
+  --   --   -- opts.options.separator_style = "padded_slant"
+  --   --   -- opts.options.separator_style = { " ", "" }
+  --   -- end,
+  -- },
+}
