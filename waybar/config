@@ -60,6 +60,7 @@
         "custom/keyboard-layout",
         "idle_inhibitor",
         "cpu",
+        "temperature",
         "memory",
         "backlight",
         "pulseaudio",
@@ -91,9 +92,14 @@
         "format": "{usage:>3}%",
         "states": {
             "warning": 70,
-            "critical": 90,
+            "critical": 90
         },
         "on-click": "footclient -T waybar_htop -e htop"
+    },
+    "temperature": {
+        "critical-threshold": 60,
+        "thermal-zone": 0,
+        "format": "t{temperatureC}°C"
     },
     "memory": {
         "interval": 5,
