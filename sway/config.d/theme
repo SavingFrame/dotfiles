@@ -2,20 +2,25 @@
 exec_always ~/.config/sway/scripts/import-gsettings
 
 # Set inner/outer gaps
-gaps inner 2
-gaps outer 0
+gaps inner 10
+gaps outer 10
 
 # Hide titlebar on windows:
-default_border pixel 1
+default_border none
+default_floating_border none
+# font pango:monospace 0.001
+titlebar_padding 1
+titlebar_border_thickness 0
 
-# Default Font
-font pango:Noto Sans Regular 10
+output * bg /home/savingframe/Wallpapers/palms-purple-sky.png fill
+# # Default Font
+# font pango:Noto Sans Regular 10
 
 # Thin borders:
 smart_borders on
 
 # Set wallpaper:
-exec ~/.azotebg
+# exec ~/.azotebg
 
 # Title format for windows
 for_window [shell="xdg_shell"] title_format "%title (%app_id)"

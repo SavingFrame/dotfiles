@@ -1,74 +1,60 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    // "height": 30, // Auto-height is used when commented
-    // "width": 1280, // Full screen width when commented
-    "spacing": 16, // Gaps between modules (in px)
-    // See `man waybar` for more configuration options
-    // Configuration - modules-left
+    "layer": "top",
+    "position": "top",
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+    "height": 20,
+    "spacing": 0,
     "modules-left": [
         "custom/launcher",
         "sway/workspaces",
         "sway/mode",
-        "sway/window"
+        "custom/weather",
+        "sway/window",
+        "mpd"
     ],
-    "custom/launcher": {
-        "format": "<span size='x-large'></span>",
-        "on-click": "exec nwg-drawer",
-        "tooltip": false
-    },
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{icon}",
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "tray",
+        "sway/language",
+        "mpris",
+        "backlight",
+        "pulseaudio",
+        // "battery",
+        "memory",
+        "cpu",
+        "idle_inhibitor",
+        "custom/powermenu"
+    ],
+    "idle_inhibitor": {
+        "format": "{icon} ",
+        "start-activated": true,
         "format-icons": {
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "10": "10"
-        }
+            "activated": "",
+            "deactivated": "󰛊"
+        },
+        "tooltip-format-activated": "Caffeine Mode: Active \nNothing will be happen.",
+        "tooltip-format-deactivated": "Caffeine Mode: Inactive\n\nIf there is no interaction with your\nsystem (mouse/keyboard), then \nScreen Lock: after 5 min \nScreen Off: after 10 min \nSleep: after 30 min"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>",
         "tooltip": false
     },
-    "sway/window": {
-        "format": "{}",
-        //"all-outputs": true, // Active window shows only on active display when commented
-        "max-length": 120
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-click-right": "fullscreen",
+        "icon-theme": "WhiteSur",
+        "icon-size": 25,
+        "tooltip-format": "{title}"
     },
-    // Configuration - modules-center
-    "modules-center": [
-        "network"
-    ],
-    "network": {
-        "format-disabled": " Disabled",
-        "format-wifi": " {bandwidthDownBits:>} 󰶡 {bandwidthUpBits:>} 󰶣",
-        "tooltip-format-wifi": "{essid}",
-        "format-ethernet": "󰈀 {bandwidthDownBits:>} 󰶡 {bandwidthUpBits:>} 󰶣",
-        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
-        "format-disconnected": " Disconnected",
-        "on-click": "footclient -T waybar_nmtui -e nmtui",
-        "interval": 2
+    "sway/language": {
+        "format": "{flag} {short}"
     },
-    // Configuration - modules-right
-    "modules-right": [
-        "custom/keyboard-layout",
-        "idle_inhibitor",
-        "cpu",
-        "temperature",
-        "memory",
-        "backlight",
-        "pulseaudio",
-        "battery",
-        "clock",
-        "tray",
-        "custom/power"
-    ],
     "custom/keyboard-layout": {
         "exec": "swaymsg -t get_inputs | jq -r '[.[] | select(.type==\"keyboard\") | .xkb_active_layout_name][0]'",
         "format": " {}",
@@ -78,114 +64,185 @@
         "signal": 1,
         "on-click": "~/.config/waybar/scripts/keyhint.sh"
     },
-    "idle_inhibitor": {
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "hyprland/workspaces": {
+        "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "default": "",
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "active": "󱓻",
+            "urgent": "󱓻"
         },
-        "tooltip-format-activated": "Idle Inhibitor Activated",
-        "tooltip-format-deactivated": "Idle Inhibitor Deactivated"
-    },
-    "cpu": {
-        "interval": 5,
-        "format": "{usage:>3}%",
-        "states": {
-            "warning": 70,
-            "critical": 90
-        },
-        "on-click": "footclient -T waybar_htop -e htop"
-    },
-    "temperature": {
-        "critical-threshold": 60,
-        "thermal-zone": 0,
-        "format": "t{temperatureC}°C"
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
     },
     "memory": {
         "interval": 5,
-        "format": "{:>3}%",
-        "on-click": "footclient -T waybar_htop -e htop",
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
+        "format": "   {}% ",
+        "max-length": 10
     },
-    "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": [
-            "󰄰",
-            "󰪞",
-            "󰪟",
-            "󰪠",
-            "󰪡",
-            "󰪢",
-            "󰪣",
-            "󰪤",
-            "󰪥"
-        ],
-        "tooltip-format": "Backlight (Scroll): {percent:}%",
-        "on-scroll-down": "brightnessctl -c backlight set 5%-",
-        "on-scroll-up": "brightnessctl -c backlight set +5%"
-    },
-    "pulseaudio": {
-        "scroll-step": 2,
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 muted",
-        "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": [
-                "󰕿",
-                "󰖀",
-                "󰕾"
-            ]
-        },
-        "on-click": "pavucontrol"
-    },
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon} {capacity}%",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
-    },
-    "clock": {
-        "format": "󰅐 {:%H:%M}",
-        "format-alt": "󰅐 {:%OI:%M %p}",
-        "tooltip-format": " {:%A %m/%d}\n\n<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "on-scroll": 1,
-            "format": {
-                "months": "<span color='#ffead3'><b>{}</b></span>",
-                "days": "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-            },
-        },
-        "actions": {
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        },
+    "cpu": {
+        "interval": 5,
+        "format": "   {}% ",
+        "max-length": 10
     },
     "tray": {
-        "icon-size": 16,
-        "spacing": 10
+        "spacing": 10,
+        "icon-size": 21
     },
-    "custom/power": {
-        "format": "⏻",
-        "on-click": "exec ~/.config/sway/scripts/power_menu.sh",
+    "clock": {
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "format-alt": "   {:%a, %d %b %Y} ",
+        "format": "   {:%H:%M} "
+    },
+    "network": {
+        "format-wifi": "{icon} {essid}",
+        "format-disconnected": "Disconnected ⚠ ",
+        "format-icons": [
+            "󰤯 ",
+            "󰤟 ",
+            "󰤢 ",
+            "󰤥 ",
+            "󰤨 "
+        ],
+        "tooltip-format-disconnected": "Disconnected",
+        "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "on-click": "footclient -T waybar_nmtui -e nmtui",
+        "format-ethernet": "󰈀 {bandwidthDownBits:>} 󰶡 {bandwidthUpBits:>} 󰶣",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+        "nospacing": 1,
+        "interval": 5
+    },
+    "pulseaudio": {
+        "format": "{icon}{volume}%",
+        "format-bluetooth": "󰂰 {volume}%",
+        "nospacing": 1,
+        "tooltip-format": "Volume : {volume}%",
+        "format-muted": "󰝟 ",
+        "format-icons": {
+            "headphone": " ",
+            "default": [
+                "󰕿 ",
+                "󰖀 ",
+                "󰕾 "
+            ]
+        },
+        "on-click": "pavucontrol",
+        "scroll-step": 1
+    },
+    "custom/launcher": {
+        "format": "  ",
+        "tooltip": false,
+        "on-click": "~/.config/rofi/launchers/misc/launcher.sh &"
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-icons": {
+            "charging": [
+                "󰢜",
+                "󰂆",
+                "󰂇",
+                "󰂈",
+                "󰢝",
+                "󰂉",
+                "󰢞",
+                "󰂊",
+                "󰂋",
+                "󰂅"
+            ],
+            "default": [
+                "󰁺",
+                "󰁻",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰂂",
+                "󰁹"
+            ]
+        },
+        "interval": 5,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
         "tooltip": false
+    },
+    "custom/powermenu": {
+        "format": "⏻ ",
+        "tooltip": false,
+        "on-click": "~/.config/rofi/powermenu/type-6/powermenu.sh &"
+    },
+    "mpd": {
+        "format": "{stateIcon} {title}",
+        "format-disconnected": " Disconnected",
+        "format-stopped": " Stopped",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "on-click": "mpc toggle",
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "player-icons": {
+            "spotify": "",
+            "default": "🎵"
+        },
+        "dynamic-order": [
+            "title"
+        ],
+        "interval": 5,
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "ignored-players": [
+            "firefox"
+        ]
+    },
+    "custom/weather": {
+        "format": "{}",
+        "format-alt": "{alt}",
+        "format-alt-click": "click-left",
+        "interval": 3600,
+        "return-type": "json",
+        "exec": "~/.config/waybar/weather-waybar-module.sh",
+        "exec-if": "ping openweathermap.org -c1",
+        "signal": 8
     },
 }

@@ -14,7 +14,7 @@ input "type:keyboard" {
   repeat_delay 400
   repeat_rate 40
   xkb_layout "us,ua"
-  xkb_options "grp:alt_space_toggle"
+  xkb_options "grp:win_space_toggle"
   # xkb_layout us,ua
   # xkb_options grp:alt_shift_toggle
   }

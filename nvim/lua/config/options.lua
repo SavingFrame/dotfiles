@@ -35,3 +35,6 @@ vim.g.lazyvim_statuscolumn = {
 -- vim.g.guicursor = "guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.guicursor =
   "n-v-c-sm:block-blinkwait700-blinkon400-blinkoff250,i-ci-ve:ver25-blinkwait700-blinkon400-blinkoff250,r-cr-o:hor20-blinkwait700-blinkon400-blinkoff250"
+vim.g.dbs = {
+  localdb = "postgres://postgres:password@localhost/modo_pg",
+}

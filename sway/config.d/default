@@ -11,7 +11,8 @@ set $right l
 set $term ghostty
 
 # Application launcher
-set $launcher fuzzel
+# set $launcher fuzzel
+set $launcher "bash /home/savingframe/.config/rofi/launchers/type-7/launcher.sh"
 
 # Application menu
 set $menu nwg-drawer
@@ -19,30 +20,34 @@ set $menu nwg-drawer
 # Power Menu
 set $powermenu ~/.config/sway/scripts/power_menu.sh
 
+set $mybind bindsym --to-code
 ### Key bindings
 #
 # Basics:
 #
     # Launch the terminal
-    bindsym $mod+Return exec $term
+    $mybind $mod+Return exec $term
+
+    # Launch notification center
+    $mybind $mod+Shift+n exec swaync-client -t -sw
 
     # Open the power menu
-    bindsym $mod+Shift+e exec $powermenu
+    $mybind $mod+Shift+e exec $powermenu
 
     # Kill focused window
-    bindsym $mod+q kill
+    $mybind $mod+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $launcher
+    $mybind $mod+d exec $launcher
 
     # Menu
-    bindsym $mod+Shift+d exec $menu
+    $mybind $mod+Shift+d exec $menu
 
     # Lock screen
-    bindsym $mod+f1 exec gtklock
+    $mybind $mod+f1 exec gtklock
 
     # Activities
-    bindsym $mod+p exec ~/.config/sway/scripts/window_switcher.sh
+    $mybind $mod+p exec ~/.config/sway/scripts/window_switcher.sh
 
     # Move windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -50,13 +55,13 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
-    # bindsym Alt+Space exec "pkill -RTMIN+1 waybar"
+    $mybind $mod+Shift+c reload
+    # $mybind Alt+Space exec "pkill -RTMIN+1 waybar"
 
 #
 # Moving around:
 #
-    bindsym {
+    $mybind {
         # Change window focus
         $mod+Left focus left
         $mod+Down focus down
@@ -83,7 +88,7 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
 #
 # Workspaces:
 #
-    # Workspace bindings are using bindcode instead of bindsym for better Azerty compatibility.
+    # Workspace bindings are using bindcode instead of $mybind for better Azerty compatibility.
     # https://github.com/EndeavourOS-Community-Editions/sway/pull/81
     # Use wev to find keycodes for setting up other bindings this way.
 
@@ -120,26 +125,26 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
 #
     # Set how the current window will be split
     # Split the window vertically
-    bindsym $mod+v splitv
+    $mybind $mod+v splitv
     # Split the window horizontally
-    bindsym $mod+b splith
+    $mybind $mod+b splith
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    $mybind $mod+s layout stacking
+    $mybind $mod+w layout tabbed
+    $mybind $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    $mybind $mod+f fullscreen
 
     # Toggle between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    $mybind $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    # $mybind $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+a focus parent
+    $mybind $mod+a focus parent
 
 #
 # Scratchpad:
@@ -148,16 +153,16 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    $mybind $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    $mybind $mod+minus scratchpad show
 
 #
 # Resizing containers:
 #
-    bindsym {
+    $mybind {
         # Resize with arrow keys
         $mod+ctrl+Right resize shrink width 10 px
         $mod+ctrl+Up resize grow height 10 px
@@ -171,7 +176,7 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
     }
 
     # Resize floating windows with mouse scroll:
-    bindsym --whole-window --border {
+    $mybind --whole-window --border {
         # Resize vertically
         $mod+button4 resize shrink height 5 px or 5 ppt
         $mod+button5 resize grow height 5 px or 5 ppt
@@ -183,7 +188,7 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
 #
 # Media Keys
 #
-    bindsym {
+    $mybind {
         # Volume
         XF86AudioRaiseVolume exec pamixer -ui 2
         XF86AudioLowerVolume exec pamixer -ud 2
@@ -195,32 +200,32 @@ set $powermenu ~/.config/sway/scripts/power_menu.sh
         XF86AudioPrev exec playerctl previous
 
         # Backlight
-        XF86MonBrightnessUp exec brightnessctl -c backlight set +5%
-        XF86MonBrightnessDown exec brightnessctl -c backlight set 5%-
-    }
+        XF86MonBrightnessUp exec ddcutil -d 1 setvcp 10 + 5
+        XF86MonBrightnessDown exec ddcutil -d 1 setvcp 10 - 5
+		}
 
 #
 # App shortcuts
 #
     # Launch the file explorer
-    bindsym $mod+n exec thunar
+    $mybind $mod+n exec thunar
 
     # Launch the browser
-    bindsym $mod+o exec firefox
+    $mybind $mod+o exec zen-browser
 
     # Launch the clipboard manager
-    bindsym $mod+Ctrl+v exec cliphist list | fuzzel -d -w 90 -l 30 -p "Select an entry to copy it to your clipboard buffer:"| cliphist decode | wl-copy
+    $mybind $mod+Ctrl+v exec cliphist list | fuzzel -d -w 90 -l 30 -p "Select an entry to copy it to your clipboard buffer:"| cliphist decode | wl-copy
     # Delete an entry from the clipboard manager
-    bindsym $mod+Ctrl+x exec cliphist list | fuzzel -d -w 90 -l 30 -t cc9393ff -S cc9393ff -p "Select an entry to delete it from cliphist:"| cliphist delete
+    $mybind $mod+Ctrl+x exec cliphist list | fuzzel -d -w 90 -l 30 -t cc9393ff -S cc9393ff -p "Select an entry to delete it from cliphist:"| cliphist delete
     # Note: you can clear all cliphist entries by running `cliphist wipe`
 
 #
 # Screenshots
 #
     # Snip a selection and pipe to swappy
-    bindsym print exec grim -g "$(slurp)" - | swappy -f -
+    $mybind print exec grim -g "$(slurp)" - | swappy -f -
     # Screenshot a window and pipe to swappy
-    bindsym Ctrl+Print exec ~/.config/sway/scripts/screenshot_window.sh
+    $mybind Ctrl+Print exec ~/.config/sway/scripts/screenshot_window.sh
     # Screenshot the current display and pipe to swappy
-    bindsym Shift+Print exec ~/.config/sway/scripts/screenshot_display.sh
+    $mybind Shift+Print exec ~/.config/sway/scripts/screenshot_display.sh
 
