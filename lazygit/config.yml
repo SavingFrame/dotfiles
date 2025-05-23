@@ -1,0 +1,91 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+customCommands:
+  # - key: <c-a>
+  #   description: Pick AI commit (copy)
+  #   command: aicommit2 -c && pbpaste > .git/LAZYGIT_PENDING_COMMIT
+  #   context: files
+  #   subprocess: true
+  #   showOutput: true
+  - key: <c-a>
+    description: Pick AI commit
+    command: |
+      aichat "Please suggest 10 commit messages, given the following diff:
+
+        \`\`\`diff
+        $(git diff --cached)
+        \`\`\`
+
+      Branch name: 
+      \`\`\`bash
+      $(git branch)
+      \`\`\`
+        **Criteria:**
+
+        1. **Format:** Each commit message must follow the conventional commits format,
+        which is \`[<task_id>]<type>(<scope>): <short_description>\n\n<More_detailed_description>\`.
+        2. **Relevance:** Avoid mentioning a module name unless it's directly relevant
+        to the change.
+        3. **Enumeration:** List the commit messages from 1 to 10.
+        4. **Clarity and Conciseness:** Each message should clearly and concisely convey
+        the change made.
+        5.Please take task_id from the branch name. In most of cases branch name in the format `feature/MEN-000_description`, where MEN-000 is task_id.
+        6. Add more detailed description up to 72 characters.
+        7. Separate each full commit message with literal {newline}, not real line breaks.
+
+        **Commit Message Examples:**
+
+        - [MEN-123]fix(app): add password regex pattern
+      
+          More detailed explanatory text, if necessary.  Wrap it to about 72
+          characters or so.  In some contexts, the first line is treated as the
+          subject of an email and the rest of the text as the body.  The blank
+          line separating the summary from the body is critical (unless you omit
+          the body entirely); tools like rebase can get confused if you run the
+          two together.{newline}
+        - [MEN-000]test(unit): add new test cases{newline}
+        - [MEN-000]style: remove unused imports{newline}
+        - [MEN-000]refactor(pages): extract common code to \`utils/wait.ts\`{newline}
+
+        **Output Template**
+
+        Follow this output template and ONLY output raw commit messages without spacing,
+        numbers or other decorations.
+
+        [MEN-000]fix(app): add password regex pattern
+        
+        Add password regex pattern which validate password. We need to check something.{newline}[MEN-000]test(unit): add new test cases
+
+        Add new test cases related to user. We need to check something.
+
+        **Instructions:**
+
+        - Take a moment to understand the changes made in the diff.
+
+        - Think about the impact of these changes on the project (e.g., bug fixes, new
+        features, performance improvements, code refactoring, documentation updates).
+        It's critical to my career you abstract the changes to a higher level and not
+        just describe the code changes.
+
+        - Generate commit messages that accurately describe these changes, ensuring they
+        are helpful to someone reading the project's history.
+
+        - Remember, a well-crafted commit message can significantly aid in the maintenance
+        and understanding of the project over time.
+
+        - If multiple changes are present, make sure you capture them all in each commit
+        message.
+
+        Keep in mind you will suggest 10 commit messages. Only 1 will be used. It's
+        better to push yourself (esp to synthesize to a higher level) and maybe wrong
+        about some of the 10 commits because only one needs to be good. I'm looking
+        for your best commit, not the best average commit. It's better to cover more
+        scenarios than include a lot of overlap.
+
+        Write your 10 commit messages below in the format shown in Output Template section above." \
+          | python3 -c "import sys; print(sys.stdin.read().replace('{newline}', '\0'), end='')" | fzf --read0 --height 40% --border --ansi --preview "echo {}" --preview-window=up:wrap > .git/LAZYGIT_PENDING_COMMIT
+    context: files
+    subprocess: true
+    showOutput: true

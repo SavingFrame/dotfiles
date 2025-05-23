@@ -1,0 +1,26 @@
+font-family = "JetBrainsMono Nerd Font Mono"
+
+font-size = 13
+theme = lackluster
+confirm-close-surface = false
+window-padding-x = 6
+# background-opacity = 0.70
+# background-blur-radius = 70
+
+cursor-style = block
+cursor-style-blink = true
+shell-integration-features = no-cursor
+adjust-underline-position = 4
+copy-on-select = clipboard
+
+adjust-cell-height = 35%
+bold-is-bright = true
+link-url = true
+mouse-hide-while-typing = true
+
+# macos-option-as-alt = true
+window-inherit-working-directory = true
+# config-file = non_tmux_config
+shell-integration = fish
+command = fish
+app-notifications = no-clipboard-copy

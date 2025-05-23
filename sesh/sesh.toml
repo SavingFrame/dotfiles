@@ -1,0 +1,3 @@
+[default_session]
+startup_command = "nvim -c ':lua Snacks.picker.files()'"
+preview_command = "eza --all --git --icons --color=always {}"

@@ -1,0 +1,3 @@
+function vd
+    deactivate
+end
