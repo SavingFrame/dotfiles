@@ -33,3 +33,5 @@ cef_user_data
 dconf
 go
 menus
+fish/secrets.fish
+fish/fish_variables
