@@ -9,7 +9,7 @@ window-padding-x = 6
 
 cursor-style = block
 cursor-style-blink = true
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,sudo
 adjust-underline-position = 4
 copy-on-select = clipboard
 
@@ -24,3 +24,4 @@ window-inherit-working-directory = true
 shell-integration = fish
 command = fish
 app-notifications = no-clipboard-copy
+gtk-titlebar = false

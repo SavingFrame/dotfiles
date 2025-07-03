@@ -10,14 +10,14 @@
       "hyprland/workspaces",
     ],
     "modules-right": [
-	"hyprland/language",
-	"tray",
-    "pulseaudio",
-    "network",
-    "memory",
-	"cpu",
-	"temperature",
-    "clock",
+			"hyprland/language",
+			"tray",
+			"pulseaudio",
+			"network",
+			"memory",
+			"cpu",
+			"temperature",
+			"clock",
     ],
     "hyprland/window": {
       "format": "{}",
@@ -45,8 +45,10 @@
       },
     },
     "clock": {
+			"format": "{:%d.%m.%Y %H:%M:%S}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format-alt": "{:%Y-%m-%d}"
+      "format-alt": "{:%Y-%m-%d}",
+			"interval": 1
     },
     "cpu": {
       "format": "{usage}%",
