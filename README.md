@@ -11,6 +11,22 @@
 - **File Manager**: Thunar/yazi
 - **Theme**: Lackluster (consistent across applications)
 
+## 📸 Screenshots
+
+![Desktop](screenshots/desktop.png)
+_Clean Hyprland desktop with Waybar status bar and lackluster theme_
+
+![Fastfetch](screenshots/ffetch.png)
+_Ghostty terminal with Fish shell, Starship prompt, and tmux session management_
+
+![Neovim](screenshots/tty.png)
+_Neovim with LSP support, file explorer, and lackluster colorscheme_
+
+![Rofi](screenshots/rofi.png)
+_Rofi application launcher with Type-7 theme and Papirus icons_
+
+![Swaync](screenshots/swaync.png)
+
 ## 📁 Configuration Structure
 
 ### Core Applications
@@ -78,9 +94,13 @@
 - **SwayNC**: Notification daemon for Wayland
 - **Custom styling**: Integrated with system theme
 
-## 🚀 Quick Start
 
-### Key Bindings
+### System Monitoring
+
+![Waybar](screenshots/waybar.png)
+_Waybar with system information, language indicator, and custom styling_
+
+## Key Bindings
 
 - `Ctrl + F`: Quick session switcher(works in tmux/ghostty/fish).
 
@@ -103,4 +123,3 @@
 
 - `z <directory>`: Smart directory jumping (zoxide)
 - `ss`: Session management shortcut
-
