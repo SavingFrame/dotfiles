@@ -13,17 +13,11 @@
 
 ## 📸 Screenshots
 
-![Desktop](screenshots/desktop.png)
-_Clean Hyprland desktop with Waybar status bar and lackluster theme_
-
 ![Fastfetch](screenshots/ffetch.png)
-_Ghostty terminal with Fish shell, Starship prompt, and tmux session management_
 
 ![Neovim](screenshots/tty.png)
-_Neovim with LSP support, file explorer, and lackluster colorscheme_
 
 ![Rofi](screenshots/rofi.png)
-_Rofi application launcher with Type-7 theme and Papirus icons_
 
 ![Swaync](screenshots/swaync.png)
 
