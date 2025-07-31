@@ -9,7 +9,7 @@ WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" 
 # Apply the selected wallpaper
 hyprctl hyprpaper reload ,"$WALLPAPER"
 
-selected_wallpaper=$(echo "$WALLPAPER" | sed 's/^img://')
-wal -i "$selected_wallpaper" -n --cols16
-swaync-client --reload-css
-pywalfox update
+# selected_wallpaper=$(echo "$WALLPAPER" | sed 's/^img://')
+# wal -i "$selected_wallpaper" -n --cols16
+# swaync-client --reload-css
+# pywalfox update

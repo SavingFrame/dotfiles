@@ -19,3 +19,7 @@ set -lx SHELL /usr/bin/fish
 if test -f ~/.config/fish/secrets.fish
     source ~/.config/fish/secrets.fish
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

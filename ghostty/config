@@ -1,7 +1,9 @@
-font-family = "JetBrainsMono Nerd Font Mono"
+# font-family = "JetBrainsMono Nerd Font Mono"
+font-family = "Iosevka Curly"
 
-font-size = 13
-theme = lackluster
+font-size = 14
+# theme = lackluster
+theme = Kanagawa Wave
 confirm-close-surface = false
 window-padding-x = 6
 # background-opacity = 0.70
@@ -25,3 +27,5 @@ shell-integration = fish
 command = fish
 app-notifications = no-clipboard-copy
 gtk-titlebar = false
+clipboard-write=allow
+clipboard-read=allow
