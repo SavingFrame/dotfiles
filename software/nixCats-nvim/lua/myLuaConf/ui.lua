@@ -1,0 +1,436 @@
+-- UI Configuration
+-- Handles themes, statusline, notifications, and UI enhancements
+
+-- Load optional plugins for UI
+if nixCats('ui') then
+  vim.cmd('packadd snacks-nvim')
+  vim.cmd('packadd lualine-nvim')
+  vim.cmd('packadd noice-nvim')
+  vim.cmd('packadd nui-nvim')
+  vim.cmd('packadd nvim-notify')
+  vim.cmd('packadd kanagawa-nvim')
+  vim.cmd('packadd lackluster-nvim')
+  vim.cmd('packadd dressing-nvim')
+end
+
+-- Snacks.nvim configuration
+if nixCats('ui') then
+  require('snacks').setup {
+    dashboard = { enabled = true },
+    indent = {
+      enabled = true,
+      chunk = {
+        enabled = true,
+      },
+    },
+    lazygit = {
+      enabled = true,
+    },
+    input = { enabled = true },
+    picker = {
+      formatters = {
+        file = {
+          truncate = 120,
+        },
+      },
+      previewers = {
+        git = {
+          native = true,
+        },
+      },
+    },
+    notifier = {
+      enabled = true,
+    },
+    quickfile = { enabled = true },
+    scope = { enabled = true },
+    statuscolumn = { enabled = true },
+    words = { enabled = true },
+  }
+
+  -- Snacks keymaps
+  local snacks_keys = {
+    -- Top Pickers & Explorer
+    {
+      '<leader><space>',
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = 'Smart Find Files',
+    },
+    {
+      '<leader>,',
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = 'Buffers',
+    },
+    {
+      '<leader><tab>',
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = 'Buffers',
+    },
+    {
+      '<leader>:',
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = 'Command History',
+    },
+    {
+      '<leader>n',
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = 'Notification History',
+    },
+    -- find
+    {
+      '<leader>fb',
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = 'Buffers',
+    },
+    {
+      '<leader>fc',
+      function()
+        Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+      end,
+      desc = 'Find Config File',
+    },
+    {
+      '<leader>ff',
+      function()
+        Snacks.picker.files {
+          finder = 'files',
+          format = 'file',
+          hidden = true,
+          ignored = true,
+          follow = false,
+          supports_live = true,
+        }
+      end,
+      desc = 'Find Files',
+    },
+    {
+      '<leader>fr',
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = 'Recent',
+    },
+    -- git
+    {
+      '<leader>gd',
+      function()
+        Snacks.picker.git_diff()
+      end,
+      desc = 'Git Diff (Hunks)',
+    },
+    {
+      '<leader>gf',
+      function()
+        Snacks.picker.git_log_file()
+      end,
+      desc = 'Git Log File',
+    },
+    {
+      '<leader>gs',
+      function()
+        Snacks.picker.git_status()
+      end,
+      desc = 'Git Status',
+    },
+    -- Grep
+    {
+      '<leader>sg',
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = 'Grep',
+    },
+    {
+      '<leader>sw',
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = 'Visual selection or word',
+      mode = { 'n', 'x' },
+    },
+    -- search
+    {
+      '<leader>sb',
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = 'Buffer Lines',
+    },
+    {
+      '<leader>sd',
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = 'Diagnostics',
+    },
+    {
+      '<leader>sD',
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
+      desc = 'Buffer Diagnostics',
+    },
+    {
+      '<leader>sh',
+      function()
+        Snacks.picker.help()
+      end,
+      desc = 'Help Pages',
+    },
+    {
+      '<leader>sH',
+      function()
+        Snacks.picker.highlights()
+      end,
+      desc = 'Highlights',
+    },
+    {
+      '<leader>sj',
+      function()
+        Snacks.picker.jumps()
+      end,
+      desc = 'Jumps',
+    },
+    {
+      '<leader>sk',
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = 'Keymaps',
+    },
+    {
+      '<leader>sl',
+      function()
+        Snacks.picker.loclist()
+      end,
+      desc = 'Location List',
+    },
+    {
+      '<leader>sm',
+      function()
+        Snacks.picker.marks()
+      end,
+      desc = 'Marks',
+    },
+    {
+      '<leader>sM',
+      function()
+        Snacks.picker.man()
+      end,
+      desc = 'Man Pages',
+    },
+    {
+      '<leader>sq',
+      function()
+        Snacks.picker.qflist()
+      end,
+      desc = 'Quickfix List',
+    },
+    {
+      '<leader>sR',
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = 'Resume',
+    },
+    {
+      '<leader>su',
+      function()
+        Snacks.picker.undo()
+      end,
+      desc = 'Undo History',
+    },
+    {
+      '<leader>sp',
+      function()
+        Snacks.picker.lazy()
+      end,
+      desc = 'Search for Plugin Spec',
+    },
+    {
+      '<leader>uC',
+      function()
+        Snacks.picker.colorschemes()
+      end,
+      desc = 'Colorschemes',
+    },
+    {
+      '<leader>cR',
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = 'Rename File',
+    },
+    {
+      '<leader>gB',
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = 'Git Browse',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>gb',
+      function()
+        Snacks.git.blame_line()
+      end,
+      desc = 'Git Blame',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>gg',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'Lazygit',
+    },
+    {
+      '<leader>un',
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = 'Dismiss All Notifications',
+    },
+    {
+      ']]',
+      function()
+        Snacks.words.jump(vim.v.count1)
+      end,
+      desc = 'Next Reference',
+      mode = { 'n', 't' },
+    },
+    {
+      '[[',
+      function()
+        Snacks.words.jump(-vim.v.count1)
+      end,
+      desc = 'Prev Reference',
+      mode = { 'n', 't' },
+    },
+  }
+
+  -- Set up keymaps
+  for _, key in ipairs(snacks_keys) do
+    local mode = key.mode or 'n'
+    vim.keymap.set(mode, key[1], key[2], { desc = key.desc })
+  end
+end
+
+-- Lualine configuration
+if nixCats('ui') then
+  require('lualine').setup {
+    options = {
+      theme = 'kanagawa',
+      section_separators = '',
+      component_separators = '',
+      disabled_filetypes = {
+        statusline = { 'neo-tree' },
+      },
+    },
+    sections = {
+      lualine_a = { 'mode' },
+      lualine_b = { 'branch', 'diff', 'diagnostics' },
+      lualine_c = {
+        {
+          'filename',
+          file_status = true,
+          newfile_status = false,
+          path = 1,
+          shorting_target = 120,
+          symbols = {
+            modified = '[+]',
+            readonly = '[-]',
+            unnamed = '[No Name]',
+            newfile = '[New]',
+          },
+        },
+      },
+      lualine_x = { 'encoding', 'fileformat', 'filetype' },
+      lualine_y = { 'progress' },
+      lualine_z = { 'location' },
+    },
+    winbar = {
+      lualine_c = {
+        {
+          'filename',
+          file_status = true,
+          newfile_status = false,
+          path = 1,
+          shorting_target = 120,
+          symbols = {
+            modified = '[+]',
+            readonly = '[-]',
+            unnamed = '[No Name]',
+            newfile = '[New]',
+          },
+        },
+        {
+          'navic',
+          color_correction = nil,
+          navic_opts = nil,
+        },
+      },
+    },
+  }
+end
+
+-- Noice configuration
+if nixCats('ui') then
+  require('noice').setup {
+    -- add any options here
+  }
+end
+
+-- Kanagawa theme configuration
+if nixCats('ui') then
+  require('kanagawa').setup {
+    colors = {
+      theme = {
+        all = {
+          ui = {
+            bg_gutter = 'none',
+          },
+        },
+      },
+    },
+  }
+  vim.cmd.colorscheme 'kanagawa'
+end
+
+-- Lackluster theme setup (alternative)
+if nixCats('ui') then
+  local lackluster = require 'lackluster'
+  lackluster.setup {
+    tweak_syntax = {
+      comment = lackluster.color.gray5,
+    },
+    tweak_highlight = {
+      ['DiagnosticWarn'] = {
+        fg = lackluster.color.yellow,
+      },
+      ['DiagnosticVirtualTextWarn'] = {
+        fg = lackluster.color.yellow,
+      },
+    },
+  }
+  
+  vim.api.nvim_set_hl(0, 'WinBar', { fg = '#7a7a7a', bg = '#242424' })
+  vim.api.nvim_set_hl(0, 'WinBarNC', { fg = '#7a7a7a', bg = '#242424' })
+end
+
+-- Dressing.nvim for better UI
+if nixCats('ui') then
+  require('dressing').setup {}
+end

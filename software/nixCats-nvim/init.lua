@@ -1,60 +1,193 @@
 --[[
-NOTE:
-if you plan to always load your nixCats via nix,
-you can safely ignore this setup call,
-and the require('myLuaConf.non_nix_download') call below it.
-as well as the entire lua/myLuaConf/non_nix_download file.
-Unless you want the lzUtils file, or the lazy wrapper, you also wont need lua/nixCatsUtils
+nixCats-nvim Configuration
+Ported from lua.nvim (Kickstart.nvim based)
 
-IF YOU DO NOT DO THIS SETUP CALL:
-the result will be that, when you load this folder without using nix,
-the global nixCats function which you use everywhere
-to check for categories will throw an error.
-This setup function will give it a default value.
-Of course, if you only ever download nvim with nix, this isnt needed.]]
---[[ ----------------------------------- ]]
---[[ This setup function will provide    ]]
---[[ a default value for the nixCats('') ]]
---[[ function so that it will not throw  ]]
---[[ an error if not loaded via nixCats  ]]
---[[ ----------------------------------- ]]
-require('nixCatsUtils').setup {
-  non_nix_value = true,
-}
---[[
-Nix puts the plugins
-into the directories paq-nvim expects them to be in,
-because both follow the normal neovim scheme.
-So you just put the URLs and build steps in there, and use its opt option to do the same
-thing as putting a plugin in nixCat's optionalPlugins field.
-then load the plugins via paq-nvim
-YOU are in charge of putting the plugin
-urls and build steps in there, which will only be used when not on nix,
-and you should keep any setup functions
-OUT of that file, as they are ONLY loaded when this
-configuration is NOT loaded via nix.
---]]
-require("myLuaConf.non_nix_download")
--- OK, again, that isnt needed if you load this setup via nix, but it is an option.
-
---[[
-outside of when you want to use the nixCats global command
-to decide if something should be loaded, or to pass info from nix to lua,
-thats pretty much everything specific to nixCats that
-needs to be in your config.
-If you always want to load it via nix,
-you pretty much dont need this file at all, and you also won't need
-anything within lua/nixCatsUtils, nor will that be in the default template.
-that directory is addable via the luaUtils template.
-it is not required, but has some useful utility functions.
+This configuration uses nixCats for plugin management while preserving
+the original Lua configuration structure and functionality.
 --]]
 
---[[
-ok thats enough for 1 file. Off to lua/myLuaConf/init.lua
-all the config starts there in this example config.
-This config is loadable with and without nix due to the above,
-and the lua/myLuaConf/non_nix_download.lua file.
-the rest is just example of how to configure nvim making use of various
-features of nixCats and using the plugin lze for lazy loading.
---]]
-require('myLuaConf')
+-- Set <space> as the leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
+
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
+-- [[ Setting options ]]
+-- Make line numbers default
+vim.o.number = true
+vim.o.relativenumber = true
+
+vim.opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
+
+-- Enable mouse mode
+vim.o.mouse = 'a'
+
+-- Don't show the mode, since it's already in the status line
+vim.o.showmode = false
+
+-- Sync clipboard between OS and Neovim
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
+
+-- Tab settings
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+
+-- Cursor settings
+vim.opt.guicursor =
+  'n-v-c-sm:block-blinkwait700-blinkon400-blinkoff250,i-ci-ve:ver25-blinkwait700-blinkon400-blinkoff250,r-cr-o:hor20-blinkwait700-blinkon400-blinkoff250'
+
+-- Enable break indent
+vim.o.breakindent = true
+
+-- Save undo history
+vim.o.undofile = true
+
+-- Case-insensitive searching UNLESS \C or capital letters
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Keep signcolumn on by default
+vim.o.signcolumn = 'yes'
+
+-- Decrease update time
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+
+-- Configure splits
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+-- Whitespace characters
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live
+vim.o.inccommand = 'split'
+
+-- Show cursor line
+vim.o.cursorline = true
+
+-- Minimal screen lines around cursor
+vim.o.scrolloff = 10
+
+-- Confirm before failing operations
+vim.o.confirm = true
+
+-- [[ Basic Keymaps ]]
+require 'keymaps'
+
+-- [[ Basic Autocommands ]]
+-- Highlight when yanking text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
+-- Close certain filetypes with 'q'
+local function augroup(name)
+  return vim.api.nvim_create_augroup('nixcats_' .. name, { clear = true })
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup 'close_with_q',
+  pattern = {
+    'PlenaryTestPopup',
+    'checkhealth',
+    'dbout',
+    'gitsigns-blame',
+    'grug-far',
+    'help',
+    'lspinfo',
+    'neotest-output',
+    'neotest-output-panel',
+    'neotest-summary',
+    'notify',
+    'qf',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set('n', 'q', function()
+        vim.cmd 'close'
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = 'Quit buffer',
+      })
+    end)
+  end,
+})
+
+-- [[ nixCats Plugin Loading ]]
+-- nixCats provides a function to check if categories are enabled
+-- This replaces lazy.nvim's plugin loading system
+
+-- Load plugins based on nixCats categories
+if nixCats('core') then
+  -- Core plugins are loaded automatically via startupPlugins
+  require('guess-indent').setup {}
+end
+
+if nixCats('ui') then
+  -- UI plugins configuration
+  require 'myLuaConf.ui'
+end
+
+if nixCats('completion') then
+  -- Completion system
+  require 'myLuaConf.completion'
+end
+
+if nixCats('lsp') then
+  -- LSP configuration
+  require 'myLuaConf.lsp'
+end
+
+if nixCats('treesitter') then
+  -- Treesitter configuration
+  require 'myLuaConf.treesitter'
+end
+
+if nixCats('editor') then
+  -- Editor enhancements
+  require 'myLuaConf.editor'
+end
+
+if nixCats('ai') then
+  -- AI/Copilot configuration
+  require 'myLuaConf.ai'
+end
+
+if nixCats('tools') then
+  -- Development tools
+  require 'myLuaConf.tools'
+end
+
+if nixCats('testing') then
+  -- Testing configuration
+  require 'myLuaConf.testing'
+end
+
+if nixCats('python') then
+  -- Python-specific configuration
+  require 'myLuaConf.python'
+end
+
+-- Enable snakelsp if available
+if vim.fn.executable('snakelsp') == 1 then
+  vim.lsp.enable 'snakelsp'
+end
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et

@@ -31,10 +31,95 @@
         "type": "github"
       }
     },
+    "plugins-blink-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753494804,
+        "narHash": "sha256-Ya9RagGE+Awo9xuF8XtwgAO2B9DKJLNsLDU2wsEMumo=",
+        "owner": "fang2hou",
+        "repo": "blink-copilot",
+        "rev": "41e91a659bd9b8cba9ba2ea68a69b52ba5a9ebd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fang2hou",
+        "repo": "blink-copilot",
+        "type": "github"
+      }
+    },
+    "plugins-pymple": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745234258,
+        "narHash": "sha256-nRMqqQzvwUar58oCt5n29xmy7wICG4vyKjJduxCf1Fc=",
+        "owner": "alexpasmantier",
+        "repo": "pymple.nvim",
+        "rev": "6a0a0f047c7f8a7f1f39e48c2c2e713369a13e61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexpasmantier",
+        "repo": "pymple.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-python-copy-reference": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679255514,
+        "narHash": "sha256-dKfbWWoiTuLZk6TEUiVkerKu6+kgGlppWhL9KbN2ht4=",
+        "owner": "ranelpadon",
+        "repo": "python-copy-reference.vim",
+        "rev": "8172d0ce83d730820d9497fd2e988046022d0b99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ranelpadon",
+        "repo": "python-copy-reference.vim",
+        "type": "github"
+      }
+    },
+    "plugins-screenkey": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1749596824,
+        "narHash": "sha256-94bafW0DP4Q9jfE4voiEvUy13JVTs6UP5qgLG2SbeZk=",
+        "owner": "NStefan002",
+        "repo": "screenkey.nvim",
+        "rev": "a21e158a0f28bdd53525599194edde577d2f9e0c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NStefan002",
+        "repo": "screenkey.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-statuscol": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1748881224,
+        "narHash": "sha256-nFEQRJ5V+0RskJoAVRPAe2yrkORMTg9Jm13ClTmTSgk=",
+        "owner": "luukvbaal",
+        "repo": "statuscol.nvim",
+        "rev": "c46172d0911aa5d49ba5f39f4351d1bb7aa289cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "luukvbaal",
+        "repo": "statuscol.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "plugins-blink-copilot": "plugins-blink-copilot",
+        "plugins-pymple": "plugins-pymple",
+        "plugins-python-copy-reference": "plugins-python-copy-reference",
+        "plugins-screenkey": "plugins-screenkey",
+        "plugins-statuscol": "plugins-statuscol"
       }
     }
   },
