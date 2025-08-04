@@ -5,7 +5,7 @@ if nixCats('ai') then
   vim.cmd('packadd copilot-lua')
   vim.cmd('packadd copilot-vim')
   vim.cmd('packadd copilot-chat-nvim')
-  vim.cmd('packadd blink-copilot')
+  -- vim.cmd('packadd blink-copilot') -- Temporarily disabled
 end
 
 -- Copilot.lua configuration

@@ -3,8 +3,8 @@
 
 if nixCats('python') then
   vim.cmd('packadd SchemaStore-nvim')
-  vim.cmd('packadd pymple')
-  vim.cmd('packadd python-copy-reference')
+  -- vim.cmd('packadd pymple') -- Temporarily disabled
+  -- vim.cmd('packadd python-copy-reference') -- Temporarily disabled
 end
 
 -- Python-specific configurations

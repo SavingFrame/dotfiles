@@ -7,7 +7,7 @@ if nixCats('tools') then
   vim.cmd('packadd neo-tree-nvim')
   vim.cmd('packadd conform-nvim')
   vim.cmd('packadd persistence-nvim')
-  vim.cmd('packadd screenkey')
+  -- vim.cmd('packadd screenkey') -- Temporarily disabled
 end
 
 -- Harpoon configuration

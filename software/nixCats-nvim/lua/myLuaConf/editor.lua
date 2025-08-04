@@ -14,7 +14,7 @@ if nixCats('editor') then
   vim.cmd('packadd todo-comments-nvim')
   vim.cmd('packadd mini-nvim')
   vim.cmd('packadd vim-tmux-navigator')
-  vim.cmd('packadd close-buffers')
+  -- vim.cmd('packadd close-buffers') -- Temporarily disabled
   vim.cmd('packadd marks-nvim')
   vim.cmd('packadd nvim-ufo')
   vim.cmd('packadd promise-async')
@@ -289,7 +289,8 @@ if nixCats('editor') then
   }
 end
 
--- Close buffers configuration
+-- Close buffers configuration (temporarily disabled)
+--[[ 
 if nixCats('editor') then
   require('close_buffers').setup {
     filetype_ignore = { 'neo-tree' },
@@ -303,6 +304,7 @@ if nixCats('editor') then
     require('close_buffers').delete { type = 'hidden', force = true }
   end, { desc = 'Delete Other Buffers' })
 end
+--]]
 
 -- Marks configuration
 if nixCats('editor') then

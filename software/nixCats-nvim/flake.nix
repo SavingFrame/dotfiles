@@ -159,10 +159,7 @@
           nvim-ufo
           promise-async
           vim-python-pep8-indent
-        ] ++ [
-          # Custom plugins from inputs
-          pkgs.neovimPlugins.close-buffers
-          pkgs.neovimPlugins.statuscol
+          # Note: close-buffers and statuscol temporarily removed due to overlay issues
         ];
         
         ai = with pkgs.vimPlugins; [
@@ -170,9 +167,7 @@
           copilot-lua
           copilot-vim
           CopilotChat-nvim
-        ] ++ [
-          # Custom plugins from inputs
-          pkgs.neovimPlugins.blink-copilot
+          # Note: blink-copilot temporarily removed due to overlay issues
         ];
         
 
@@ -189,10 +184,7 @@
         python = with pkgs.vimPlugins; [
           # Python specific
           SchemaStore-nvim
-        ] ++ [
-          # Custom plugins from inputs
-          pkgs.neovimPlugins.pymple
-          pkgs.neovimPlugins.python-copy-reference
+          # Note: pymple and python-copy-reference temporarily removed due to overlay issues
         ];
         
         tools = with pkgs.vimPlugins; [
@@ -202,9 +194,7 @@
           neo-tree-nvim
           conform-nvim
           persistence-nvim
-        ] ++ [
-          # Custom plugins from inputs
-          pkgs.neovimPlugins.screenkey
+          # Note: screenkey temporarily removed due to overlay issues
         ];
       };
 
