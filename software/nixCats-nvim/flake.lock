@@ -47,6 +47,22 @@
         "type": "github"
       }
     },
+    "plugins-close-buffers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1636931460,
+        "narHash": "sha256-/jk38ebxKTlyH3AsrSQWMl/cErmu6threyy/MIrdzD4=",
+        "owner": "kazhala",
+        "repo": "close-buffers.nvim",
+        "rev": "3acbcad1211572342632a6c0151f839e7dead27f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kazhala",
+        "repo": "close-buffers.nvim",
+        "type": "github"
+      }
+    },
     "plugins-pymple": {
       "flake": false,
       "locked": {
@@ -116,6 +132,7 @@
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-blink-copilot": "plugins-blink-copilot",
+        "plugins-close-buffers": "plugins-close-buffers",
         "plugins-pymple": "plugins-pymple",
         "plugins-python-copy-reference": "plugins-python-copy-reference",
         "plugins-screenkey": "plugins-screenkey",

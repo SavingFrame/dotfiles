@@ -26,6 +26,10 @@
       url = "github:luukvbaal/statuscol.nvim";
       flake = false;
     };
+    "plugins-close-buffers" = {
+      url = "github:kazhala/close-buffers.nvim";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: let
@@ -151,30 +155,27 @@
           todo-comments-nvim
           mini-nvim
           vim-tmux-navigator
-          close-buffers-nvim
           marks-nvim
           nvim-ufo
           promise-async
           vim-python-pep8-indent
+        ] ++ [
+          # Custom plugins from inputs
+          pkgs.neovimPlugins.close-buffers
+          pkgs.neovimPlugins.statuscol
         ];
         
         ai = with pkgs.vimPlugins; [
           # AI/Copilot
           copilot-lua
           copilot-vim
-          copilot-chat-nvim
-          # blink-copilot will be added via neovimPlugins
+          CopilotChat-nvim
+        ] ++ [
+          # Custom plugins from inputs
+          pkgs.neovimPlugins.blink-copilot
         ];
         
-        tools = with pkgs.vimPlugins; [
-          # Development tools
-          harpoon2
-          overseer-nvim
-          neo-tree-nvim
-          conform-nvim
-          persistence-nvim
-        ];
-        
+
         testing = with pkgs.vimPlugins; [
           # Testing
           neotest
@@ -188,16 +189,22 @@
         python = with pkgs.vimPlugins; [
           # Python specific
           SchemaStore-nvim
-          # pymple and python-copy-reference via neovimPlugins
-        ];
-        
-        extra = [
+        ] ++ [
           # Custom plugins from inputs
-          pkgs.neovimPlugins.blink-copilot
-          pkgs.neovimPlugins.screenkey
           pkgs.neovimPlugins.pymple
           pkgs.neovimPlugins.python-copy-reference
-          pkgs.neovimPlugins.statuscol
+        ];
+        
+        tools = with pkgs.vimPlugins; [
+          # Development tools
+          harpoon2
+          overseer-nvim
+          neo-tree-nvim
+          conform-nvim
+          persistence-nvim
+        ] ++ [
+          # Custom plugins from inputs
+          pkgs.neovimPlugins.screenkey
         ];
       };
 
@@ -246,7 +253,6 @@
           tools = true;
           testing = true;
           python = true;
-          extra = true;
           
           # LSP categories
           general = true;
@@ -281,7 +287,6 @@
           tools = true;
           testing = true;
           python = true;
-          extra = true;
           
           general = true;
           go = true;
