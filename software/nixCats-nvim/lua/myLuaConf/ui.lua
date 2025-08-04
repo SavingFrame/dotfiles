@@ -1,17 +1,6 @@
 -- UI Configuration
 -- Handles themes, statusline, notifications, and UI enhancements
 
--- Load optional plugins for UI
-if nixCats('ui') then
-  vim.cmd('packadd snacks-nvim')
-  vim.cmd('packadd lualine-nvim')
-  vim.cmd('packadd noice-nvim')
-  vim.cmd('packadd nui-nvim')
-  vim.cmd('packadd nvim-notify')
-  vim.cmd('packadd kanagawa-nvim')
-  vim.cmd('packadd lackluster-nvim')
-  vim.cmd('packadd dressing-nvim')
-end
 
 -- Snacks.nvim configuration
 if nixCats('ui') then

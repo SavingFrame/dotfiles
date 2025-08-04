@@ -2,7 +2,6 @@
 -- Handles LSP servers, diagnostics, and LSP-related functionality
 
 if nixCats('lsp') then
-  vim.cmd('packadd nvim-lspconfig')
   vim.cmd('packadd fidget-nvim')
   vim.cmd('packadd nvim-navic')
 end

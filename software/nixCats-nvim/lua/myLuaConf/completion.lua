@@ -1,12 +1,6 @@
 -- Completion Configuration
 -- Handles blink.cmp, LuaSnip, and completion sources
 
-if nixCats('completion') then
-  vim.cmd('packadd blink-cmp')
-  vim.cmd('packadd luasnip')
-  vim.cmd('packadd lazydev-nvim')
-end
-
 -- LazyDev configuration for Lua development
 if nixCats('completion') then
   require('lazydev').setup {

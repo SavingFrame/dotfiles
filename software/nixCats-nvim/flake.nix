@@ -129,8 +129,6 @@
         lsp = with pkgs.vimPlugins; [
           # LSP core
           nvim-lspconfig
-          fidget-nvim
-          nvim-navic
         ];
         
         treesitter = with pkgs.vimPlugins; [
@@ -196,6 +194,11 @@
           persistence-nvim
           # Note: screenkey temporarily removed due to overlay issues
         ];
+
+        lsp = with pkgs.vimPlugins; [
+          fidget-nvim
+          nvim-navic
+          ];
       };
 
       # Shared libraries

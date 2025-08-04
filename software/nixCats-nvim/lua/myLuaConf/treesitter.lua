@@ -1,10 +1,8 @@
 -- Treesitter Configuration
 -- Handles syntax highlighting, text objects, and treesitter-based features
 
-if nixCats('treesitter') then
-  vim.cmd('packadd nvim-treesitter')
-  vim.cmd('packadd nvim-treesitter-textobjects')
-end
+-- Treesitter plugins are loaded automatically via startupPlugins
+-- No need to packadd: nvim-treesitter, nvim-treesitter-textobjects
 
 -- Treesitter configuration
 if nixCats('treesitter') then

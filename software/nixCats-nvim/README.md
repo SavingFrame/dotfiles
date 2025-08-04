@@ -162,3 +162,27 @@ nixCats-nvim/
 └── lua/overseer/template/user/
     └── go_build.lua         # Custom overseer template
 ```
+
+## Temporarily Disabled Plugins
+
+The following plugins have been temporarily disabled due to Nix overlay issues with custom flake inputs. They can be re-enabled once the overlay system is properly configured:
+
+### Custom Plugins (from flake inputs)
+- **blink-copilot** - Copilot integration for blink.cmp (AI category)
+- **close-buffers.nvim** - Advanced buffer management (editor category)  
+- **statuscol.nvim** - Enhanced status column (editor category)
+- **screenkey.nvim** - Show keypresses on screen (tools category)
+- **pymple.nvim** - Python development enhancements (python category)
+- **python-copy-reference.vim** - Copy Python references (python category)
+
+### Impact
+- **AI features**: Copilot still works, but without blink.cmp integration
+- **Buffer management**: Basic buffer operations work, advanced close-buffers features disabled
+- **Status column**: Using default Neovim status column instead of enhanced version
+- **Python development**: Core Python LSP and tools work, some convenience features disabled
+
+### Re-enabling Later
+These plugins can be re-enabled by:
+1. Fixing the nixCats overlay to properly handle flake inputs
+2. Or using `fetchFromGitHub` directly in the Nix configuration
+3. Or loading them as git submodules/manual installations
