@@ -14,7 +14,7 @@ if nixCats('editor') then
   vim.cmd('packadd todo-comments-nvim')
   vim.cmd('packadd mini-nvim')
   vim.cmd('packadd vim-tmux-navigator')
-  vim.cmd('packadd close-buffers-nvim')
+  vim.cmd('packadd close-buffers')
   vim.cmd('packadd marks-nvim')
   vim.cmd('packadd nvim-ufo')
   vim.cmd('packadd promise-async')

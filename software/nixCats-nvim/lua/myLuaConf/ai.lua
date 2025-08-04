@@ -5,6 +5,7 @@ if nixCats('ai') then
   vim.cmd('packadd copilot-lua')
   vim.cmd('packadd copilot-vim')
   vim.cmd('packadd copilot-chat-nvim')
+  vim.cmd('packadd blink-copilot')
 end
 
 -- Copilot.lua configuration
@@ -16,9 +17,9 @@ if nixCats('ai') then
 end
 
 -- Blink-copilot integration (if available)
-if nixCats('ai') and nixCats('extra') then
+if nixCats('ai') then
   -- This will be handled by the blink.cmp configuration
-  -- The plugin is loaded via the extra category
+  -- The plugin is loaded via the ai category
 end
 
 -- Update blink.cmp to include copilot if AI is enabled

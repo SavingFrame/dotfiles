@@ -3,6 +3,8 @@
 
 if nixCats('python') then
   vim.cmd('packadd SchemaStore-nvim')
+  vim.cmd('packadd pymple')
+  vim.cmd('packadd python-copy-reference')
 end
 
 -- Python-specific configurations
@@ -40,11 +42,11 @@ if nixCats('python') then
 end
 
 -- Additional Python tools configuration
-if nixCats('python') and nixCats('extra') then
-  -- Pymple.nvim configuration (if loaded via extra plugins)
+if nixCats('python') then
+  -- Pymple.nvim configuration (if loaded via python plugins)
   -- This would be configured here if the plugin is available
   
-  -- Python copy reference configuration (if loaded via extra plugins)
+  -- Python copy reference configuration (if loaded via python plugins)
   -- This would be configured here if the plugin is available
 end
 
