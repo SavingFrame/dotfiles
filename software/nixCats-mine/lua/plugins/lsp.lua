@@ -39,36 +39,29 @@ return {
           map('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
-          if nixCats('ui') then
-            map('gr', function()
-              Snacks.picker.lsp_references()
-            end, '[G]oto [R]eferences')
+          map('gr', function()
+            Snacks.picker.lsp_references()
+          end, '[G]oto [R]eferences')
 
-            map('gi', function()
-              Snacks.picker.lsp_implementations()
-            end, '[G]oto [I]mplementation')
+          map('gi', function()
+            Snacks.picker.lsp_implementations()
+          end, '[G]oto [I]mplementation')
 
-            map('gd', function()
-              Snacks.picker.lsp_definitions()
-            end, '[G]oto [D]efinition')
+          map('gd', function()
+            Snacks.picker.lsp_definitions()
+          end, '[G]oto [D]efinition')
 
-            map('<leader>ss', function()
-              Snacks.picker.lsp_symbols()
-            end, 'Open Document Symbols')
+          map('<leader>ss', function()
+            Snacks.picker.lsp_symbols()
+          end, 'Open Document Symbols')
 
-            map('<leader>sS', function()
-              Snacks.picker.lsp_workspace_symbols()
-            end, 'Open Workspace Symbols')
+          map('<leader>sS', function()
+            Snacks.picker.lsp_workspace_symbols()
+          end, 'Open Workspace Symbols')
 
-            map('grt', function()
-              Snacks.picker.lsp_type_definitions()
-            end, '[G]oto [T]ype Definition')
-          else
-            map('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
-            map('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-            map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-            map('grt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
-          end
+          map('grt', function()
+            Snacks.picker.lsp_type_definitions()
+          end, '[G]oto [T]ype Definition')
 
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
@@ -264,21 +257,9 @@ return {
     end,
       }
 
-      -- Only configure servers that are available via nixCats
+      -- Configure all available servers
       for server_name, config in pairs(servers) do
-        if nixCats('go') and server_name == 'gopls' then
-          vim.lsp.config(server_name, config)
-        elseif nixCats('python') and (server_name == 'basedpyright' or server_name == 'ruff') then
-          vim.lsp.config(server_name, config)
-        elseif nixCats('nix') and server_name == 'lua_ls' then
-          vim.lsp.config(server_name, config)
-        elseif nixCats('json') and server_name == 'jsonls' then
-          vim.lsp.config(server_name, config)
-        elseif nixCats('docker') and (server_name == 'dockerls' or server_name == 'docker_compose_language_service') then
-          vim.lsp.config(server_name, config)
-        elseif nixCats('templ') and server_name == 'templ' then
-          vim.lsp.config(server_name, config)
-        end
+        vim.lsp.config(server_name, config)
       end
 
       vim.api.nvim_create_autocmd('LspAttach', {

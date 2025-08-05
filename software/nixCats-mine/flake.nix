@@ -25,51 +25,37 @@
           ripgrep
           fd
           lazygit
-        ];
-        go = with pkgs; [
           gopls
           gotools
           go-tools
           delve
-        ];
-        python = with pkgs; [
           basedpyright
           ruff
-        ];
-        nix = with pkgs; [
           lua-language-server
           stylua
           nixd
-        ];
-        json = with pkgs; [
           nodePackages.jsonlint
-        ];
-        docker = with pkgs; [
           dockerfile-language-server-nodejs
           docker-compose-language-service
-        ];
-        templ = with pkgs; [
           templ
         ];
       };
 
       startupPlugins = {
-        general = with pkgs.vimPlugins; {
-          always = [
-            lze
-            plenary-nvim
-            nvim-web-devicons
-            guess-indent-nvim
-            snacks-nvim
-            nui-nvim
-            neo-tree-nvim
-          ];
-        };
+        general = with pkgs.vimPlugins; [
+          lze
+          plenary-nvim
+          nvim-web-devicons
+          guess-indent-nvim
+          snacks-nvim
+          nui-nvim
+          neo-tree-nvim
+        ];
       };
 
       optionalPlugins = {
-        # These will be loaded via lze
-        ui = with pkgs.vimPlugins; [
+        general = with pkgs.vimPlugins; [
+          # UI plugins
           lualine-nvim
           kanagawa-nvim
           lackluster-nvim
@@ -79,80 +65,67 @@
           marks-nvim
           which-key-nvim
 
-          # close-buffers-nvim  # Not available in nixpkgs
-        ];
-        git = with pkgs.vimPlugins; [
+          # Git plugins
           gitsigns-nvim
           diffview-nvim
-        ];
-        editor = with pkgs.vimPlugins; [
+
+          # Editor plugins
           flash-nvim
           treesj
           undotree
           grug-far-nvim
           trouble-nvim
-        ];
-        copilot = with pkgs.vimPlugins; [
+
+          # Copilot plugins
           copilot-lua
           blink-cmp
           CopilotChat-nvim
           copilot-vim
-        ];
-        completion = with pkgs.vimPlugins; [
-          blink-cmp
+
+          # Completion plugins
           luasnip
           lazydev-nvim
-        ];
-        lsp = with pkgs.vimPlugins; [
+
+          # LSP plugins
           nvim-lspconfig
           fidget-nvim
           mason-nvim
           mason-lspconfig-nvim
           mason-tool-installer-nvim
           SchemaStore-nvim
-        ];
-        treesitter = with pkgs.vimPlugins; [
+
+          # Treesitter plugins
           nvim-treesitter.withAllGrammars
           nvim-treesitter-textobjects
-        ];
-        format = with pkgs.vimPlugins; [
+
+          # Format plugins
           conform-nvim
-        ];
-        debug = with pkgs.vimPlugins; [
+
+          # Debug plugins
           nvim-dap
           nvim-dap-ui
           nvim-dap-go
           nvim-nio
           mason-nvim-dap-nvim
-        ];
-        testing = with pkgs.vimPlugins; [
-          # neotest  # Build issues
-          # neotest-python
-        ];
-        python = with pkgs.vimPlugins; [
-          # pymple-nvim  # Not available in nixpkgs
-          # python-copy-reference-vim  # Not available in nixpkgs
+
+          # Python plugins
           vim-python-pep8-indent
-        ];
-        utils = with pkgs.vimPlugins; [
+
+          # Utility plugins
           dial-nvim
           harpoon2
           persistence-nvim
-          # screenkey-nvim  # Not available in nixpkgs
           vim-tmux-navigator
-        ];
-        fold = with pkgs.vimPlugins; [
+
+          # Fold plugins
           nvim-ufo
           promise-async
           statuscol-nvim
-        ];
-        overseer = with pkgs.vimPlugins; [
-          # overseer-nvim  # Depends on neotest which has build issues
-        ];
-        mini = with pkgs.vimPlugins; [
+
+          # Mini plugins
           mini-nvim
-        ];
-        todo_comments = with pkgs.vimPlugins; [
+
+          # Todo comments
           todo-comments-nvim
         ];
       };
@@ -163,22 +136,14 @@
         ];
       };
 
-      environmentVariables = {
-        test = {
-          default = {
-            CATTESTVARDEFAULT = "It worked!";
-          };
-        };
-      };
-
       extraWrapperArgs = {
-        test = [
+        general = [
           '' --set CATTESTVAR2 "It worked again!"''
         ];
       };
 
       python3.libraries = {
-        test = (_:[]);
+        general = (_:[]);
       };
 
       extraLuaPackages = {
@@ -203,29 +168,6 @@
         };
         categories = {
           general = true;
-          ui = true;
-          git = true;
-          editor = true;
-          copilot = true;
-          completion = true;
-          lsp = true;
-          treesitter = true;
-          format = true;
-          debug = true;
-          testing = true;
-          python = true;
-          utils = true;
-          fold = true;
-          overseer = true;
-          neo_tree = true;
-          mini = true;
-          which_key = true;
-          todo_comments = true;
-          go = true;
-          nix = true;
-          json = true;
-          docker = true;
-          templ = true;
         };
         extra = {
           # Extra configuration can go here

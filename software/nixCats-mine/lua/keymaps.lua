@@ -44,11 +44,7 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>bd', function()
-  if nixCats('ui') then
-    Snacks.bufdelete()
-  else
-    vim.cmd('bdelete')
-  end
+  Snacks.bufdelete()
 end, { desc = 'Delete Buffer' })
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })

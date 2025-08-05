@@ -23,21 +23,21 @@ return {
       },
 
       sources = {
-        default = nixCats('copilot') and { 'lsp', 'path', 'snippets', 'lazydev', 'copilot' } or { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'lazydev', 'copilot' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-          -- copilot = nixCats('copilot') and {
+          -- copilot = {
           --   name = 'copilot',
           --   module = 'blink-copilot',
           --   score_offset = 100,
           --   async = true,
-          -- } or nil,
+          -- },
         },
       },
 
       appearance = {
         nerd_font_variant = 'mono',
-        kind_icons = nixCats('copilot') and {
+        kind_icons = {
           Copilot = '',
           Text = '󰉿',
           Method = '󰊕',
@@ -64,7 +64,7 @@ return {
           Event = '󱐋',
           Operator = '󰪚',
           TypeParameter = '󰬛',
-        } or {},
+        },
       },
 
       snippets = { preset = 'luasnip' },
