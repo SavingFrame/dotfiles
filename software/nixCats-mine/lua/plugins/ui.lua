@@ -4,384 +4,172 @@ return {
     'snacks.nvim',
     priority = 1000,
     lazy = false,
-    opts = {
-      dashboard = { enabled = true },
-      indent = {
-        enabled = true,
-        chunk = {
+    after = function()
+      require('snacks').setup({
+        dashboard = { enabled = true },
+        indent = {
+          enabled = true,
+          chunk = {
+            enabled = true,
+          },
+        },
+        lazygit = {
           enabled = true,
         },
-      },
-      lazygit = {
-        enabled = true,
-      },
-      input = { enabled = true },
-      picker = {
-        formatters = {
-          file = {
-            truncate = 120,
+        input = { enabled = true },
+        picker = {
+          formatters = {
+            file = {
+              truncate = 120,
+            },
+          },
+          previewers = {
+            git = {
+              native = true,
+            },
           },
         },
-        previewers = {
-          git = {
-            native = true,
-          },
+        notifier = {
+          enabled = true,
         },
-      },
-      notifier = {
-        enabled = true,
-      },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-    },
-    keys = {
+        quickfile = { enabled = true },
+        scope = { enabled = true },
+        statuscolumn = { enabled = true },
+        words = { enabled = true },
+      })
+      
+      -- Set up keymaps
+      local function map(mode, lhs, rhs, opts)
+        opts = opts or {}
+        vim.keymap.set(mode, lhs, rhs, opts)
+      end
+      
       -- Top Pickers & Explorer
-      {
-        '<leader><space>',
-        function()
-          Snacks.picker.smart()
-        end,
-        desc = 'Smart Find Files',
-      },
-      {
-        '<leader>,',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'Buffers',
-      },
-      {
-        '<leader><tab>',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'Buffers',
-      },
-      {
-        '<leader>:',
-        function()
-          Snacks.picker.command_history()
-        end,
-        desc = 'Command History',
-      },
-      {
-        '<leader>n',
-        function()
-          Snacks.picker.notifications()
-        end,
-        desc = 'Notification History',
-      },
+      map('n', '<leader><space>', function() Snacks.picker.smart() end, { desc = 'Smart Find Files' })
+      map('n', '<leader>,', function() Snacks.picker.buffers() end, { desc = 'Buffers' })
+      map('n', '<leader><tab>', function() Snacks.picker.buffers() end, { desc = 'Buffers' })
+      map('n', '<leader>:', function() Snacks.picker.command_history() end, { desc = 'Command History' })
+      map('n', '<leader>n', function() Snacks.picker.notifications() end, { desc = 'Notification History' })
+      
       -- find
-      {
-        '<leader>fb',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'Buffers',
-      },
-      {
-        '<leader>fc',
-        function()
-          Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
-        end,
-        desc = 'Find Config File',
-      },
-      {
-        '<leader>ff',
-        function()
-          Snacks.picker.files {
-            finder = 'files',
-            format = 'file',
-            hidden = true,
-            ignored = true,
-            follow = false,
-            supports_live = true,
-          }
-        end,
-        desc = 'Find Files',
-      },
-      {
-        '<leader>fr',
-        function()
-          Snacks.picker.recent()
-        end,
-        desc = 'Recent',
-      },
+      map('n', '<leader>fb', function() Snacks.picker.buffers() end, { desc = 'Buffers' })
+      map('n', '<leader>fc', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, { desc = 'Find Config File' })
+      map('n', '<leader>ff', function()
+        Snacks.picker.files {
+          finder = 'files',
+          format = 'file',
+          hidden = true,
+          ignored = true,
+          follow = false,
+          supports_live = true,
+        }
+      end, { desc = 'Find Files' })
+      map('n', '<leader>fr', function() Snacks.picker.recent() end, { desc = 'Recent' })
+      
       -- git
-      {
-        '<leader>gd',
-        function()
-          Snacks.picker.git_diff()
-        end,
-        desc = 'Git Diff (Hunks)',
-      },
-      {
-        '<leader>gf',
-        function()
-          Snacks.picker.git_log_file()
-        end,
-        desc = 'Git Log File',
-      },
-      {
-        '<leader>gs',
-        function()
-          Snacks.picker.git_status()
-        end,
-        desc = 'Git Status',
-      },
+      map('n', '<leader>gd', function() Snacks.picker.git_diff() end, { desc = 'Git Diff (Hunks)' })
+      map('n', '<leader>gf', function() Snacks.picker.git_log_file() end, { desc = 'Git Log File' })
+      map('n', '<leader>gs', function() Snacks.picker.git_status() end, { desc = 'Git Status' })
+      
       -- Grep
-      {
-        '<leader>sg',
-        function()
-          Snacks.picker.grep()
-        end,
-        desc = 'Grep',
-      },
-      {
-        '<leader>sw',
-        function()
-          Snacks.picker.grep_word()
-        end,
-        desc = 'Visual selection or word',
-        mode = { 'n', 'x' },
-      },
+      map('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = 'Grep' })
+      map({'n', 'x'}, '<leader>sw', function() Snacks.picker.grep_word() end, { desc = 'Visual selection or word' })
+      
       -- search
-      {
-        '<leader>sb',
-        function()
-          Snacks.picker.lines()
-        end,
-        desc = 'Buffer Lines',
-      },
-      {
-        '<leader>sd',
-        function()
-          Snacks.picker.diagnostics()
-        end,
-        desc = 'Diagnostics',
-      },
-      {
-        '<leader>sD',
-        function()
-          Snacks.picker.diagnostics_buffer()
-        end,
-        desc = 'Buffer Diagnostics',
-      },
-      {
-        '<leader>sh',
-        function()
-          Snacks.picker.help()
-        end,
-        desc = 'Help Pages',
-      },
-      {
-        '<leader>sH',
-        function()
-          Snacks.picker.highlights()
-        end,
-        desc = 'Highlights',
-      },
-      {
-        '<leader>sj',
-        function()
-          Snacks.picker.jumps()
-        end,
-        desc = 'Jumps',
-      },
-      {
-        '<leader>sk',
-        function()
-          Snacks.picker.keymaps()
-        end,
-        desc = 'Keymaps',
-      },
-      {
-        '<leader>sl',
-        function()
-          Snacks.picker.loclist()
-        end,
-        desc = 'Location List',
-      },
-      {
-        '<leader>sm',
-        function()
-          Snacks.picker.marks()
-        end,
-        desc = 'Marks',
-      },
-      {
-        '<leader>sM',
-        function()
-          Snacks.picker.man()
-        end,
-        desc = 'Man Pages',
-      },
-      {
-        '<leader>sq',
-        function()
-          Snacks.picker.qflist()
-        end,
-        desc = 'Quickfix List',
-      },
-      {
-        '<leader>sR',
-        function()
-          Snacks.picker.resume()
-        end,
-        desc = 'Resume',
-      },
-      {
-        '<leader>su',
-        function()
-          Snacks.picker.undo()
-        end,
-        desc = 'Undo History',
-      },
-      {
-        '<leader>sp',
-        function()
-          Snacks.picker.lazy()
-        end,
-        desc = 'Search for Plugin Spec',
-      },
-      {
-        '<leader>uC',
-        function()
-          Snacks.picker.colorschemes()
-        end,
-        desc = 'Colorschemes',
-      },
-      {
-        '<leader>bd',
-        function()
-          Snacks.bufdelete()
-        end,
-        desc = 'Delete Buffer',
-      },
-      {
-        '<leader>cR',
-        function()
-          Snacks.rename.rename_file()
-        end,
-        desc = 'Rename File',
-      },
-      {
-        '<leader>gB',
-        function()
-          Snacks.gitbrowse()
-        end,
-        desc = 'Git Browse',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>gb',
-        function()
-          Snacks.git.blame_line()
-        end,
-        desc = 'Git Blame',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>gg',
-        function()
-          Snacks.lazygit()
-        end,
-        desc = 'Lazygit',
-      },
-      {
-        '<leader>un',
-        function()
-          Snacks.notifier.hide()
-        end,
-        desc = 'Dismiss All Notifications',
-      },
-      {
-        ']]',
-        function()
-          Snacks.words.jump(vim.v.count1)
-        end,
-        desc = 'Next Reference',
-        mode = { 'n', 't' },
-      },
-      {
-        '[[',
-        function()
-          Snacks.words.jump(-vim.v.count1)
-        end,
-        desc = 'Prev Reference',
-        mode = { 'n', 't' },
-      },
-    },
+      map('n', '<leader>sb', function() Snacks.picker.lines() end, { desc = 'Buffer Lines' })
+      map('n', '<leader>sd', function() Snacks.picker.diagnostics() end, { desc = 'Diagnostics' })
+      map('n', '<leader>sD', function() Snacks.picker.diagnostics_buffer() end, { desc = 'Buffer Diagnostics' })
+      map('n', '<leader>sh', function() Snacks.picker.help() end, { desc = 'Help Pages' })
+      map('n', '<leader>sH', function() Snacks.picker.highlights() end, { desc = 'Highlights' })
+      map('n', '<leader>sj', function() Snacks.picker.jumps() end, { desc = 'Jumps' })
+      map('n', '<leader>sk', function() Snacks.picker.keymaps() end, { desc = 'Keymaps' })
+      map('n', '<leader>sl', function() Snacks.picker.loclist() end, { desc = 'Location List' })
+      map('n', '<leader>sm', function() Snacks.picker.marks() end, { desc = 'Marks' })
+      map('n', '<leader>sM', function() Snacks.picker.man() end, { desc = 'Man Pages' })
+      map('n', '<leader>sq', function() Snacks.picker.qflist() end, { desc = 'Quickfix List' })
+      map('n', '<leader>sR', function() Snacks.picker.resume() end, { desc = 'Resume' })
+      map('n', '<leader>su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
+      map('n', '<leader>sp', function() Snacks.picker.lazy() end, { desc = 'Search for Plugin Spec' })
+      map('n', '<leader>uC', function() Snacks.picker.colorschemes() end, { desc = 'Colorschemes' })
+      map('n', '<leader>bd', function() Snacks.bufdelete() end, { desc = 'Delete Buffer' })
+      map('n', '<leader>cR', function() Snacks.rename.rename_file() end, { desc = 'Rename File' })
+      map({'n', 'v'}, '<leader>gB', function() Snacks.gitbrowse() end, { desc = 'Git Browse' })
+      map({'n', 'v'}, '<leader>gb', function() Snacks.git.blame_line() end, { desc = 'Git Blame' })
+      map('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazygit' })
+      map('n', '<leader>un', function() Snacks.notifier.hide() end, { desc = 'Dismiss All Notifications' })
+      map({'n', 't'}, ']]', function() Snacks.words.jump(vim.v.count1) end, { desc = 'Next Reference' })
+      map({'n', 't'}, '[[', function() Snacks.words.jump(-vim.v.count1) end, { desc = 'Prev Reference' })
+    end,
   },
   {
     'lualine.nvim',
-    -- event = 'VeryLazy',
-    opts = {
-      options = {
-        theme = 'kanagawa',
-        section_separators = '',
-        component_separators = '',
-        disabled_filetypes = {
-          statusline = { 'neo-tree' },
+    after = function()
+      require('lualine').setup({
+        options = {
+          theme = 'kanagawa',
+          section_separators = '',
+          component_separators = '',
+          disabled_filetypes = {
+            statusline = { 'neo-tree' },
+          },
         },
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = {
-          {
-            'filename',
-            file_status = true,
-            newfile_status = false,
-            path = 1,
-            shorting_target = 120,
-            symbols = {
-              modified = '[+]',
-              readonly = '[-]',
-              unnamed = '[No Name]',
-              newfile = '[New]',
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_c = {
+            {
+              'filename',
+              file_status = true,
+              newfile_status = false,
+              path = 1,
+              shorting_target = 120,
+              symbols = {
+                modified = '[+]',
+                readonly = '[-]',
+                unnamed = '[No Name]',
+                newfile = '[New]',
+              },
+            },
+          },
+          lualine_x = { 'encoding', 'fileformat', 'filetype' },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' },
+        },
+        winbar = {
+          lualine_c = {
+            {
+              'filename',
+              file_status = true,
+              newfile_status = false,
+              path = 1,
+              shorting_target = 120,
+              symbols = {
+                modified = '[+]',
+                readonly = '[-]',
+                unnamed = '[No Name]',
+                newfile = '[New]',
+              },
+            },
+            {
+              'navic',
+              color_correction = nil,
+              navic_opts = nil,
             },
           },
         },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' },
-      },
-      winbar = {
-        lualine_c = {
-          {
-            'filename',
-            file_status = true,
-            newfile_status = false,
-            path = 1,
-            shorting_target = 120,
-            symbols = {
-              modified = '[+]',
-              readonly = '[-]',
-              unnamed = '[No Name]',
-              newfile = '[New]',
-            },
-          },
-          {
-            'navic',
-            color_correction = nil,
-            navic_opts = nil,
-          },
-        },
-      },
-    },
+      })
+    end,
   },
   {
     'marks.nvim',
-    -- event = 'VeryLazy',
-    opts = {},
+    after = function()
+      require('marks').setup({})
+    end,
   },
   {
     'nvim-navic',
     event = 'LspAttach',
-    config = function()
+    after = function()
       require('nvim-navic').setup {
         lsp = {
           auto_attach = true,
@@ -398,7 +186,7 @@ return {
     'lackluster.nvim',
     lazy = false,
     priority = 1000,
-    config = function()
+    after = function()
       local lackluster = require 'lackluster'
       lackluster.setup {
         tweak_syntax = {
@@ -421,7 +209,7 @@ return {
     'kanagawa.nvim',
     lazy = false,
     priority = 1000,
-    config = function()
+    after = function()
       require('kanagawa').setup {
         colors = {
           theme = {
@@ -438,26 +226,28 @@ return {
   },
   {
     'close-buffers.nvim',
-    opts = {
-      filetype_ignore = { 'neo-tree' },
-      file_glob_ignore = {},
-      file_regex_ignore = {},
-      preserve_window_layout = { 'this', 'nameless' },
-      next_buffer_cmd = nil,
-    },
-    keys = {
-      {
-        '<leader>bo',
-        function()
-          require('close_buffers').delete { type = 'hidden', force = true }
-        end,
-        desc = 'Delete Other Buffers',
-      },
-    },
+    keys = '<leader>bo',
+    after = function()
+      require('close_buffers').setup({
+        filetype_ignore = { 'neo-tree' },
+        file_glob_ignore = {},
+        file_regex_ignore = {},
+        preserve_window_layout = { 'this', 'nameless' },
+        next_buffer_cmd = nil,
+      })
+      
+      vim.keymap.set('n', '<leader>bo', function()
+        require('close_buffers').delete { type = 'hidden', force = true }
+      end, { desc = 'Delete Other Buffers' })
+    end,
+  },
+  {
+    'nui.nvim',
   },
   {
     'noice.nvim',
-    -- event = 'VeryLazy',
-    opts = {},
+    after = function()
+      require('noice').setup({})
+    end,
   },
 }

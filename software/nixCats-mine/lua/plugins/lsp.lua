@@ -3,20 +3,30 @@ return {
   {
     'lazydev.nvim',
     ft = 'lua',
-    opts = {
+    after = function()
+      require
       library = {
-        { path = 'library', words = { 'vim%.uv' } },
-        { path = 'snacks.nvim', words = { 'Snacks' } },
-      },
-    },
-  },
+        { path = 'library', words = { 'vim%.uv' }       })
+    end,
+        { path = 'snacks.nvim', words = { 'Snacks' }       })
+    end,
+            })
+    end,
+          })
+    end,
+        })
+    end,
   {
     'fidget.nvim',
-    opts = {},
-  },
+    after = function()
+      require      })
+    end,
+        })
+    end,
   {
     'nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufNewFile'       })
+    end,
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -113,16 +123,20 @@ return {
       -- Diagnostic Config
       vim.diagnostic.config {
         severity_sort = true,
-        float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
+        float = { border = 'rounded', source = 'if_many'       })
+    end,
+        underline = { severity = vim.diagnostic.severity.ERROR       })
+    end,
         signs = vim.g.have_nerd_font and {
           text = {
             [vim.diagnostic.severity.ERROR] = '󰅚 ',
             [vim.diagnostic.severity.WARN] = '󰀪 ',
             [vim.diagnostic.severity.INFO] = '󰋽 ',
             [vim.diagnostic.severity.HINT] = '󰌶 ',
-          },
-        } or {},
+                })
+    end,
+        } or {      })
+    end,
         virtual_text = {
           source = 'if_many',
           spacing = 2,
@@ -135,7 +149,8 @@ return {
             }
             return diagnostic_message[diagnostic.severity]
           end,
-        },
+              })
+    end,
       }
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -154,7 +169,8 @@ return {
                 tidy = true,
                 upgrade_dependency = true,
                 vendor = true,
-              },
+                    })
+    end,
               hints = {
                 assignVariableTypes = true,
                 compositeLiteralFields = true,
@@ -163,21 +179,27 @@ return {
                 functionTypeParameters = true,
                 parameterNames = true,
                 rangeVariableTypes = true,
-              },
+                    })
+    end,
               analyses = {
                 nilness = true,
                 unusedparams = true,
                 unusedwrite = true,
                 useany = true,
-              },
+                    })
+    end,
               usePlaceholders = true,
               completeUnimported = true,
               staticcheck = true,
-              directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+              directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules'       })
+    end,
               semanticTokens = true,
-            },
-          },
-        },
+                  })
+    end,
+                })
+    end,
+              })
+    end,
         basedpyright = {
           disableOrganizeImports = true,
           settings = {
@@ -188,39 +210,58 @@ return {
                 useLibraryCodeForTypes = true,
                 diagnosticSeverityOverrides = {
                   reportAssignmentType = 'warning',
-                },
-              },
-            },
-          },
-        },
+                      })
+    end,
+                    })
+    end,
+                  })
+    end,
+                })
+    end,
+              })
+    end,
         ruff = {
           capabilities = {
             hoverProvider = false,
-          },
-        },
+                })
+    end,
+              })
+    end,
         jsonls = {
           settings = {
             json = {
               schemas = require('schemastore').json.schemas(),
-              validate = { enable = true },
+              validate = { enable = true       })
+    end,
               format = {
                 enable = true,
-              },
-            },
-          },
-        },
+                    })
+    end,
+                  })
+    end,
+                })
+    end,
+              })
+    end,
         lua_ls = {
           settings = {
             Lua = {
               completion = {
                 callSnippet = 'Replace',
-              },
-            },
-          },
-        },
-        dockerls = {},
-        docker_compose_language_service = {},
-        templ = {},
+                    })
+    end,
+                  })
+    end,
+                })
+    end,
+              })
+    end,
+        dockerls = {      })
+    end,
+        docker_compose_language_service = {      })
+    end,
+        templ = {      })
+    end,
       }
 
       -- Only configure servers that are available via nixCats
@@ -251,5 +292,6 @@ return {
         end,
       })
     end,
-  },
+        })
+    end,
 }

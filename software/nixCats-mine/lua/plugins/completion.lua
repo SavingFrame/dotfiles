@@ -2,20 +2,13 @@
 return {
   {
     'luasnip',
-    version = '2.*',
-    build = function()
-      if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-        return
-      end
-      return 'make install_jsregexp'
-    end,
-    opts = {},
   },
   {
     'blink.cmp',
     event = 'InsertEnter',
-    version = '1.*',
-    opts = {
+    after = function()
+
+      require('blink.cmp').setup({
       keymap = {
         preset = 'default',
       },
@@ -33,12 +26,12 @@ return {
         default = nixCats('copilot') and { 'lsp', 'path', 'snippets', 'lazydev', 'copilot' } or { 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-          copilot = nixCats('copilot') and {
-            name = 'copilot',
-            module = 'blink-copilot',
-            score_offset = 100,
-            async = true,
-          } or nil,
+          -- copilot = nixCats('copilot') and {
+          --   name = 'copilot',
+          --   module = 'blink-copilot',
+          --   score_offset = 100,
+          --   async = true,
+          -- } or nil,
         },
       },
 
@@ -78,7 +71,8 @@ return {
 
       fuzzy = { implementation = 'prefer_rust_with_warning' },
 
-      signature = { enabled = true },
-    },
+        signature = { enabled = true },
+      })
+    end,
   },
 }

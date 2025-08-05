@@ -2,9 +2,11 @@
 return {
   {
     'nvim-treesitter',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile'       })
+    end,
     build = ':TSUpdate',
-    opts = {
+    after = function()
+      require
       ensure_installed = {
         'bash',
         'c',
@@ -25,16 +27,21 @@ return {
         'json5',
         'dockerfile',
         'templ',
-      },
+            })
+    end,
       auto_install = false, -- Managed by nix
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,
-      },
-      indent = { enable = true, disable = { 'ruby', 'python' } },
-    },
+            })
+    end,
+      indent = { enable = true, disable = { 'ruby', 'python' }       })
+    end,
+          })
+    end,
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
     end,
-  },
+        })
+    end,
 }

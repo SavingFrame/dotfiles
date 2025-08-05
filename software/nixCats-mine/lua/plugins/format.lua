@@ -2,8 +2,10 @@
 return {
   {
     'conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
+    event = { 'BufWritePre'       })
+    end,
+    cmd = { 'ConformInfo'       })
+    end,
     keys = {
       {
         '<leader>cf',
@@ -12,9 +14,12 @@ return {
         end,
         mode = '',
         desc = '[C]ode [F]ormat',
-      },
-    },
-    opts = {
+            })
+    end,
+          })
+    end,
+    after = function()
+      require
       notify_on_error = true,
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
@@ -28,10 +33,16 @@ return {
         end
       end,
       formatters_by_ft = {
-        lua = { 'stylua' },
-        python = { 'ruff_fix', 'ruff_format' },
-        html = { 'prettier' },
-      },
-    },
-  },
+        lua = { 'stylua'       })
+    end,
+        python = { 'ruff_fix', 'ruff_format'       })
+    end,
+        html = { 'prettier'       })
+    end,
+            })
+    end,
+          })
+    end,
+        })
+    end,
 }

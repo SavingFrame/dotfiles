@@ -3,6 +3,9 @@ return {
   {
     'todo-comments.nvim',
     event = 'VimEnter',
-    opts = { signs = false },
-  },
+    after = function()
+      require signs = false       })
+    end,
+        })
+    end,
 }

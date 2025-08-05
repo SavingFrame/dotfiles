@@ -60,6 +60,9 @@
             plenary-nvim
             nvim-web-devicons
             guess-indent-nvim
+            snacks-nvim
+            nui-nvim
+            neo-tree-nvim
           ];
         };
       };
@@ -67,15 +70,15 @@
       optionalPlugins = {
         # These will be loaded via lze
         ui = with pkgs.vimPlugins; [
-          snacks-nvim
           lualine-nvim
           kanagawa-nvim
           lackluster-nvim
           noice-nvim
-          nui-nvim
           nvim-notify
           nvim-navic
           marks-nvim
+          which-key-nvim
+
           # close-buffers-nvim  # Not available in nixpkgs
         ];
         git = with pkgs.vimPlugins; [
@@ -146,14 +149,8 @@
         overseer = with pkgs.vimPlugins; [
           # overseer-nvim  # Depends on neotest which has build issues
         ];
-        neo_tree = with pkgs.vimPlugins; [
-          neo-tree-nvim
-        ];
         mini = with pkgs.vimPlugins; [
           mini-nvim
-        ];
-        which_key = with pkgs.vimPlugins; [
-          which-key-nvim
         ];
         todo_comments = with pkgs.vimPlugins; [
           todo-comments-nvim

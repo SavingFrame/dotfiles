@@ -5,30 +5,14 @@ return {
   },
   {
     'neo-tree.nvim',
-    lazy = false,
     keys = {
-      { '<leader>e', ':Neotree toggle reveal=true<CR>', desc = 'NeoTree reveal', silent = true },
-      {
-        '<leader>fV',
-        function()
-          local site_packages_path = require('utils.path').get_venv_site_packages_path()
-          if site_packages_path then
-            require('neo-tree.command').execute {
-              toggle = true,
-              dir = site_packages_path,
-              filters = {
-                hide_dotfiles = false, -- Ensure dotfiles are shown
-                hide_gitignored = false,
-                hide_by_pattern = { '__pycache__/', '%.so', '%.dist-info/', '*.egg-info/', '*.pyc', '*dist-info/' },
-              },
-            }
-          end
-        end,
-        desc = 'Explorer NeoTree (Libraries)',
-      },
+      '<leader>e',
+      '<leader>fV',
     },
-    opts = {
-      event_handlers = {
+    after = function()
+      -- Setup neo-tree
+      require('neo-tree').setup({
+        event_handlers = {
         {
           event = 'file_open_requested',
           handler = function()
@@ -107,7 +91,24 @@ return {
             end,
           },
         },
-      },
-    },
+      })
+      
+      -- Set up keymaps
+      vim.keymap.set('n', '<leader>e', ':Neotree toggle reveal=true<CR>', { desc = 'NeoTree reveal', silent = true })
+      vim.keymap.set('n', '<leader>fV', function()
+        local site_packages_path = require('utils.path').get_venv_site_packages_path()
+        if site_packages_path then
+          require('neo-tree.command').execute {
+            toggle = true,
+            dir = site_packages_path,
+            filters = {
+              hide_dotfiles = false,
+              hide_gitignored = false,
+              hide_by_pattern = { '__pycache__/', '%.so', '%.dist-info/', '*.egg-info/', '*.pyc', '*dist-info/' },
+            },
+          }
+        end
+      end, { desc = 'Explorer NeoTree (Libraries)' })
+    end,
   },
 }

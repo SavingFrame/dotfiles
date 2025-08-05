@@ -2,8 +2,9 @@
 return {
   {
     'which-key.nvim',
-    event = 'VimEnter',
-    opts = {
+    lazy = false,
+    after = function()
+      require
       preset = 'helix',
       delay = 250,
       icons = {
@@ -37,16 +38,27 @@ return {
           F10 = '<F10>',
           F11 = '<F11>',
           F12 = '<F12>',
-        },
-      },
+              })
+    end,
+            })
+    end,
       spec = {
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>b', group = '[B]uffers' },
-        { '<leader>f', group = '[F]ind' },
-        { '<leader>u', group = '[U]I' },
-        { '<leader>c', group = '[C]ode' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-      },
-    },
-  },
+        { '<leader>s', group = '[S]earch'       })
+    end,
+        { '<leader>b', group = '[B]uffers'       })
+    end,
+        { '<leader>f', group = '[F]ind'       })
+    end,
+        { '<leader>u', group = '[U]I'       })
+    end,
+        { '<leader>c', group = '[C]ode'       })
+    end,
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' }       })
+    end,
+            })
+    end,
+          })
+    end,
+        })
+    end,
 }
