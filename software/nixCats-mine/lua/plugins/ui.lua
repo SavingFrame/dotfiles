@@ -1,7 +1,7 @@
 -- UI plugins configuration for lze
 return {
   {
-    'folke/snacks.nvim',
+    'snacks.nvim',
     priority = 1000,
     lazy = false,
     opts = {
@@ -316,7 +316,7 @@ return {
     },
   },
   {
-    'nvim-lualine/lualine.nvim',
+    'lualine.nvim',
     -- event = 'VeryLazy',
     opts = {
       options = {
@@ -374,12 +374,12 @@ return {
     },
   },
   {
-    'chentoast/marks.nvim',
+    'marks.nvim',
     -- event = 'VeryLazy',
     opts = {},
   },
   {
-    'SmiteshP/nvim-navic',
+    'nvim-navic',
     event = 'LspAttach',
     config = function()
       require('nvim-navic').setup {
@@ -395,7 +395,7 @@ return {
     end,
   },
   {
-    'slugbyte/lackluster.nvim',
+    'lackluster.nvim',
     lazy = false,
     priority = 1000,
     config = function()
@@ -418,7 +418,7 @@ return {
     end,
   },
   {
-    'rebelot/kanagawa.nvim',
+    'kanagawa.nvim',
     lazy = false,
     priority = 1000,
     config = function()
@@ -437,7 +437,7 @@ return {
     end,
   },
   {
-    'kazhala/close-buffers.nvim',
+    'close-buffers.nvim',
     opts = {
       filetype_ignore = { 'neo-tree' },
       file_glob_ignore = {},
@@ -456,7 +456,7 @@ return {
     },
   },
   {
-    'folke/noice.nvim',
+    'noice.nvim',
     -- event = 'VeryLazy',
     opts = {},
   },

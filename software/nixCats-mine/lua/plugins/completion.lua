@@ -1,13 +1,20 @@
 -- Completion configuration for lze
 return {
   {
-    'saghen/blink.cmp',
+    'luasnip',
+    version = '2.*',
+    build = function()
+      if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+        return
+      end
+      return 'make install_jsregexp'
+    end,
+    opts = {},
+  },
+  {
+    'blink.cmp',
     event = 'InsertEnter',
     version = '1.*',
-    dependencies = {
-      'L3MON4D3/LuaSnip',
-      'folke/lazydev.nvim',
-    },
     opts = {
       keymap = {
         preset = 'default',
@@ -73,16 +80,5 @@ return {
 
       signature = { enabled = true },
     },
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    version = '2.*',
-    build = function()
-      if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-        return
-      end
-      return 'make install_jsregexp'
-    end,
-    opts = {},
   },
 }

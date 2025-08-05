@@ -1,7 +1,7 @@
 -- Git plugins configuration for lze
 return {
   {
-    'lewis6991/gitsigns.nvim',
+    'gitsigns.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
       signs = {
@@ -23,7 +23,7 @@ return {
     },
   },
   {
-    'sindrets/diffview.nvim',
+    'diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewFileHistory' },
     keys = function()
       local function toggleDiffView(cmd)

@@ -1,7 +1,7 @@
 -- Mini plugins configuration for lze
 return {
   {
-    'echasnovski/mini.nvim',
+    'mini.nvim',
     -- event = 'VeryLazy',
     config = function()
       local ai = require 'mini.ai'

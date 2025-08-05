@@ -1,7 +1,7 @@
 -- Copilot plugins configuration for lze
 return {
   {
-    'zbirenbaum/copilot.lua',
+    'copilot.lua',
     event = 'InsertEnter',
     opts = {
       suggestion = { enabled = false },
@@ -9,7 +9,7 @@ return {
     },
   },
   {
-    'fang2hou/blink-copilot',
+    'blink-copilot',
     event = 'InsertEnter',
     opts = {
       debounce = 50,
@@ -17,7 +17,7 @@ return {
     },
   },
   {
-    'CopilotC-Nvim/CopilotChat.nvim',
+    'CopilotChat.nvim',
     build = 'make tiktoken',
     keys = {
       { '<leader>a', '', desc = '+ai', mode = { 'n', 'v' } },

@@ -1,7 +1,7 @@
 -- Which-key plugins configuration for lze
 return {
   {
-    'folke/which-key.nvim',
+    'which-key.nvim',
     event = 'VimEnter',
     opts = {
       preset = 'helix',

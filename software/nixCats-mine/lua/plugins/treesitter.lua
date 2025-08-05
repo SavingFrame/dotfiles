@@ -1,7 +1,7 @@
 -- Treesitter configuration for lze
 return {
   {
-    'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter',
     event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
     opts = {

@@ -62,6 +62,10 @@
             guess-indent-nvim
           ];
         };
+      };
+
+      optionalPlugins = {
+        # These will be loaded via lze
         ui = with pkgs.vimPlugins; [
           snacks-nvim
           lualine-nvim
@@ -154,10 +158,6 @@
         todo_comments = with pkgs.vimPlugins; [
           todo-comments-nvim
         ];
-      };
-
-      optionalPlugins = {
-        # These will be loaded via lze
       };
 
       sharedLibraries = {

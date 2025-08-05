@@ -1,22 +1,22 @@
 -- LSP configuration for lze
 return {
   {
-    'folke/lazydev.nvim',
+    'lazydev.nvim',
     ft = 'lua',
     opts = {
       library = {
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        { path = 'library', words = { 'vim%.uv' } },
         { path = 'snacks.nvim', words = { 'Snacks' } },
       },
     },
   },
   {
-    'neovim/nvim-lspconfig',
+    'fidget.nvim',
+    opts = {},
+  },
+  {
+    'nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'j-hui/fidget.nvim',
-      'saghen/blink.cmp',
-    },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -251,10 +251,5 @@ return {
         end,
       })
     end,
-  },
-  {
-    'j-hui/fidget.nvim',
-    event = 'LspAttach',
-    opts = {},
   },
 }

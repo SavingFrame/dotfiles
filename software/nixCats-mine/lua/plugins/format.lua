@@ -1,7 +1,7 @@
 -- Format plugins configuration for lze
 return {
   {
-    'stevearc/conform.nvim',
+    'conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {

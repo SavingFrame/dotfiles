@@ -1,14 +1,14 @@
 -- Editor plugins configuration for lze
 return {
   {
-    'Wansmer/treesj',
+    'treesj',
     keys = { '<space>m', '<space>j' },
     config = function()
       require('treesj').setup({})
     end,
   },
   {
-    'mbbill/undotree',
+    'undotree',
     keys = {
       {
         '<leader>U',
@@ -18,7 +18,7 @@ return {
     },
   },
   {
-    'folke/flash.nvim',
+    'flash.nvim',
     -- event = 'VeryLazy',
     opts = {},
     keys = {
@@ -30,7 +30,7 @@ return {
     },
   },
   {
-    'MagicDuck/grug-far.nvim',
+    'grug-far.nvim',
     opts = { headerMaxWidth = 80 },
     cmd = 'GrugFar',
     keys = {
@@ -52,7 +52,7 @@ return {
     },
   },
   {
-    'folke/trouble.nvim',
+    'trouble.nvim',
     opts = {
       modes = {
         symbols = {
@@ -82,7 +82,7 @@ return {
       {
         '<leader>cl',
         '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-        desc = 'LSP Definitions / references / ... (Trouble)',
+        desc = ' ... (Trouble)',
       },
       {
         '<leader>xL',
