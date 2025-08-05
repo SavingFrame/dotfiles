@@ -1,188 +1,43 @@
-# nixCats Neovim Configuration
+# Example `nixCats` Configuration
 
-This is a nixCats-based Neovim configuration ported from a Kickstart.nvim setup. It provides a fully reproducible, declarative Neovim environment with all plugins and LSPs managed through Nix.
+This directory contains an example of the suggested, idiomatic way to manage a neovim configuration using `nixCats`. It leverages [`lze`](https://github.com/BirdeeHub/lze) for lazy loading, although [`lz.n`](https://github.com/nvim-neorocks/lz.n) can be used instead to similar effect. It also includes a fallback mechanism using `paq` and `mason`, allowing you to load the directory without `nix` if needed.
 
-## Features
+This setup serves as a strong starting point for a `Neovim` configuration—think of it as `kickstart.nvim`, but using `nixCats` **instead of** `lazy.nvim` and `mason`, rather than in addition to them. It also follows a modular approach, spreading the configuration across multiple files rather than consolidating everything into one.
 
-- **Fully Declarative**: All plugins, LSPs, and dependencies managed via Nix
-- **Reproducible**: Exact same environment across different machines
-- **Modular**: Organized into logical categories (UI, LSP, Editor, AI, etc.)
-- **Multiple Packages**: Different variants for different use cases
-- **No Mason Required**: LSPs installed directly via Nix (works great on NixOS)
+While this is not a "perfect" configuration, nor does it claim to be, it is **a well-structured, recommended way to use `nixCats`**. You are encouraged to customize it to fit your needs. `nixCats` itself is just the `nix`-based package manager, along with its associated [Lua plugin](https://nixcats.org/nixCats_plugin.html).
 
-## Quick Start
+## Why Use This Approach?
 
-### Try it out
+Using `nixCats` in this way provides a **simpler, more transparent** experience compared to solutions like `lazy.nvim`, which hijack normal plugin loading.
 
-```bash
-# Run the configuration directly
-nix run .
+It leverages the normal packpath methods of loading plugins both at startup and lazily, allowing you to know what is going on behind the scenes.
 
-# Or run the development version with live reloading
-nix run .#nixCats-dev
-```
+It avoids duplicating functionality between nix and other nvim based download managers, avoiding compatibility issues.
 
-### Install locally
+You can still have a config that works without nix using this method if desired without undue difficulty.
 
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd nixCats-nvim
+## Directory Structure
 
-# Build and run
-nix build
-./result/bin/nixCats
+This configuration primarily uses the following directory structure:
 
-# Or run directly
-nix run .
-```
+- The `lua/` directory for core configurations.
+- The `after/plugin/` directory to demonstrate compatibility.
 
-## Available Packages
+While this structure works well, you are encouraged to further modularize your setup by utilizing any of the runtime directories checked by Neovim:
 
-- **nixCats**: Full configuration with all features
-- **nixCats-dev**: Development version with live reloading (`wrapRc = false`)
-- **nixCats-minimal**: Minimal configuration with only essential features
+- `ftplugin/` for file-type-specific configurations.
+- `plugin/` for global plugin configurations.
+- Even `pack/*/{start,opt}/` work if you want to make a plugin inside your configuration.
+- And so on...
 
-## Plugin Categories
+If you are unfamiliar with the above, refer to the [Neovim runtime path documentation](https://neovim.io/doc/user/options.html#'rtp').
 
-The configuration is organized into the following categories:
+---
 
-### Core (`core`)
-- plenary-nvim
-- nvim-web-devicons  
-- guess-indent-nvim
-
-### UI (`ui`)
-- snacks-nvim (picker, dashboard, notifications)
-- lualine-nvim (statusline)
-- kanagawa-nvim (colorscheme)
-- lackluster-nvim (alternative colorscheme)
-- noice-nvim (command line UI)
-- dressing-nvim (better UI elements)
-
-### Completion (`completion`)
-- blink-cmp (completion engine)
-- luasnip (snippets)
-- lazydev-nvim (Lua development)
-
-### LSP (`lsp`)
-- nvim-lspconfig
-- fidget-nvim (LSP progress)
-- nvim-navic (breadcrumbs)
-
-### Treesitter (`treesitter`)
-- nvim-treesitter (with all grammars)
-- nvim-treesitter-textobjects
-
-### Editor (`editor`)
-- flash-nvim (navigation)
-- trouble-nvim (diagnostics)
-- gitsigns-nvim (git integration)
-- diffview-nvim (git diff viewer)
-- which-key-nvim (keybinding help)
-- mini-nvim (various utilities)
-- And many more...
-
-### AI (`ai`)
-- copilot-lua
-- copilot-chat-nvim
-- blink-copilot (Copilot integration with blink.cmp)
-
-### Tools (`tools`)
-- harpoon2 (file navigation)
-- neo-tree-nvim (file explorer)
-- overseer-nvim (task runner)
-- conform-nvim (formatting)
-
-### Testing (`testing`)
-- neotest (testing framework)
-- neotest-python
-- nvim-dap (debugging)
-- nvim-dap-ui
-
-### Python (`python`)
-- Python-specific configurations and tools
-
-## LSP Servers
-
-The following LSP servers are available based on enabled categories:
-
-- **Go** (`go`): gopls, delve
-- **Python** (`python`): basedpyright, ruff
-- **Web** (`web`): typescript-language-server, prettier
-- **Nix** (`nix`): lua-language-server, stylua, nixd
-- **Docker** (`docker`): docker-ls, docker-compose-language-service
-- **JSON** (`json`): vscode-json-languageserver
-
-## Key Features
-
-### Snacks.nvim Integration
-- Smart file picker (`<leader><space>`)
-- Buffer management (`<leader>,`)
-- Git integration (`<leader>g*`)
-- Search and grep (`<leader>s*`)
-- Notification system
-
-### LSP Features
-- Go to definition/references with Snacks picker
-- Code actions (`<leader>ca`)
-- Rename (`<leader>cr`)
-- Diagnostics (`<leader>cd`)
-- Inlay hints toggle (`<leader>uh`)
-
-### Git Integration
-- Gitsigns for git status in gutter
-- Diffview for reviewing changes
-- Lazygit integration via Snacks
-- Git blame and browse
-
-### AI Features
-- GitHub Copilot integration
-- Copilot Chat for AI assistance
-- Seamless integration with completion system
-
-## Configuration Structure
-
-```
-nixCats-nvim/
-├── flake.nix                 # Main Nix configuration
-├── init.lua                  # Main Neovim entry point
-├── lua/
-│   ├── keymaps.lua          # Global keymaps
-│   └── myLuaConf/           # Modular configuration
-│       ├── ui.lua           # UI plugins
-│       ├── completion.lua   # Completion system
-│       ├── lsp.lua          # LSP configuration
-│       ├── treesitter.lua   # Treesitter setup
-│       ├── editor.lua       # Editor enhancements
-│       ├── ai.lua           # AI/Copilot setup
-│       ├── tools.lua        # Development tools
-│       ├── testing.lua      # Testing and debugging
-│       └── python.lua       # Python-specific config
-└── lua/overseer/template/user/
-    └── go_build.lua         # Custom overseer template
-```
-
-## Temporarily Disabled Plugins
-
-The following plugins have been temporarily disabled due to Nix overlay issues with custom flake inputs. They can be re-enabled once the overlay system is properly configured:
-
-### Custom Plugins (from flake inputs)
-- **blink-copilot** - Copilot integration for blink.cmp (AI category)
-- **close-buffers.nvim** - Advanced buffer management (editor category)  
-- **statuscol.nvim** - Enhanced status column (editor category)
-- **screenkey.nvim** - Show keypresses on screen (tools category)
-- **pymple.nvim** - Python development enhancements (python category)
-- **python-copy-reference.vim** - Copy Python references (python category)
-
-### Impact
-- **AI features**: Copilot still works, but without blink.cmp integration
-- **Buffer management**: Basic buffer operations work, advanced close-buffers features disabled
-- **Status column**: Using default Neovim status column instead of enhanced version
-- **Python development**: Core Python LSP and tools work, some convenience features disabled
-
-### Re-enabling Later
-These plugins can be re-enabled by:
-1. Fixing the nixCats overlay to properly handle flake inputs
-2. Or using `fetchFromGitHub` directly in the Nix configuration
-3. Or loading them as git submodules/manual installations
+> "Idiomatic" here means:
+>
+> - This configuration does **not** use `lazy.nvim`, and does not use `mason.nvim` when nix is involved.
+> - `nixCats` is responsible for downloading all plugins.
+> - Plugins are only loaded if their respective category is enabled.
+> - The [Lua utilities template](https://github.com/BirdeeHub/nixCats-nvim/tree/main/templates/luaUtils/lua/nixCatsUtils) is used (see [`:h nixCats.luaUtils`](https://nixcats.org/nixCats_luaUtils.html)).
+> - [`lze`](https://github.com/BirdeeHub/lze) or [`lz.n`](https://github.com/nvim-neorocks/lz.n) is used for lazy loading.
