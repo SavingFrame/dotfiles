@@ -2,13 +2,14 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, nixCats-nvim, opencode, ... }:
+{ config, lib, pkgs, nixCats-mine, opencode, ... }:
 #{ config, lib, pkgs,  ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      nixCats-mine.nixosModules.default
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -68,6 +69,12 @@
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
 
+  # nixCats configuration
+  nixCats = {
+    enable = true;
+    packageNames = [ "nixCats" ];
+  };
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -82,7 +89,6 @@
     unzip
     gtk3
     gtk4
-    nixCats-nvim.packages.${pkgs.system}.default
     pkgs.opencode
     # ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

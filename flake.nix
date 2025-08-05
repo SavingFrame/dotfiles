@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixCats-nvim = {
-      url = "path:./software/nixCats-nvim";
+    nixCats-mine = {
+      url = "path:./software/nixCats-mine";
     };
     opencode = {
       url = "github:sst/opencode/v0.3.85";
@@ -14,11 +14,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixCats-nvim, opencode,  ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixCats-mine, opencode,  ... }@inputs: {
     # replace 'joes-desktop' with your hostname here.
     nixosConfigurations.nixosy = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs nixCats-nvim opencode; };
+      specialArgs = { inherit inputs nixCats-mine opencode; };
       modules = [
       ./configuration.nix 
 
