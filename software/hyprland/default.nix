@@ -11,7 +11,9 @@
   imports = [
     ./binds.nix
     ./startup.nix
+    ./general.nix
     ./env.nix
     ./ui.nix
+    ./rules.nix
   ];
 }
