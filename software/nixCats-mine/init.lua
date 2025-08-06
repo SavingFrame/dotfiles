@@ -81,6 +81,18 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+
+require('nixCatsUtils').setup {
+  non_nix_value = true,
+}
+
+require("lze").register_handlers(require('nixCatsUtils.lzUtils').for_cat)
+
+-- NOTE: Register another one from lzextras. This one makes it so that
+-- you can set up lsps within lze specs,
+-- and trigger lspconfig setup hooks only on the correct filetypes
+require('lze').register_handlers(require('lzextras').lsp)
+-- demonstrated in ./LSPs/init.lua
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 

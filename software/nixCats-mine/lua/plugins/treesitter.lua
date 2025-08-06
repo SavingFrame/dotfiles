@@ -1,47 +1,73 @@
 -- Treesitter configuration for lze
 return {
   {
-    'nvim-treesitter',
-    event = { 'BufReadPost', 'BufNewFile'       })
+    "nvim-treesitter",
+    for_cat = 'general',
+    event = "DeferredUIEnter",
+    load = function (name)
+        vim.cmd.packadd(name)
+        vim.cmd.packadd("nvim-treesitter-textobjects")
     end,
-    build = ':TSUpdate',
-    after = function()
-      require
-      ensure_installed = {
-        'bash',
-        'c',
-        'diff',
-        'html',
-        'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'query',
-        'vim',
-        'vimdoc',
-        'python',
-        'go',
-        'gomod',
-        'gowork',
-        'gosum',
-        'json5',
-        'dockerfile',
-        'templ',
-            })
+    after = function (plugin)
+      -- [[ Configure Treesitter ]]
+      -- See `:help nvim-treesitter`
+      require('nvim-treesitter.configs').setup {
+        highlight = { enable = true, },
+        indent = { enable = false, },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<c-space>',
+            node_incremental = '<c-space>',
+            scope_incremental = '<c-s>',
+            node_decremental = '<M-space>',
+          },
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              [']m'] = '@function.outer',
+              [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+              [']M'] = '@function.outer',
+              [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+              ['[m'] = '@function.outer',
+              ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+              ['[M'] = '@function.outer',
+              ['[]'] = '@class.outer',
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<leader>a'] = '@parameter.inner',
+            },
+            swap_previous = {
+              ['<leader>A'] = '@parameter.inner',
+            },
+          },
+        },
+      }
     end,
-      auto_install = false, -- Managed by nix
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = true,
-            })
-    end,
-      indent = { enable = true, disable = { 'ruby', 'python' }       })
-    end,
-          })
-    end,
-    config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
-    end,
-        })
-    end,
+  },
 }

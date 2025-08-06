@@ -1,11 +1,9 @@
 -- Format plugins configuration for lze
-return {
+return { -- Autoformat
   {
     'conform.nvim',
-    event = { 'BufWritePre'       })
-    end,
-    cmd = { 'ConformInfo'       })
-    end,
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     keys = {
       {
         '<leader>cf',
@@ -14,14 +12,17 @@ return {
         end,
         mode = '',
         desc = '[C]ode [F]ormat',
-            })
-    end,
-          })
-    end,
-    after = function()
-      require
+      },
+    },
+    after = function(plugin) 
+      require('conform').setup({
       notify_on_error = true,
+
+      -- log_level = vim.log.levels.DEBUG,
       format_on_save = function(bufnr)
+        -- Disable "format_on_save lsp_fallback" for languages that don't
+        -- have a well standardized coding style. You can add additional
+        -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
@@ -33,16 +34,16 @@ return {
         end
       end,
       formatters_by_ft = {
-        lua = { 'stylua'       })
-    end,
-        python = { 'ruff_fix', 'ruff_format'       })
-    end,
-        html = { 'prettier'       })
-    end,
-            })
-    end,
-          })
-    end,
-        })
-    end,
+        lua = { 'stylua' },
+        -- Conform can also run multiple formatters sequentially
+        python = { 'ruff_fix', 'ruff_format' },
+        html = { 'prettier' },
+        -- python = { 'black' },
+        --
+        -- You can use 'stop_after_first' to run the first available formatter from the list
+        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+    })
+  end
+  },
 }

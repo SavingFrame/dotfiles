@@ -46,6 +46,7 @@ in {
     pkgs.fd
     grip-grab
     pkgs.lazygit
+    pkgs.wl-clipboard
   ];
 
   # basic configuration of git, please change to your own
@@ -97,6 +98,10 @@ in {
           )
           9)
       );
+      exec-once = [
+        "wl-paste --type text --watch cliphist store" # Saves text
+        "wl-paste --type image --watch cliphist store" # Saves images
+      ];
     };
 
     home.sessionVariables.NIXOS_OZONE_WL = "1";

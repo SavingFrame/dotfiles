@@ -1,14 +1,18 @@
 -- Which-key plugins configuration for lze
 return {
-  {
+  { -- Useful plugin to show you pending keybinds.
     'which-key.nvim',
-    lazy = false,
-    after = function()
-      require
+    after = function ()
+      require("which-key").setup({
       preset = 'helix',
+      -- delay between pressing a key and opening which-key (milliseconds)
+      -- this setting is independent of vim.opt.timeoutlen
       delay = 250,
       icons = {
+        -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
+        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+        -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
         keys = vim.g.have_nerd_font and {} or {
           Up = '<Up> ',
           Down = '<Down> ',
@@ -38,27 +42,20 @@ return {
           F10 = '<F10>',
           F11 = '<F11>',
           F12 = '<F12>',
-              })
-    end,
-            })
-    end,
+        },
+      },
+
+      -- Document existing key chains
       spec = {
-        { '<leader>s', group = '[S]earch'       })
-    end,
-        { '<leader>b', group = '[B]uffers'       })
-    end,
-        { '<leader>f', group = '[F]ind'       })
-    end,
-        { '<leader>u', group = '[U]I'       })
-    end,
-        { '<leader>c', group = '[C]ode'       })
-    end,
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' }       })
-    end,
-            })
-    end,
-          })
-    end,
-        })
-    end,
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>b', group = '[B]uffers' },
+        { '<leader>f', group = '[F]ind' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>u', group = '[U]I' },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      },
+  })
+  end
+  }
 }

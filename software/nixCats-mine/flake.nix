@@ -44,6 +44,7 @@
       startupPlugins = {
         general = with pkgs.vimPlugins; [
           lze
+          lzextras
           plenary-nvim
           nvim-web-devicons
           guess-indent-nvim
