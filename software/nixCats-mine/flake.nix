@@ -38,6 +38,7 @@
           dockerfile-language-server-nodejs
           docker-compose-language-service
           templ
+          nixfmt
         ];
       };
 
@@ -51,6 +52,7 @@
           snacks-nvim
           nui-nvim
           neo-tree-nvim
+          lazydev-nvim
         ];
       };
 
@@ -85,7 +87,6 @@
 
           # Completion plugins
           luasnip
-          lazydev-nvim
 
           # LSP plugins
           nvim-lspconfig
