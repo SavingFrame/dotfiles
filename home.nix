@@ -23,6 +23,9 @@ in
 {
   imports = [
     ./software/hyprland
+    ./software/waybar
+    ./software/sherlock.nix
+    ./software/gtk.nix
   ];
   home.username = "nixy";
   home.homeDirectory = "/home/nixy";
@@ -53,6 +56,12 @@ in
     grip-grab
     pkgs.lazygit
     pkgs.wl-clipboard
+    inputs.zen-browser.packages.${pkgs.system}.default
+    pkgs.telegram-desktop
+    pkgs.nerd-fonts.zed-mono
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.iosevka
+    pkgs.font-awesome
   ];
 
   # basic configuration of git, please change to your own

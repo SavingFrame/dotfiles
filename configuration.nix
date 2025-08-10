@@ -2,15 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, nixCats-mine, opencode, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  nixCats-mine,
+  opencode,
+  ...
+}:
 #{ config, lib, pkgs,  ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      nixCats-mine.nixosModules.default
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    nixCats-mine.nixosModules.default
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -21,7 +28,7 @@
   networking.hostName = "nixosy"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
@@ -41,11 +48,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = false;
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -57,6 +62,7 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -64,9 +70,12 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
   programs.hyprland.enable = true;
 
   # nixCats configuration
@@ -87,32 +96,40 @@
     nodejs
     go
     unzip
-    gtk3
-    gtk4
-    pkgs.opencode
+    opencode
+    pavucontrol
     # ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   environment.variables.EDITOR = "nvim";
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b31cd87c-bc65-45e1-80f6-3f65fc65b490";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/b31cd87c-bc65-45e1-80f6-3f65fc65b490";
+    fsType = "btrfs";
+    options = [
+      "subvol=root"
+      "compress=zstd"
+    ];
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/b31cd87c-bc65-45e1-80f6-3f65fc65b490";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/b31cd87c-bc65-45e1-80f6-3f65fc65b490";
+    fsType = "btrfs";
+    options = [
+      "subvol=home"
+      "compress=zstd"
+    ];
+  };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/b31cd87c-bc65-45e1-80f6-3f65fc65b490";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
-
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/b31cd87c-bc65-45e1-80f6-3f65fc65b490";
+    fsType = "btrfs";
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
 
   users.users.nixy = {
     isNormalUser = true;
@@ -121,17 +138,25 @@
     ];
   };
 
-hardware = {
+  hardware = {
+    bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          Experimental = true;
+        };
+      };
+    };
     graphics = {
-        enable = true;
-        enable32Bit = true;
+      enable = true;
+      enable32Bit = true;
     };
 
     amdgpu.amdvlk = {
-        enable = true;
-        support32Bit.enable = true;
+      enable = true;
+      support32Bit.enable = true;
     };
-};
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -145,6 +170,7 @@ hardware = {
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  services.blueman.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -176,4 +202,3 @@ hardware = {
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

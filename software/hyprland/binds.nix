@@ -3,10 +3,11 @@
   wayland.windowManager.hyprland.settings = {
 
     "$modifier" = "SUPER";
+    "$menu" = "sherlock";
     bind = [
       "$modifier, Return, exec, ghostty"
       "$modifier, Q, killactive,"
-      "$modifier, B, exec, firefox"
+      "$modifier, B, exec, zen"
       "$modifier, N, exec, $fileManager"
       "$modifier Shift, E, exec, /home/archie/.config/rofi/scripts/powermenu_t4"
       "$modifier Shift, W, exec, bash /home/archie/.config/hypr/scripts/wallpaper.sh"
