@@ -25,7 +25,8 @@ in
     ./software/hyprland
     ./software/waybar
     ./software/sherlock.nix
-    ./software/gtk.nix
+    ./software/themes
+    ./software/tmux.nix
   ];
   home.username = "nixy";
   home.homeDirectory = "/home/nixy";
@@ -62,7 +63,13 @@ in
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.nerd-fonts.iosevka
     pkgs.font-awesome
+    pkgs.adwaita-qt6
+    pkgs.sesh
+    pkgs.fzf
   ];
+  # tmp
+
+  # end tmp
 
   # basic configuration of git, please change to your own
   programs.git = {

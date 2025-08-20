@@ -4,14 +4,14 @@
 }:
 
 {
-  imports = [
-    inputs.sherlock.homeManagerModules.default
-  ];
+  # imports = [
+  #   inputs.sherlock.homeManagerModules.default
+  # ];
   programs.sherlock = {
     enable = true;
 
     # for faster startup times
-    runAsService = true;
+    systemd.enable = true;
 
     settings = {
       # config.json / config.toml

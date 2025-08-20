@@ -9,7 +9,10 @@
       url = "path:./software/nixCats-mine";
     };
     opencode = {
-      url = "github:sst/opencode/v0.3.85";
+      type = "github";
+      owner = "sst";
+      repo = "opencode";
+
       flake = false;
     };
     zen-browser = {
