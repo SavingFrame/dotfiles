@@ -16,7 +16,7 @@
       name = "Adwaita";
     };
     cursorTheme = {
-      name = "BreezeX-RoséPine";
+      name = "BreezeX-RosePine-Linux";
       package = pkgs.rose-pine-cursor;
     };
     gtk3.extraConfig = {
@@ -29,7 +29,7 @@
     gtk.enable = true;
     x11.enable = true;
     package = pkgs.rose-pine-cursor;
-    name = "BreezeX-RoséPine";
+    name = "BreezeX-RosePine-Linux";
     size = 24;
   };
 }

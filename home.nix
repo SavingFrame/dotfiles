@@ -72,6 +72,7 @@ in
     pkgs.hyprshot
     pkgs.satty
     pkgs.hyprpicker
+    pkgs.zoxide
   ];
 
   xdg.mimeApps = {
@@ -106,7 +107,81 @@ in
     enableCompletion = true;
   };
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      cd = "z";
+      ss = "sesh-sessions";
+    };
+    binds = {
+      "ctrl-f".command = "ss";
+    };
+    interactiveShellInit = ''
+      zoxide init fish | source
+      starship init fish | source
+      set -lx SHELL /usr/bin/fish
+    '';
+
+    functions = {
+      sesh-sessions = ''
+        if set -q TMUX
+        	sesh connect "$(
+        		sesh list --icons | fzf-tmux -p 55%,60% \
+        		--no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+        		--header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+        		--bind 'tab:down,btab:up' \
+        		--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+        		--bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+        		--bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+        		--bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+        		--bind 'ctrl-f:change-prompt(🔎  )+reload(fd -h -d 2 -t d -e .trash . ~)' \
+        		--bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+        	)"
+        else
+        	set session (sesh list --icons | fzf --height 40% \
+        	--no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+        	--layout=reverse \
+        	--header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+        	--bind 'tab:top,btab:up' \
+        	--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+        	--bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+        	--bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+        	--bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+        	--bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+        	--bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+        	)
+        	test -z "$session"; and return
+        	sesh connect $session
+        end
+      '';
+      extract = ''
+        # Taken from: https://github.com/dideler/dotfiles/blob/master/functions/extract.fish
+        function extract --description "Expand or extract bundled & compressed files"
+          set --local ext (echo $argv[1] | awk -F. '{print $NF}')
+          switch $ext
+            case tar  # non-compressed, just bundled
+              tar -xvf $argv[1]
+            case gz
+              if test (echo $argv[1] | awk -F. '{print $(NF-1)}') = tar  # tar bundle compressed with gzip
+                tar -zxvf $argv[1]
+              else  # single gzip
+                gunzip $argv[1]
+              end
+            case tgz  # same as tar.gz
+              tar -zxvf $argv[1]
+            case bz2  # tar compressed with bzip2
+              tar -jxvf $argv[1]
+            case rar
+              unrar x $argv[1]
+            case zip
+              unzip $argv[1]
+            case '*'
+              echo "unknown extension"
+          end
+        end
+      '';
+    };
+  };
 
   home.sessionVariables.NIXOS_OZONE_WL = "1";
 
