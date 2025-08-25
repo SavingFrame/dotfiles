@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -27,6 +26,7 @@ in
     ./software/sherlock.nix
     ./software/themes
     ./software/tmux.nix
+    ./software/swaync.nix
   ];
   home.username = "nixy";
   home.homeDirectory = "/home/nixy";
@@ -51,7 +51,6 @@ in
   home.packages = [
     pkgs.tree
     pkgs.kitty
-    pkgs.ghostty
     pkgs.git
     pkgs.fd
     grip-grab
@@ -66,10 +65,18 @@ in
     pkgs.adwaita-qt6
     pkgs.sesh
     pkgs.fzf
+    pkgs.opencode
+    inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+    (import ./software/wallsetter.nix { inherit pkgs; })
   ];
-  # tmp
 
-  # end tmp
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+      "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
+    };
+  };
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -94,6 +101,7 @@ in
     enable = true;
     enableCompletion = true;
   };
+
   programs.fish.enable = true;
 
   home.sessionVariables.NIXOS_OZONE_WL = "1";

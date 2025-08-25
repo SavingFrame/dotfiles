@@ -8,13 +8,6 @@
     nixCats-mine = {
       url = "path:./software/nixCats-mine";
     };
-    opencode = {
-      type = "github";
-      owner = "sst";
-      repo = "opencode";
-
-      flake = false;
-    };
     zen-browser = {
 
       url = "github:youwen5/zen-browser-flake";
@@ -23,22 +16,25 @@
 
     };
     sherlock.url = "github:Skxxtz/sherlock";
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    swww.url = "github:LGFae/swww";
   };
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       nixCats-mine,
-      opencode,
       ...
     }@inputs:
     {
       # replace 'joes-desktop' with your hostname here.
       nixosConfigurations.nixosy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs nixCats-mine opencode; };
+        specialArgs = { inherit inputs nixCats-mine; };
         modules = [
           ./configuration.nix
 
@@ -47,30 +43,10 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.nixy = ./home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs opencode; };
+            home-manager.extraSpecialArgs = { inherit inputs; };
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
-          }
-          {
-            nixpkgs.overlays = [
-              (final: prev: {
-                opencode = nixpkgs.legacyPackages.${prev.system}.opencode.overrideAttrs (old: rec {
-                  version = "0.3.128";
-                  # `opencode` is a flake input
-                  src = opencode;
-                  node_modules = old.node_modules.overrideAttrs (nmOld: {
-                    outputHash = "sha256-ZtZvS0jF2YpkDeCdP2y1qX4fJVMq8BBq6EFwqvDEfdc=";
-                  });
-                  tui = old.tui.overrideAttrs (tuiOld: {
-                    # these two lines below are important
-                    src = src;
-                    modRoot = "packages/tui";
-                    vendorHash = "sha256-+j8+TjTzd7AH9Si9tS7noTpPcG1lz9j+tmxUTrPcThw=";
-                  });
-                });
-              })
-            ];
           }
         ];
       };

@@ -3,11 +3,9 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
-  lib,
   pkgs,
   nixCats-mine,
-  opencode,
+  inputs,
   ...
 }:
 #{ config, lib, pkgs,  ... }:
@@ -18,6 +16,7 @@
     ./hardware-configuration.nix
     nixCats-mine.nixosModules.default
   ];
+  powerManagement.cpuFreqGovernor = "performance";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -77,6 +76,18 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.firefox.enable = false;
   programs.hyprland.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+    config = {
+      common.default = "gtk";
+      pantheon.default = "gtk";
+      gtk.default = "gtk";
+    };
+  };
 
   # nixCats configuration
   nixCats = {
@@ -96,11 +107,27 @@
     nodejs
     go
     unzip
-    opencode
+    zip
     pavucontrol
-    # ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+    hyprpolkitagent
+    lm_sensors
+    inputs.swww.packages.${pkgs.system}.swww
+
+    ffmpegthumbnailer # Need For Video / Image Preview
   ];
 
+  programs = {
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
+  };
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
   environment.variables.EDITOR = "nvim";
 
   fileSystems."/" = {

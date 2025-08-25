@@ -5,28 +5,22 @@
 {
   gtk = {
     enable = true;
-    font.name = "JetBrainsMono Nerd Font";
-    font.size = 10;
+    # font.name = "JetBrainsMono Nerd Font";
+    # font.size = 10;
     theme = {
       name = "Nightfox-Dark";
       package = pkgs.nightfox-gtk-theme;
     };
-
+    # Custom theme somehow slow down start of GTK4 applications
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Adwaita";
     };
-
     cursorTheme = {
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
+      name = "BreezeX-RoséPine";
+      package = pkgs.rose-pine-cursor;
     };
-
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = ''1'';
-    };
-    gtk4.extraConfig = {
-      gtk-theme-name = ''Nightfox:Dark'';
     };
 
   };
@@ -34,8 +28,8 @@
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
+    package = pkgs.rose-pine-cursor;
+    name = "BreezeX-RoséPine";
     size = 24;
   };
 }
