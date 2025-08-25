@@ -27,6 +27,7 @@ in
     ./software/themes
     ./software/tmux.nix
     ./software/swaync.nix
+    ./software/satty.nix
   ];
   home.username = "nixy";
   home.homeDirectory = "/home/nixy";
@@ -68,6 +69,9 @@ in
     pkgs.opencode
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
     (import ./software/wallsetter.nix { inherit pkgs; })
+    pkgs.hyprshot
+    pkgs.satty
+    pkgs.hyprpicker
   ];
 
   xdg.mimeApps = {

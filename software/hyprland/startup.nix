@@ -11,6 +11,7 @@
       "killall -q waybar;sleep .5 && waybar"
       "killall -q swww;sleep .5 && swww-daemon"
       "blueman-applet"
+      "wallsetter"
     ];
   };
 }

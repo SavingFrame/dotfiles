@@ -4,20 +4,21 @@
 
     "$modifier" = "SUPER";
     "$menu" = "sherlock";
+    "$filemanager" = "thunar";
     bind = [
       "$modifier, Return, exec, ghostty"
       "$modifier, Q, killactive,"
       "$modifier, B, exec, zen"
       "$modifier, N, exec, $fileManager"
       "$modifier Shift, E, exec, /home/archie/.config/rofi/scripts/powermenu_t4"
-      "$modifier Shift, W, exec, bash /home/archie/.config/hypr/scripts/wallpaper.sh"
+      "$modifier Shift, W, exec, bash wallsetter"
       "$modifier Shift, N, exec, swaync-client -t -sw"
       "$modifier Shift, Space, togglefloating,"
       "$modifier, D, exec, $menu"
       "$modifier, P, pseudo, # dwindle"
       "$modifier Shift, C, exec,pkill waybar && hyprctl dispatch exec waybar"
-      ", print, exec, hyprshot -m region --raw -z | swappy -f -"
-      "$modifier,Print,exec,hyprshot -m output --raw -z | swappy -f -"
+      ", print, exec, hyprshot -m region --raw -z | satty -f -"
+      "$modifier,Print,exec,hyprshot -m output --raw -z | satty -f -"
       "$modifier SHIFT, f, fullscreen,"
       "$modifier, left, movefocus, l"
       "$modifier, right, movefocus, r"
