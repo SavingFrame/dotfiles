@@ -1,9 +1,9 @@
 { ... }:
 {
-  xdg.configFile.satty."config.toml".text = ''
+  home.file."./.config/satty/config.toml".text = ''
     [general]
     # Start Satty in fullscreen mode
-    fullscreen = true
+    fullscreen = false
     # Exit directly after copy/save action
     early-exit = true
     # Draw corners of rectangles round if the value is greater than 0 (0 disables rounded corners)
@@ -20,10 +20,6 @@
     save-after-copy = false
     # Hide toolbars by default
     default-hide-toolbars = false
-    # Experimental: whether window focus shows/hides toolbars. This does not affect initial state of toolbars, see default-hide-toolbars.
-    focus-toggles-toolbars = false
-    # Fill shapes by default
-    default-fill-shapes = false
     # The primary highlighter to use, the other is accessible by holding CTRL at the start of a highlight [possible values: block, freehand]
     primary-highlighter = "block"
     # Disable notifications
