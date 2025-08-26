@@ -6,12 +6,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixCats-mine = {
-      url = "path:./software/nixCats-mine";
+      url = "path:./software/nix.nvim/";
     };
     zen-browser = {
-
       url = "github:youwen5/zen-browser-flake";
-
       inputs.nixpkgs.follows = "nixpkgs";
 
     };
@@ -21,7 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     swww.url = "github:LGFae/swww";
-    fff_nvim.url = "github:dmtrKovalenko/fff.nvim";
 
   };
 
