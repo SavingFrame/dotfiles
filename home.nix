@@ -73,7 +73,14 @@ in
     pkgs.satty
     pkgs.hyprpicker
     pkgs.zoxide
+    pkgs.uv
+    pkgs.devenv
+    pkgs.slack
   ];
+
+  programs.direnv = {
+    enable = true;
+  };
 
   xdg.mimeApps = {
     enable = true;
@@ -90,6 +97,12 @@ in
     userEmail = "savingframe@gmail.com";
   };
 
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper = {
+      enable = true;
+    };
+  };
   # starship - an customizable prompt for any shell
   programs.starship = {
     enable = true;
@@ -120,6 +133,7 @@ in
       zoxide init fish | source
       starship init fish | source
       set -lx SHELL /usr/bin/fish
+      direnv hook fish | source
     '';
 
     functions = {
