@@ -154,6 +154,7 @@ return {
   },
   {
     'kazhala/close-buffers.nvim',
+    name = 'close-buffers',
     opts = {
       filetype_ignore = { 'neo-tree' }, -- Filetype to ignore when running deletions
       file_glob_ignore = {}, -- File name glob pattern to ignore when running deletions (e.g. '*.md')

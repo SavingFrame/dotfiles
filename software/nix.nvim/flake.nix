@@ -31,19 +31,22 @@
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };
-    plugins-pymple-nvim = {
-      url = "alexpasmantier/pymple.nvim";
+    plugins-pymple = {
+      url = "github:alexpasmantier/pymple.nvim";
       flake = false;
     };
     plugins-python-type-stubs = {
-       url= "microsoft/python-type-stubs";
-       flake = false;
+      url = "github:microsoft/python-type-stubs";
+      flake = false;
     };
     plugins-python-copy-reference = {
-        url = "ranelpadon/python-copy-reference.vim";
-        flake = false;
+      url = "github:ranelpadon/python-copy-reference.vim";
+      flake = false;
     };
-
+    plugins-close-buffers = {
+      url = "github:kazhala/close-buffers.nvim";
+      flake = false;
+    };
 
     # see :help nixCats.flake.inputs
     # If you want your plugin to be loaded by the standard overlay,
@@ -161,6 +164,7 @@
               gitsigns-nvim
               which-key-nvim
               nvim-web-devicons
+              copilot-lua
               plenary-nvim
               nvim-lspconfig
               lazydev-nvim
@@ -189,10 +193,7 @@
               harpoon2
               overseer-nvim
               dressing-nvim
-              plugins-pymple-nvim
-              plugins-python-type-stubs
               vim-python-pep8-indent
-              plugins-python-copy-reference
               neotest
               neotest-python
               noice-nvim
@@ -202,7 +203,12 @@
               nvim-navic
               lackluster-nvim
               kanagawa-nvim
-              close-buffers-vim
+              nvim-ufo
+              blink-copilot
+              pkgs.neovimPlugins.pymple
+              pkgs.neovimPlugins.python-type-stubs
+              pkgs.neovimPlugins.python-copy-reference
+              pkgs.neovimPlugins.close-buffers
 
               # This is for if you only want some of the grammars
               # (nvim-treesitter.withPlugins (
