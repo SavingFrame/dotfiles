@@ -188,10 +188,12 @@
     nvidia = {
       open = true;
       modesetting.enable = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
     amdgpu.amdvlk = {
-      enable = true;
+      enable = false;
       support32Bit.enable = true;
     };
   };
