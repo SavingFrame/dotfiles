@@ -96,9 +96,9 @@
   };
 
   # nixCats configuration
-  nixCats = {
+  nvim = {
     enable = true;
-    packageNames = [ "nixCats" ];
+    packageNames = [ "nvim" ];
   };
 
   # List packages installed in system profile.
