@@ -6,219 +6,266 @@
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: let
-    inherit (inputs.nixCats) utils;
-    luaPath = ./.;
-    forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
-    extra_pkg_config = {
-      allowUnfree = true;
-    };
-
-    dependencyOverlays = [
-      (utils.standardPluginOverlay inputs)
-    ];
-
-    categoryDefinitions = { pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
-      lspsAndRuntimeDeps = {
-        general = with pkgs; [
-          universal-ctags
-          ripgrep
-          fd
-          lazygit
-          gopls
-          gotools
-          go-tools
-          delve
-          basedpyright
-          ruff
-          lua-language-server
-          stylua
-          nixd
-          nodePackages.jsonlint
-          dockerfile-language-server-nodejs
-          docker-compose-language-service
-          templ
-          nixfmt
-        ];
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    let
+      inherit (inputs.nixCats) utils;
+      luaPath = ./.;
+      forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
+      extra_pkg_config = {
+        allowUnfree = true;
       };
 
-      startupPlugins = {
-        general = with pkgs.vimPlugins; [
-          lze
-          lzextras
-          plenary-nvim
-          nvim-web-devicons
-          guess-indent-nvim
-          snacks-nvim
-          nui-nvim
-          neo-tree-nvim
-          lazydev-nvim
-        ];
-      };
+      dependencyOverlays = [
+        (utils.standardPluginOverlay inputs)
+      ];
 
-      optionalPlugins = {
-        general = with pkgs.vimPlugins; [
-          # UI plugins
-          lualine-nvim
-          kanagawa-nvim
-          lackluster-nvim
-          noice-nvim
-          nvim-notify
-          nvim-navic
-          marks-nvim
-          which-key-nvim
+      categoryDefinitions =
+        {
+          pkgs,
+          settings,
+          categories,
+          extra,
+          name,
+          mkPlugin,
+          ...
+        }@packageDef:
+        {
+          lspsAndRuntimeDeps = {
+            general = with pkgs; [
+              universal-ctags
+              ripgrep
+              fd
+              lazygit
+              gopls
+              gotools
+              go-tools
+              delve
+              basedpyright
+              ruff
+              lua-language-server
+              stylua
+              nixd
+              nodePackages.jsonlint
+              dockerfile-language-server-nodejs
+              docker-compose-language-service
+              templ
+              nixfmt
+            ];
+          };
 
-          # Git plugins
-          gitsigns-nvim
-          diffview-nvim
+          startupPlugins = {
+            general = with pkgs.vimPlugins; [
+              lze
+              lzextras
+              plenary-nvim
+              nvim-web-devicons
+              guess-indent-nvim
+              snacks-nvim
+              nui-nvim
+              neo-tree-nvim
+              lazydev-nvim
+            ];
+          };
 
-          # Editor plugins
-          flash-nvim
-          treesj
-          undotree
-          grug-far-nvim
-          trouble-nvim
+          optionalPlugins = {
+            general = with pkgs.vimPlugins; [
+              # UI plugins
+              lualine-nvim
+              kanagawa-nvim
+              lackluster-nvim
+              noice-nvim
+              nvim-notify
+              nvim-navic
+              marks-nvim
+              which-key-nvim
 
-          # Copilot plugins
-          copilot-lua
-          blink-cmp
-          CopilotChat-nvim
-          copilot-vim
+              # Git plugins
+              gitsigns-nvim
+              diffview-nvim
 
-          # Completion plugins
-          luasnip
+              # Editor plugins
+              flash-nvim
+              treesj
+              undotree
+              grug-far-nvim
+              trouble-nvim
 
-          # LSP plugins
-          nvim-lspconfig
-          fidget-nvim
-          mason-nvim
-          mason-lspconfig-nvim
-          mason-tool-installer-nvim
-          SchemaStore-nvim
+              # Copilot plugins
+              copilot-lua
+              blink-cmp
+              CopilotChat-nvim
+              copilot-vim
 
-          # Treesitter plugins
-          nvim-treesitter.withAllGrammars
-          nvim-treesitter-textobjects
+              # Completion plugins
+              luasnip
 
-          # Format plugins
-          conform-nvim
+              # LSP plugins
+              nvim-lspconfig
+              fidget-nvim
+              mason-nvim
+              mason-lspconfig-nvim
+              mason-tool-installer-nvim
+              SchemaStore-nvim
 
-          # Debug plugins
-          nvim-dap
-          nvim-dap-ui
-          nvim-dap-go
-          nvim-nio
-          mason-nvim-dap-nvim
+              # Treesitter plugins
+              nvim-treesitter.withAllGrammars
+              nvim-treesitter-textobjects
 
-          # Python plugins
-          vim-python-pep8-indent
+              # Format plugins
+              conform-nvim
 
-          # Utility plugins
-          dial-nvim
-          harpoon2
-          persistence-nvim
-          vim-tmux-navigator
+              # Debug plugins
+              nvim-dap
+              nvim-dap-ui
+              nvim-dap-go
+              nvim-nio
+              mason-nvim-dap-nvim
 
-          # Fold plugins
-          nvim-ufo
-          promise-async
-          statuscol-nvim
+              # Python plugins
+              vim-python-pep8-indent
 
-          # Mini plugins
-          mini-nvim
+              # Utility plugins
+              dial-nvim
+              harpoon2
+              persistence-nvim
+              vim-tmux-navigator
 
-          # Todo comments
-          todo-comments-nvim
-        ];
-      };
+              # Fold plugins
+              nvim-ufo
+              promise-async
+              statuscol-nvim
 
-      sharedLibraries = {
-        general = with pkgs; [
-          # libgit2
-        ];
-      };
+              # Mini plugins
+              mini-nvim
 
-      extraWrapperArgs = {
-        general = [
-          '' --set CATTESTVAR2 "It worked again!"''
-        ];
-      };
+              # Todo comments
+              todo-comments-nvim
 
-      python3.libraries = {
-        general = (_:[]);
-      };
+              # test
+              neotest
+              neotest-python
+            ];
+          };
 
-      extraLuaPackages = {
-        general = [ (_:[]) ];
-      };
+          sharedLibraries = {
+            general = with pkgs; [
+              # libgit2
+            ];
+          };
 
-      extraCats = {
-        # Enable default subcategories when parent is enabled
-      };
-    };
+          extraWrapperArgs = {
+            general = [
+              ''--set CATTESTVAR2 "It worked again!"''
+            ];
+          };
 
-    packageDefinitions = {
-      nixCats = { pkgs, name, ... }@misc: {
-        settings = {
-          suffix-path = true;
-          suffix-LD = true;
-          aliases = [ "vim" "nvim" ];
-          wrapRc = true;
-          configDirName = "nixCats-mine";
-          hosts.python3.enable = true;
-          hosts.node.enable = true;
+          python3.libraries = {
+            general = (_: [ ]);
+          };
+
+          extraLuaPackages = {
+            general = [ (_: [ ]) ];
+          };
+
+          extraCats = {
+            # Enable default subcategories when parent is enabled
+          };
         };
-        categories = {
-          general = true;
-        };
-        extra = {
-          # Extra configuration can go here
-        };
+
+      packageDefinitions = {
+        nixCats =
+          { pkgs, name, ... }@misc:
+          {
+            settings = {
+              suffix-path = true;
+              suffix-LD = true;
+              aliases = [
+                "vim"
+                "nvim"
+              ];
+              wrapRc = true;
+              configDirName = "nixCats-mine";
+              hosts.python3.enable = true;
+              hosts.node.enable = true;
+            };
+            categories = {
+              general = true;
+            };
+            extra = {
+              # Extra configuration can go here
+            };
+          };
       };
-    };
 
-    defaultPackageName = "nixCats";
-  in
-  forEachSystem (system: let
-    nixCatsBuilder = utils.baseBuilder luaPath {
-      inherit nixpkgs system dependencyOverlays extra_pkg_config;
-    } categoryDefinitions packageDefinitions;
-    defaultPackage = nixCatsBuilder defaultPackageName;
+      defaultPackageName = "nixCats";
+    in
+    forEachSystem (
+      system:
+      let
+        nixCatsBuilder = utils.baseBuilder luaPath {
+          inherit
+            nixpkgs
+            system
+            dependencyOverlays
+            extra_pkg_config
+            ;
+        } categoryDefinitions packageDefinitions;
+        defaultPackage = nixCatsBuilder defaultPackageName;
 
-    pkgs = import nixpkgs { inherit system; };
-  in {
-    packages = utils.mkAllWithDefault defaultPackage;
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        packages = utils.mkAllWithDefault defaultPackage;
 
-    devShells = {
-      default = pkgs.mkShell {
-        name = defaultPackageName;
-        packages = [ defaultPackage ];
-        inputsFrom = [ ];
-        shellHook = ''
-        '';
-      };
-    };
+        devShells = {
+          default = pkgs.mkShell {
+            name = defaultPackageName;
+            packages = [ defaultPackage ];
+            inputsFrom = [ ];
+            shellHook = '''';
+          };
+        };
 
-  }) // (let
-    nixosModule = utils.mkNixosModules {
-      moduleNamespace = [ defaultPackageName ];
-      inherit defaultPackageName dependencyOverlays luaPath
-        categoryDefinitions packageDefinitions extra_pkg_config nixpkgs;
-    };
-    homeModule = utils.mkHomeModules {
-      moduleNamespace = [ defaultPackageName ];
-      inherit defaultPackageName dependencyOverlays luaPath
-        categoryDefinitions packageDefinitions extra_pkg_config nixpkgs;
-    };
-  in {
-    overlays = utils.makeOverlays luaPath {
-      inherit nixpkgs dependencyOverlays extra_pkg_config;
-    } categoryDefinitions packageDefinitions defaultPackageName;
+      }
+    )
+    // (
+      let
+        nixosModule = utils.mkNixosModules {
+          moduleNamespace = [ defaultPackageName ];
+          inherit
+            defaultPackageName
+            dependencyOverlays
+            luaPath
+            categoryDefinitions
+            packageDefinitions
+            extra_pkg_config
+            nixpkgs
+            ;
+        };
+        homeModule = utils.mkHomeModules {
+          moduleNamespace = [ defaultPackageName ];
+          inherit
+            defaultPackageName
+            dependencyOverlays
+            luaPath
+            categoryDefinitions
+            packageDefinitions
+            extra_pkg_config
+            nixpkgs
+            ;
+        };
+      in
+      {
+        overlays = utils.makeOverlays luaPath {
+          inherit nixpkgs dependencyOverlays extra_pkg_config;
+        } categoryDefinitions packageDefinitions defaultPackageName;
 
-    nixosModules.default = nixosModule;
-    homeModules.default = homeModule;
+        nixosModules.default = nixosModule;
+        homeModules.default = homeModule;
 
-    inherit utils nixosModule homeModule;
-    inherit (utils) templates;
-  });
+        inherit utils nixosModule homeModule;
+        inherit (utils) templates;
+      }
+    );
 }
