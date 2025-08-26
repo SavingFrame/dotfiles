@@ -76,6 +76,7 @@ in
     pkgs.uv
     pkgs.devenv
     pkgs.slack
+    pkgs.tmuxinator
   ];
 
   programs.direnv = {

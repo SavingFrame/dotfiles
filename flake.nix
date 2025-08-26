@@ -21,6 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     swww.url = "github:LGFae/swww";
+    fff_nvim.url = "github:dmtrKovalenko/fff.nvim";
+
   };
 
   outputs =

@@ -70,6 +70,12 @@
     '';
   };
 
+  home.file."./.config/sesh/sesh.toml".text = ''
+    [default_session]
+    startup_command = "nvim -c ':lua Snacks.picker.files()'"
+    preview_command = "eza --all --git --icons --color=always {}"
+  '';
+
   # home.packages = [
   #   # Open tmux for current project.
   #   (pkgs.writeShellApplication {
