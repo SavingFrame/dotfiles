@@ -15,6 +15,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     nixCats-mine.nixosModules.default
+    ./software/docker.nix
   ];
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -73,6 +74,10 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.trusted-users = [
+    "root"
+    "nixy"
+  ];
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.firefox.enable = false;
   programs.hyprland.enable = true;
@@ -112,8 +117,8 @@
     hyprpolkitagent
     lm_sensors
     inputs.swww.packages.${pkgs.system}.swww
-
     ffmpegthumbnailer # Need For Video / Image Preview
+    pkgs.lazydocker
   ];
 
   programs = {
