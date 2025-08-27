@@ -16,5 +16,7 @@
     ./startup.nix
     ./ui.nix
     ./rules.nix
+    ./hyprlock.nix
+    ./hypridle.nix
   ];
 }

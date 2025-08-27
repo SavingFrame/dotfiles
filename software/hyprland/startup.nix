@@ -12,6 +12,7 @@
       "killall -q swww;sleep .5 && swww-daemon"
       "blueman-applet"
       "wallsetter"
+      "nm-applet --indicator"
     ];
   };
 }
