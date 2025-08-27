@@ -77,6 +77,7 @@ in
     pkgs.devenv
     pkgs.slack
     pkgs.tmuxinator
+    pkgs.jetbrains.pycharm-professional
   ];
 
   programs.direnv = {
@@ -138,6 +139,9 @@ in
       set -lx SHELL /usr/bin/fish
       direnv hook fish | source
     '';
+    shellAbbrs = {
+      nrb = "sudo nixos-rebuild switch --flake /etc/nixos#nixosy";
+    };
 
     functions = {
       sesh-sessions = ''
