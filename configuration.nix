@@ -29,8 +29,13 @@
   networking.hostName = "nixosy"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
+  networking.networkmanager = {
+    enable = true;
+    plugins = [
+      pkgs.networkmanager-openvpn
+    ];
+  };
+  users.extraGroups.networkmanager.members = [ "root" ];
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
 
@@ -50,8 +55,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = false;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = false;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -70,6 +75,8 @@
   };
 
   security.pam.services.hyprlock = { };
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
   nix.settings.experimental-features = [
@@ -120,7 +127,8 @@
     lm_sensors
     inputs.swww.packages.${pkgs.system}.swww
     ffmpegthumbnailer # Need For Video / Image Preview
-    pkgs.lazydocker
+    lazydocker
+    networkmanagerapplet
   ];
 
   programs = {
@@ -167,10 +175,14 @@
 
   users.users.nixy = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
+  users.extraUsers."nm-openvpn".extraGroups = [ "networkmanager" ];
 
   hardware = {
     bluetooth = {
