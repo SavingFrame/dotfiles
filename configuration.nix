@@ -6,7 +6,6 @@
   pkgs,
   nixCats-mine,
   inputs,
-  config,
   ...
 }:
 #{ config, lib, pkgs,  ... }:
@@ -254,11 +253,4 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  environment.etc."current-system-packages".text =
-    let
-      packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
-      sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
-      formatted = builtins.concatStringsSep "\n" sortedUnique;
-    in
-    formatted;
 }

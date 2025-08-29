@@ -3,6 +3,7 @@
   wayland.windowManager.hyprland = {
     settings = {
       env = [
+        "NIXOS_OZONE_WL,1"
         "NIXPKGS_ALLOW_UNFREE,1"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
@@ -14,10 +15,8 @@
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         "SDL_VIDEODRIVER,x11"
         "MOZ_ENABLE_WAYLAND,1"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         # This is to make electron apps start in wayland
-        "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
         # Disabling this by default as it can result in inop cfg
         # Added card2 in case this gets enabled. For better coverage
         # This is mostly needed by Hybrid laptops.
