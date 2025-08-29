@@ -197,18 +197,11 @@
       enable32Bit = true;
     };
 
-    nvidia = {
-      open = true;
-      modesetting.enable = true;
-    };
-
     amdgpu.amdvlk = {
       enable = true;
       support32Bit.enable = true;
     };
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  nixpkgs.config.allowUnfree = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
