@@ -21,6 +21,7 @@ return {
     keys = {
       { '<leader>cid', '<cmd>PythonCopyReferenceDotted<CR>', desc = 'Copy Dotted Reference' },
       { '<leader>cii', '<cmd>PythonCopyReferenceImport<CR>', desc = 'Copy Import Reference' },
+      { '<leader>cit', '<cmd>PythonCopyReferencePytest<CR>', desc = 'Copy pytest Reference' },
     },
   },
 }

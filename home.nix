@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }:
 
@@ -28,6 +29,7 @@ in
     ./software/tmux.nix
     ./software/swaync.nix
     ./software/satty.nix
+    ./software/rofi
   ];
   home.username = "nixy";
   home.homeDirectory = "/home/nixy";
@@ -78,6 +80,13 @@ in
     pkgs.slack
     pkgs.tmuxinator
     pkgs.jetbrains.pycharm-professional
+    pkgs.spotify
+    pkgs.gimp3-with-plugins
+    pkgs.mongodb-compass
+    pkgs.playerctl
+    pkgs.bitwarden-cli
+    pkgs.ssm-session-manager-plugin
+    pkgs.calc
   ];
 
   programs.direnv = {
@@ -122,6 +131,9 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+  };
+  programs.awscli = {
+    enable = true;
   };
 
   programs.fish = {
@@ -200,6 +212,16 @@ in
               echo "unknown extension"
           end
         end
+      '';
+      vpn_connect = ''
+        set bwp (cat /run/agenix/bw)
+        set password (bw get totp 39763b2e-0f83-47ae-8e49-051090f80fa7 --session $bwp)
+        echo "vpn.secrets.password:$password" >/tmp/vpn.secrets
+        nmcli c up 0b6faa8e-34c6-4391-b37e-b09692ddc39c passwd-file /tmp/vpn.secrets
+        rm -f /tmp/vpn.secrets
+      '';
+      vpn_disconnect = ''
+        nmcli c down 0b6faa8e-34c6-4391-b37e-b09692ddc39c
       '';
     };
   };

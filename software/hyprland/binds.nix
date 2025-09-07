@@ -3,7 +3,8 @@
   wayland.windowManager.hyprland.settings = {
 
     "$modifier" = "SUPER";
-    "$menu" = "sherlock";
+    # "$menu" = "sherlock";
+    "$menu" = "rofi";
     "$filemanager" = "thunar";
     bind = [
       "$modifier, Return, exec, ghostty"
@@ -14,7 +15,7 @@
       "$modifier Shift, W, exec, bash wallsetter"
       "$modifier Shift, N, exec, swaync-client -t -sw"
       "$modifier Shift, Space, togglefloating,"
-      "$modifier, D, exec, $menu"
+      "$modifier, D, exec, $menu -show drun"
       "$modifier, P, pseudo, # dwindle"
       "$modifier Shift, C, exec,pkill waybar && hyprctl dispatch exec waybar"
       ", print, exec, hyprshot -m region --raw -z | satty -f -"

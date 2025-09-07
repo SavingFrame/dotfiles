@@ -24,7 +24,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/efi";
   boot.initrd.kernelModules = [ "amdgpu" ];
-
+  nixpkgs.config.allowUnfree = true;
   networking.hostName = "nixosy"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -128,6 +128,10 @@
     ffmpegthumbnailer # Need For Video / Image Preview
     lazydocker
     networkmanagerapplet
+    htop
+    btop
+    inputs.agenix.packages."${system}".default
+    jq
   ];
 
   programs = {
@@ -172,6 +176,7 @@
     ];
   };
 
+  services.envfs.enable = true;
   users.users.nixy = {
     isNormalUser = true;
     extraGroups = [
@@ -213,8 +218,14 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
+  age.secrets.bw = {
+    file = ./secrets/bw.age;
+    owner = "nixy";
+    group = "users";
+    mode = "770";
+  };
   services.blueman.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

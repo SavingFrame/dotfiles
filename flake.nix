@@ -20,6 +20,10 @@
     };
     swww.url = "github:LGFae/swww";
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "";
+
   };
 
   outputs =
@@ -27,6 +31,7 @@
       nixpkgs,
       home-manager,
       nixCats-mine,
+      agenix,
       ...
     }@inputs:
     {
@@ -36,8 +41,8 @@
         specialArgs = { inherit inputs nixCats-mine; };
         modules = [
           ./configuration.nix
-
-          home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
+          home-manager.nixosModules.default
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

@@ -147,6 +147,8 @@
               docker-compose-language-service
               templ
               nixfmt
+              prettier
+              vtsls
               # inputs.fff-nvim.packages.${pkgs.system}.fff-nvim
             ];
             kickstart-debug = [
@@ -196,6 +198,7 @@
               vim-python-pep8-indent
               neotest
               neotest-python
+              neotest-golang
               noice-nvim
               nvim-notify
               lualine-nvim
@@ -205,6 +208,7 @@
               kanagawa-nvim
               nvim-ufo
               blink-copilot
+              better-escape-nvim
               pkgs.neovimPlugins.pymple
               pkgs.neovimPlugins.python-type-stubs
               pkgs.neovimPlugins.python-copy-reference
