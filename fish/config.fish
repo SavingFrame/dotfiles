@@ -1,6 +1,7 @@
 set -gx PAGER less
 set -gx EDITOR nvim
 set -gx VISUAL nvim
+set -gx TF_PLUGIN_CACHE_DIR $HOME/.terraform.d/plugin-cache
 alias ls='grc --colour=auto ls --color=always'
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.local/share/gem/ruby/3.4.0/bin
