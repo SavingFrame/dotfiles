@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
+customCommands:
+  containers:
+    - name: bash attach
+      attach: true
+      command: 'docker exec -it {{ .Container.ID }} bash'
+      serviceNames: []
+
+    - name: bash run
+      attach: true
+      command: 'docker run -it {{ .Container.Container.ImageID }} bash'

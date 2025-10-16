@@ -5,7 +5,10 @@ font-size = 14
 # theme = lackluster
 theme = Kanagawa Wave
 confirm-close-surface = false
-window-padding-x = 6
+window-padding-x = 14
+window-padding-y = 14
+window-theme = ghostty
+gtk-toolbar-style = flat
 # background-opacity = 0.70
 # background-blur-radius = 70
 
@@ -26,6 +29,18 @@ window-inherit-working-directory = true
 shell-integration = fish
 command = fish
 app-notifications = no-clipboard-copy
-gtk-titlebar = false
+# gtk-titlebar = false
 clipboard-write=allow
 clipboard-read=allow
+
+keybind = alt+digit1=text:\x02\x31
+keybind = alt+digit2=text:\x02\x32
+keybind = alt+digit3=text:\x02\x33
+keybind = alt+digit4=text:\x02\x34
+keybind = alt+digit5=text:\x02\x35
+keybind = alt+digit6=text:\x02\x36
+keybind = alt+digit7=text:\x02\x37
+keybind = alt+digit8=text:\x02\x38
+keybind = alt+digit9=text:\x02\x39
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
