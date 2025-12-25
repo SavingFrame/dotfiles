@@ -5,20 +5,21 @@ font-size = 14
 # theme = lackluster
 theme = Kanagawa Wave
 confirm-close-surface = false
-window-padding-x = 14
-window-padding-y = 14
+window-padding-x = 4
+# window-padding-y = 14
 window-theme = ghostty
 gtk-toolbar-style = flat
-# background-opacity = 0.70
-# background-blur-radius = 70
+# comment for default beh
+# background-opacity = 0.3
+# background-blur-radius = 90
 
 cursor-style = block
 cursor-style-blink = true
-shell-integration-features = no-cursor,sudo
+shell-integration-features = no-cursor,sudo,ssh-terminfo,ssh-env
 adjust-underline-position = 4
 copy-on-select = clipboard
 
-adjust-cell-height = 35%
+adjust-cell-height = 42%
 bold-is-bright = true
 link-url = true
 mouse-hide-while-typing = true
@@ -32,7 +33,8 @@ app-notifications = no-clipboard-copy
 # gtk-titlebar = false
 clipboard-write=allow
 clipboard-read=allow
-
+ # window-padding-color = extend-always 
+ window-padding-balance=true
 keybind = alt+digit1=text:\x02\x31
 keybind = alt+digit2=text:\x02\x32
 keybind = alt+digit3=text:\x02\x33
