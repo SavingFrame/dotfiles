@@ -1,67 +1,27 @@
 {
+	"reload_style_on_change": true,
 	"layer": "top",
 	"position": "top",
-	"margin-top": 5,
+	"spacing": 0,
+	"height": 32,
 	"modules-left": [
 		"hyprland/workspaces",
-		"hyprland/window"
-		// "idle_inhibitor"
+		"mpris"
 	],
 	"modules-center": [
 		"clock"
 	],
 	"modules-right": [
-		"custom/weather",
-		"hyprland/language",
-		// "group/volight",
+		"memory",
+		"cpu",
+		"disk",
+		"idle_inhibitor",
+		"network",
+		"bluetooth",
 		"backlight",
 		"pulseaudio",
-		// "group/wifibt",
-		// "custom/wifibt",
-		"bluetooth",
-		"network",
-		"cpu",
-		"temperature",
-		"memory",
-		"idle_inhibitor",
-		"custom/notification"
+		"tray"
 	],
-	"group/volight": {
-		"orientation": "inherit",
-		"drawer": {
-			"transition-duration": 500,
-			"children-class": "not-power",
-			"transition-left-to-right": true,
-			"click-to-reveal": true
-		},
-		"modules": [
-			"custom/volight",
-			"pulseaudio",
-			"backlight" // TODO: Add support for keyboard backlight (if available)
-		]
-	},
-	"group/wifibt": {
-		"orientation": "inherit",
-		"drawer": {
-			"transition-duration": 500,
-			"children-class": "not-power",
-			"transition-left-to-right": false,
-			"click-to-reveal": true
-		},
-		"modules": [
-			"custom/wifibt",
-			"bluetooth",
-			"network"
-		]
-	},
-	"memory": {
-		"format": " {used:.1f} GB"
-	},
-	"hyprland/language": {
-		"format": "{}",
-		"format-en": "US",
-		"format-uk": "UA"
-	},
 	"idle_inhibitor": {
 		"format": "{icon}",
 		"format-icons": {
@@ -69,127 +29,9 @@
 			"deactivated": ""
 		}
 	},
-	"cpu": {
-		"format": " {usage}%",
-		"tooltip": true
-	},
-	"temperature": {
-		"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-		"critical-threshold": 80,
-		"format": "{icon} {temperatureC}°C",
-		"format-icons": [
-			"",
-			"",
-			""
-		]
-	},
-	"height": 28,
-	"custom/wifibt": {
-		"format": " 󰤨"
-	},
-	"custom/volight": {
-		"format": "󰕾 󰃠"
-	},
-	"custom/notification": {
-		"tooltip": false,
-		"format": "{icon}",
-		"format-icons": {
-			"notification": "<span foreground='red'><sup></sup></span>",
-			"none": "",
-			"dnd-notification": "<span foreground='red'><sup></sup></span>",
-			"dnd-none": "",
-			"inhibited-notification": "<span foreground='red'><sup></sup></span>",
-			"inhibited-none": "",
-			"dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-			"dnd-inhibited-none": ""
-		},
-		"return-type": "json",
-		"exec-if": "which swaync-client",
-		"exec": "swaync-client -swb",
-		"on-click": "swaync-client -t -sw",
-		"on-click-right": "swaync-client -d -sw",
-		"escape": true
-	},
-	"custom/launcher": {
-		"format": "",
-		"on-click": "bash /home/$USER/.config/waybar/scripts/app_launcher.sh",
-		"tooltip-format": "Launch your favorite apps"
-	},
-	"custom/pacman": {
-		"format": "  {}",
-		"interval": "once",
-		"exec": "checkupdates | wc -l",
-		"on-click": "update-system",
-		"signal": 8,
-		"tooltip-format": "{} updates available"
-	},
-	"custom/media": {
-		"format": "{}",
-		"escape": true,
-		"return-type": "json",
-		"max-length": 40,
-		"on-click": "playerctl play-pause",
-		"on-click-right": "playerctl stop",
-		"smooth-scrolling-threshold": 1, // This value was tested using a trackpad, it should be lowered if using a mouse.
-		"on-scroll-up": "playerctl next",
-		"on-scroll-down": "playerctl previous",
-		"exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
-	},
-	"clock": {
-		"format": "󰥔  {:%d.%m.%Y %H:%M:%S}",
-		"tooltip-format": "{:%A | %d-%m-%Y}",
-		"interval": 1
-	},
-	"pulseaudio": {
-		"format": "{icon}  {volume}%",
-		"format-bluetooth": "󰂱 {volume}%",
-		"format-muted": "󰖁",
-		"scroll-step": 1,
-		"on-click": "pavucontrol",
-		"ignored-sinks": [
-			"Easy Effects Sink"
-		],
-		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "󰋎",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": [
-				"󰖀",
-				"󰕾"
-			]
-		},
-		"tooltip-format": "Volume: {volume}%"
-	},
-	"network": {
-		"format": "{ifname}",
-		"format-wifi": "{icon}  {essid}",
-		"format-ethernet": "󰈀  {ipaddr}/{cidr}",
-		"format-disconnected": "󰤭 Disconnected",
-		"max-length": 50,
-		"format-icons": [
-			"󰤯",
-			"󰤟",
-			"󰤢",
-			"󰤥",
-			"󰤨"
-		],
-		"tooltip-format": "Connected to {essid}",
-		"on-click": "ghostty -e nmtui"
-	},
-	"bluetooth": {
-		"format": "",
-		"format-on": "󰂲  Disconnected",
-		"format-disabled": "Disabled",
-		"format-connected": " {device_alias}",
-		"format-connected-battery": "󰂱 {device_alias}",
-		"on-click": "blueman-manager"
-	},
 	"hyprland/workspaces": {
-		"format": "{icon}",
 		"on-click": "activate",
+		"format": "{icon}",
 		"format-icons": {
 			"1": "1",
 			"2": "2",
@@ -200,37 +42,142 @@
 			"7": "7",
 			"8": "8",
 			"9": "9",
-			"10": "10"
-		},
-		"persistent-workspaces": {
-			"*": 5 // 5 workspaces by default on every monitor
-		},
-		"sort-by-number": true
+			"10": "10",
+			"default": ""
+		}
 	},
 	"backlight": {
-		// "device": "intel_backlight",
-		"format": "{icon}   {percent}%",
+		"format": "{icon}",
+		"tooltip-format": "🌕 {percent}%",
 		"format-icons": [
+			"󰃜",
+			"󰃝",
 			"󰃞",
 			"󰃟",
 			"󰃠"
-		]
+		],
+		"scroll-step": 10,
+		"on-click": "~/.config/waybar/scripts/wall-picker",
+		"on-click-right": "~/.config/waybar/scripts/random-wall"
 	},
-	"custom/weather": {
-		"exec": "${HOME}/.config/waybar/scripts/get_weather.sh Zagreb",
-		"return-type": "json",
-		"format": "{}",
-		"tooltip": true,
-		"interval": 3600
+	"disk": {
+		"interval": 30,
+		"format": "󱛟 {percentage_free}%",
+		"tooltip-format": "Used: {used}\nFree: {free}\nTotal: {total}",
+		"path": "/"
 	},
-	"hyprland/window": {
-		"format": "{}",
-		"max-length": 35,
-		"rewrite": {
-			"": "Harsh"
+	"cpu": {
+		"interval": 2,
+		"format": "󰍛 {usage}%",
+		"on-click": "ghostty -e btop"
+	},
+	"memory": {
+		"format": " {used:0.1f}gb",
+		"interval": 2,
+		"on-click": "ghostty -e btop"
+	},
+	"clock": {
+		"format": "{:%d.%m.%Y %H:%M:%S}",
+		"tooltip-format": "{:%A | %d-%m-%Y}",
+		"interval": 1
+	},
+	"network": {
+		// "interface": "wlan*",
+		"format-icons": [
+			"󰤯",
+			"󰤟",
+			"󰤢",
+			"󰤥",
+			"󰤨"
+		],
+		"format": "{icon} {essid}",
+		"format-wifi": "{icon}",
+		"format-ethernet": "󰀂",
+		"format-disconnected": "󰤮",
+		"tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+		"tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+		"tooltip-format-disconnected": "Disconnected",
+		"interval": 3,
+		"spacing": 1,
+		"on-click": "ghostty -e nmtui"
+	},
+	"battery": {
+		"format": "{icon}",
+		"format-discharging": "{icon} {capacity}%",
+		"format-charging": "{icon}",
+		"format-plugged": "",
+		"on-click": "~/.config/rofi/scripts/power-profiles",
+		"format-icons": {
+			"charging": [
+				"󰢜",
+				"󰂆",
+				"󰂇",
+				"󰂈",
+				"󰢝",
+				"󰂉",
+				"󰢞",
+				"󰂊",
+				"󰂋",
+				"󰂅"
+			],
+			"default": [
+				"󰁺",
+				"󰁻",
+				"󰁼",
+				"󰁽",
+				"󰁾",
+				"󰁿",
+				"󰂀",
+				"󰂁",
+				"󰂂",
+				"󰁹"
+			]
 		},
-		"separate-outputs": true,
-		"icon": true,
-		"icon-size": 24
+		"format-full": "󰂅",
+		"tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+		"tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+		"interval": 5,
+		"states": {
+			"warning": 20,
+			"critical": 10
+		}
+	},
+	"bluetooth": {
+		"format": "",
+		"format-disabled": "󰂲",
+		"format-connected": "",
+		"tooltip-format": "Devices connected: {num_connections}",
+		"on-click": "blueman-manager"
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"on-click": "pavucontrol",
+		"on-click-right": "pamixer -t",
+		"tooltip-format": "🎵 {volume}%",
+		"scroll-step": 5,
+		"format-muted": "",
+		"format-icons": {
+			"default": [
+				"",
+				"",
+				""
+			]
+		}
+	},
+	"tray": {
+		"icon-size": 22,
+		"spacing": 4
+	},
+	"mpris": {
+		"format": "{player_icon} {artist}|{title}",
+		"format-paused": "{status_icon} {artist} - {title}</i>",
+		"player-icons": {
+			// "default": "🎵",
+			// "mpv": ""
+		},
+		"status-icons": {
+			"paused": "⏸"
+		},
+		"max-length": 70
 	}
 }

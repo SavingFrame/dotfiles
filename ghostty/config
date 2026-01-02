@@ -2,8 +2,8 @@
 font-family = "Iosevka Curly"
 
 font-size = 14
-# theme = lackluster
-theme = Kanagawa Wave
+# theme = Kanagawa Wave
+theme = Ayu
 confirm-close-surface = false
 window-padding-x = 4
 # window-padding-y = 14
