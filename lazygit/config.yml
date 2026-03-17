@@ -1,7 +1,9 @@
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  # paging:
+  #   colorArg: always
+  #   pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  pagers:
+    - externalDiffCommand: difft --color=always
 gui:
   useHunkModeInStagingView: true
 customCommands:
@@ -11,8 +13,31 @@ customCommands:
   #   context: files
   #   subprocess: true
   #   showOutput: true
-  - key: <c-a>
-    description: Pick AI commit
-    command: "aichat \"Please suggest 10 commit messages, given the following diff:\n\n  \\`\\`\\`diff\n  $(git diff --cached)\n  \\`\\`\\`\n\nBranch name: \n\\`\\`\\`bash\n$(git branch)\n\\`\\`\\`\n  **Criteria:**\n\n  1. **Format:** Each commit message must follow the conventional commits format,\n  which is \\`<type>(<scope>): <short_description>\\n\\n<More_detailed_description>\\`.\n  2. **Relevance:** Avoid mentioning a module name unless it's directly relevant\n  to the change.\n  3. **Enumeration:** List the commit messages from 1 to 10.\n  4. **Clarity and Conciseness:** Each message should clearly and concisely convey\n  the change made.\n  6. Add more detailed description up to 72 characters.\n  7. Separate each full commit message with literal {newline}, not real line breaks.\n\n  **Commit Message Examples:**\n\n  - fix(app): add password regex pattern\n\n    More detailed explanatory text, if necessary.  Wrap it to about 72\n    characters or so.  In some contexts, the first line is treated as the\n    subject of an email and the rest of the text as the body.  The blank\n    line separating the summary from the body is critical (unless you omit\n    the body entirely); tools like rebase can get confused if you run the\n    two together.{newline}\n  - test(unit): add new test cases{newline}\n  - style: remove unused imports{newline}\n  - refactor(pages): extract common code to \\`utils/wait.ts\\`{newline}\n\n  **Output Template**\n\n  Follow this output template and ONLY output raw commit messages without spacing,\n  numbers or other decorations.\n\n  fix(app): add password regex pattern\n  \n  Add password regex pattern which validate password. We need to check something.{newline}test(unit): add new test cases\n\n  Add new test cases related to user. We need to check something.\n\n  **Instructions:**\n\n  - Take a moment to understand the changes made in the diff.\n\n  - Think about the impact of these changes on the project (e.g., bug fixes, new\n  features, performance improvements, code refactoring, documentation updates).\n  It's critical to my career you abstract the changes to a higher level and not\n  just describe the code changes.\n\n  - Generate commit messages that accurately describe these changes, ensuring they\n  are helpful to someone reading the project's history.\n\n  - Remember, a well-crafted commit message can significantly aid in the maintenance\n  and understanding of the project over time.\n\n  - If multiple changes are present, make sure you capture them all in each commit\n  message.\n\n  Keep in mind you will suggest 10 commit messages. Only 1 will be used. It's\n  better to push yourself (esp to synthesize to a higher level) and maybe wrong\n  about some of the 10 commits because only one needs to be good. I'm looking\n  for your best commit, not the best average commit. It's better to cover more\n  scenarios than include a lot of overlap.\n\n  Write your 10 commit messages below in the format shown in Output Template section above.\" \\\n    | python3 -c \"import sys; print(sys.stdin.read().replace('{newline}', '\\0'), end='')\" | fzf --read0 --height 40% --border --ansi --preview \"echo {}\" --preview-window=up:wrap > .git/LAZYGIT_PENDING_COMMIT\n"
+
+  - key: <c-o>
+    description: Pick AI commit (pi/openai fast)
+    command: |
+      pi -p --no-session --provider openai-codex --model gpt-5.3-codex --thinking off --no-tools --no-extensions --no-skills --no-prompt-templates "Generate 10 commit message options for the staged diff.
+
+      Staged diff:
+      BEGIN_DIFF
+      $(git diff --cached)
+      END_DIFF
+
+      Branch: $(git branch --show-current)
+
+      Requirements:
+      - Use conventional commits format.
+      - Each option must be a full commit message:
+        <type>(<scope>): <subject>
+
+        <body wrapped to ~72 chars>
+      - Keep subject imperative and concise.
+      - Focus on intent and impact, not only changed files.
+      - Return ONLY valid JSON array with exactly 10 strings.
+      - No markdown, no extra text." \
+      | python3 -c "import json,sys;s=sys.stdin.read();i=s.find('[');j=s.rfind(']');a=json.loads(s[i:j+1]);print('\\0'.join(str(m).strip() for m in a if str(m).strip()), end='')" \
+      | fzf --read0 --height 40% --border --ansi --preview "echo {}" --preview-window=up:wrap \
+      > .git/LAZYGIT_PENDING_COMMIT
     context: files
     output: terminal

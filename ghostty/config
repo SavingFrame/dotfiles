@@ -3,7 +3,8 @@ font-family = "Iosevka Curly"
 
 font-size = 14
 # theme = Kanagawa Wave
-theme = Ayu
+# theme = Ayu
+theme= moonfly
 confirm-close-surface = false
 window-padding-x = 4
 # window-padding-y = 14
@@ -19,7 +20,7 @@ shell-integration-features = no-cursor,sudo,ssh-terminfo,ssh-env
 adjust-underline-position = 4
 copy-on-select = clipboard
 
-adjust-cell-height = 42%
+adjust-cell-height = 45%
 bold-is-bright = true
 link-url = true
 mouse-hide-while-typing = true

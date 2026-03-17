@@ -6,6 +6,7 @@ alias ls='grc --colour=auto ls --color=always'
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.local/share/gem/ruby/3.4.0/bin
 fish_add_path $HOME/.spicetify
+fish_add_path $HOME/go/bin
 alias ss sesh-sessions
 alias cd z
 
@@ -24,3 +25,4 @@ end
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
