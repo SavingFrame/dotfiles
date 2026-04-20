@@ -1,0 +1,10 @@
+# Tmux keybinds - alt+N sends prefix (C-b) + N to switch tmux windows
+keybind = alt+digit1=text:\x02\x31
+keybind = alt+digit2=text:\x02\x32
+keybind = alt+digit3=text:\x02\x33
+keybind = alt+digit4=text:\x02\x34
+keybind = alt+digit5=text:\x02\x35
+keybind = alt+digit6=text:\x02\x36
+keybind = alt+digit7=text:\x02\x37
+keybind = alt+digit8=text:\x02\x38
+keybind = alt+digit9=text:\x02\x39

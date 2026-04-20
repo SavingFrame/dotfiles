@@ -25,25 +25,16 @@ bold-is-bright = true
 link-url = true
 mouse-hide-while-typing = true
 
-# macos-option-as-alt = true
 window-inherit-working-directory = true
 # config-file = non_tmux_config
 shell-integration = fish
 command = fish
 app-notifications = no-clipboard-copy
-# gtk-titlebar = false
 clipboard-write=allow
 clipboard-read=allow
  # window-padding-color = extend-always 
  window-padding-balance=true
-keybind = alt+digit1=text:\x02\x31
-keybind = alt+digit2=text:\x02\x32
-keybind = alt+digit3=text:\x02\x33
-keybind = alt+digit4=text:\x02\x34
-keybind = alt+digit5=text:\x02\x35
-keybind = alt+digit6=text:\x02\x36
-keybind = alt+digit7=text:\x02\x37
-keybind = alt+digit8=text:\x02\x38
-keybind = alt+digit9=text:\x02\x39
+config-file = tmux
+# config-file = non_tmux
 keybind = shift+insert=paste_from_clipboard
 keybind = control+insert=copy_to_clipboard

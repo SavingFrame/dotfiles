@@ -1,0 +1,36 @@
+# macOS-style keybinds (Alt as modifier)
+
+# Tabs
+keybind = alt+t=new_tab
+keybind = alt+w=close_surface
+keybind = alt+shift+right_bracket=next_tab
+keybind = alt+shift+left_bracket=previous_tab
+keybind = alt+digit1=goto_tab:1
+keybind = alt+digit2=goto_tab:2
+keybind = alt+digit3=goto_tab:3
+keybind = alt+digit4=goto_tab:4
+keybind = alt+digit5=goto_tab:5
+keybind = alt+digit6=goto_tab:6
+keybind = alt+digit7=goto_tab:7
+keybind = alt+digit8=goto_tab:8
+keybind = alt+digit9=goto_tab:9
+
+# Splits
+keybind = alt+d=new_split:right
+keybind = alt+shift+d=new_split:down
+keybind = alt+left_bracket=goto_split:previous
+keybind = alt+right_bracket=goto_split:next
+
+# Window
+keybind = alt+n=new_window
+
+# Clipboard
+keybind = alt+c=copy_to_clipboard
+keybind = alt+v=paste_from_clipboard
+
+# Font size
+keybind = alt+equal=increase_font_size:1
+keybind = alt+minus=decrease_font_size:1
+keybind = alt+digit0=reset_font_size
+
+gtk-titlebar-style = tabs
