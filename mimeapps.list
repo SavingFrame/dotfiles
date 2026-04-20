@@ -13,6 +13,8 @@ x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-KKI072.desktop
 message/rfc822=userapp-Thunderbird-KKI072.desktop
 x-scheme-handler/mid=userapp-Thunderbird-KKI072.desktop
+x-scheme-handler/terminal=com.mitchellh.ghostty.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;
@@ -27,3 +29,6 @@ application/x-extension-xhtml=zen.desktop;
 application/x-extension-xht=zen.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-KKI072.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-KKI072.desktop;
+text/csv=jetbrains-pycharm.desktop;nvim.desktop;
+model/stl=BambuStudio.desktop;OrcaSlicer.desktop;
+audio/flac=mpv.desktop;
