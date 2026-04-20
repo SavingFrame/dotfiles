@@ -1,10 +1,5 @@
 add_newline = false
 
-# [character]
-# success_symbol = '[ #](bold green)'
-# error_symbol = "[ x](bold red)"
-# vicmd_symbol = "[ V](bold green)"
-
 [git_status]
 disabled = true
 
@@ -13,6 +8,7 @@ disabled = false
 
 [package]
 disabled = true
+style = "orange"
 
 [git_commit]
 commit_hash_length = 7
@@ -43,7 +39,36 @@ disabled = true
 
 [git_branch]
 disabled = false
+style = "lavender"
+
+[gcloud]
+disabled = true
 
 [username]
 disabled = false
 show_always = true
+
+[character]
+success_symbol = "[❯](blue)"
+error_symbol = "[❯](red)"
+
+[directory]
+truncation_length = 4
+truncation_symbol = "…/"
+style = "fern"
+
+
+[perl]
+style = "green"
+
+[swift]
+style = "red"
+
+[terraform]
+style = "purple"
+
+[palettes.moonfly]
+fern = "#87d787"
+lavender = "#adadf3"
+orange = "#f09479"
+red = "#f07496"
