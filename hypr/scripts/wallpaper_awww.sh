@@ -168,15 +168,11 @@ if [ "$1" == "init" ] ;then
     echo ":: Init"
 else
     sleep 1
-    notify-send "Wallpaper" "Applying $newwall..." -h int:value:10 -h string:x-canonical-private-synchronous:wallpaper
 fi
 
 # -----------------------------------------------------
 # Create blurred and square wallpapers (optimized with caching)
 # -----------------------------------------------------
-if [ "$1" != "init" ] ;then
-    notify-send "Wallpaper" "Processing..." -h int:value:40 -h string:x-canonical-private-synchronous:wallpaper
-fi
 
 # Generate hash for caching
 wallpaper_hash=$(md5sum "$wallpaper" | cut -d' ' -f1)
@@ -216,9 +212,6 @@ else
     echo ":: Image processing complete"
 fi
 
-if [ "$1" != "init" ] ;then
-    notify-send "Wallpaper" "Finalizing..." -h int:value:75 -h string:x-canonical-private-synchronous:wallpaper
-fi
 
 # -----------------------------------------------------
 # Write selected wallpaper into .cache files
@@ -233,7 +226,6 @@ echo "* { current-image: url(\"$blurred\", height); }" > "$rasi_file"
 if [ "$1" == "init" ] ;then
     echo ":: Init"
 else
-    notify-send "Wallpaper" "Applied $newwall" -h int:value:100 -h string:x-canonical-private-synchronous:wallpaper
 fi
 
 # -----------------------------------------------------
