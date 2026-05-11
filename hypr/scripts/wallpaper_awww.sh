@@ -124,7 +124,7 @@ newwall=$(echo $wallpaper | sed "s|$HOME/Pictures/wallpapers/||g")
 # ----------------------------------------------------- 
 # Reload waybar with new colors
 # -----------------------------------------------------
-pkill waybar && hyprctl dispatch exec waybar
+pkill waybar && hyprctl dispatch 'hl.dsp.exec_cmd("waybar")'
 
 # -----------------------------------------------------
 # Set the new wallpaper
