@@ -85,7 +85,8 @@ hl.env("XFT_DPI", "162")
 hl.config({
 	general = {
 		gaps_in = 5,
-		gaps_out = { 15, 20, 40, 20 },
+		gaps_out = { top = 15, left = 20, bottom = 40, right = 20 },
+		-- gaps_out = 10,
 
 		border_size = 1,
 

@@ -13,6 +13,7 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("/home/archie/.config/rofi/scripts/powermenu_t4"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(apps.FILE_MANAGER))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("/home/archie/.config/hypr/scripts/wallpaper_rotate.sh"))
 hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(
@@ -24,7 +25,7 @@ hl.bind(
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(apps.MENU))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(apps.BROWSER))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(mainMod .. " + Y", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region --raw -z | swappy -f -"))
 hl.bind(mainMod .. " + C", hl.dsp.send_shortcut({ mods = "CTRL", key = "C" }))
 hl.bind(mainMod .. " + V", hl.dsp.send_shortcut({ mods = "CTRL", key = "V" }))

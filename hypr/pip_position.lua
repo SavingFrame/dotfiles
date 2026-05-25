@@ -1,6 +1,7 @@
 local M = {}
 
-local state_file = (os.getenv("XDG_CACHE_HOME") or (os.getenv("HOME") .. "/.cache")) .. "/hypr/pip-window-position.state"
+local state_file = (os.getenv("XDG_CACHE_HOME") or (os.getenv("HOME") .. "/.cache"))
+	.. "/hypr/pip-window-position.state"
 local state = {}
 local last_saved = ""
 
@@ -195,7 +196,7 @@ function M.setup()
 		remember_all_positions()
 	end)
 
-	hl.timer(remember_all_positions, { timeout = 1000, type = "repeat" })
+	-- hl.timer(remember_all_positions, { timeout = 1000, type = "repeat" })
 end
 
 return M
