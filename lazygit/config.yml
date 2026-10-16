@@ -2,10 +2,38 @@ git:
   # paging:
   #   colorArg: always
   #   pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
-  pagers:
-    - externalDiffCommand: difft --color=always
+  diffRenderers:
+    - command: difft --color=always
+      type: extDiff
 gui:
-  useHunkModeInStagingView: true
+  theme:
+    activeBorderColor:
+      - "#879a39"
+      - bold
+    inactiveBorderColor:
+      - "#4385be"
+    searchingActiveBorderColor:
+      - "#8b7ec8"
+      - bold
+    optionsTextColor:
+      - "#878580"
+    selectedLineBgColor:
+      - "#272524"
+    inactiveViewSelectedLineBgColor:
+      - bold
+    cherryPickedCommitFgColor:
+      - "#878580"
+    cherryPickedCommitBgColor:
+      - "#8b7ec8"
+    markedBaseCommitFgColor:
+      - "#8b7ec8"
+    markedBaseCommitBgColor:
+      - "#d14d41"
+    unstagedChangesColor:
+      - "#d14d41"
+    defaultFgColor:
+      - "#cecdc3"
+  useHunkModeInDiffView: true
 customCommands:
   # - key: <c-a>
   #   description: Pick AI commit (copy)
@@ -13,11 +41,10 @@ customCommands:
   #   context: files
   #   subprocess: true
   #   showOutput: true
-
   - key: <c-o>
     description: Pick AI commit (pi/openai fast)
     command: |
-      pi -p --no-session --provider openai-codex --model gpt-5.3-codex --thinking off --no-tools --no-extensions --no-skills --no-prompt-templates "Generate 10 commit message options for the staged diff.
+      pi -p --no-session --provider openai-codex --model gpt-5.5 --thinking off --no-tools --no-extensions --no-skills --no-prompt-templates "Generate 10 commit message options for the staged diff.
 
       Staged diff:
       BEGIN_DIFF

@@ -23,6 +23,28 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	name = "bitwarden-extension-float",
+	match = { class = "^chrome-nngceckbapebfimnlniiiahkandclblb.*$" },
+
+	float = true,
+})
+
+hl.window_rule({
+	name = "showmethekey-alynx-float",
+	match = { class = "^(one.alynx.showmethekey)$" },
+
+	float = true,
+})
+
+hl.window_rule({
+	name = "showmethekey-gtk-float-pin",
+	match = { class = "^(showmethekey-gtk)$" },
+
+	float = true,
+	pin = true,
+})
+
+hl.window_rule({
 	name = "zen-picture-in-picture",
 	match = {
 		class = "zen",
@@ -155,6 +177,16 @@ hl.layer_rule({
 	no_anim = true,
 })
 
+hl.layer_rule({
+	name = "noctalia",
+	match = {
+		namespace = "^noctalia-(bar-.+|notification|dock|panel)$",
+	},
+	ignore_alpha = 0.5,
+	blur = true,
+	blur_popups = true,
+})
+
 -- Hyprland-run windowrule
 hl.window_rule({
 	name = "move-hyprland-run",
@@ -162,4 +194,19 @@ hl.window_rule({
 
 	move = "20 monitor_h-120",
 	float = true,
+})
+
+hl.workspace_rule({ workspace = "1", monitor = "DP-3", persistent = true })
+hl.workspace_rule({ workspace = "2", monitor = "DP-3", persistent = true })
+hl.workspace_rule({ workspace = "3", monitor = "DP-3", persistent = true })
+hl.workspace_rule({ workspace = "4", monitor = "DP-3", persistent = true })
+hl.workspace_rule({ workspace = "5", monitor = "DP-3", persistent = true })
+
+hl.window_rule({
+	name = "minecraft-opacity",
+	match = {
+		class = "Minecraft.+",
+	},
+
+	opacity = "override 1.0 override 1.0 override 1.0",
 })

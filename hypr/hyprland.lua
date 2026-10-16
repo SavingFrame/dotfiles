@@ -37,15 +37,17 @@ hl.monitor({
 -- end)
 hl.on("hyprland.start", function()
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
-	hl.exec_cmd("awww-daemon")
-	hl.exec_cmd("swaync")
-	hl.exec_cmd("hypridle")
-	hl.exec_cmd("/home/archie/.config/hypr/scripts/wallpaper_rotate.sh")
+	-- hl.exec_cmd("awww-daemon")
+	-- hl.exec_cmd("swaync")
+	-- hl.exec_cmd("hypridle")
+	-- hl.exec_cmd("/home/archie/.config/hypr/scripts/wallpaper_rotate.sh")
+	-- hl.exec_cmd("qs -c noctalia-shell")
+	hl.exec_cmd("noctalia")
 	hl.exec_cmd("nm-applet --indicator")
 	hl.exec_cmd("blueman-applet")
 	hl.exec_cmd("vicinae server")
 	hl.exec_cmd("systemctl --user start hyprland-session.target")
-	hl.exec_cmd("sleep 0.5; waybar")
+	-- hl.exec_cmd("sleep 0.5; waybar")
 	-- hl.exec_cmd("~/walk_pushup_reminder.sh")
 end)
 
@@ -85,7 +87,7 @@ hl.env("XFT_DPI", "162")
 hl.config({
 	general = {
 		gaps_in = 5,
-		gaps_out = { top = 15, left = 20, bottom = 40, right = 20 },
+		gaps_out = 10,
 		-- gaps_out = 10,
 
 		border_size = 1,
@@ -105,7 +107,7 @@ hl.config({
 	},
 
 	decoration = {
-		rounding = 6,
+		rounding = 20,
 		rounding_power = 2,
 
 		-- Change transparency of focused and unfocused windows
@@ -114,14 +116,14 @@ hl.config({
 
 		shadow = {
 			enabled = true,
-			range = 20,
+			range = 4,
 			render_power = 3,
-			color = "rgba(000000b3)",
+			color = 0xee1a1a1a,
 		},
 
 		blur = {
 			enabled = true,
-			size = 5,
+			size = 3,
 			passes = 2,
 			vibrancy = 0.1696,
 		},
@@ -140,7 +142,7 @@ hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 }
 hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 
 -- Default springs
-hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 218.2633, dampening = 18.8273644 })
 
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
@@ -230,7 +232,7 @@ hl.config({
 
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
-		scroll_factor = 1.5,
+		scroll_factor = 1.0,
 
 		touchpad = {
 			natural_scroll = false,
@@ -272,3 +274,6 @@ hl.config({
 		force_zero_scaling = true,
 	},
 })
+
+-- For Noctalia Color templates
+require("noctalia")

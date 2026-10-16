@@ -26,3 +26,10 @@ end
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
+# pnpm
+set -gx PNPM_HOME "/home/archie/.local/share/pnpm"
+fish_add_path $PNPM_HOME/bin
+# pnpm end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/archie/google-cloud-sdk/path.fish.inc' ]; . '/home/archie/google-cloud-sdk/path.fish.inc'; end

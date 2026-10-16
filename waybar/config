@@ -21,7 +21,7 @@
         "cpu",
         "memory",
         "hyprland/language",
-        "tray",
+        // "tray",
 		"custom/power"
 		],
 		"hyprland/workspaces": {

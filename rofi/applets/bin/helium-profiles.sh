@@ -87,6 +87,8 @@ rofi_cmd() {
 	local args=(
 		-theme-str "listview {columns: $list_col; lines: $list_row;}"
 		-theme-str 'textbox-prompt-colon {str: "";}'
+		-kb-custom-1 '1'
+		-kb-custom-2 '2'
 	)
 
 	if [[ -n "$placement" ]]; then
@@ -102,7 +104,30 @@ rofi_cmd() {
 		-theme "$theme"
 }
 
-chosen="$(printf '%s\n' "$profiles" | cut -f1 | rofi_cmd)"
+menu_items="$(printf '%s\n' "$profiles" | cut -f1)"
+
+set +e
+chosen="$(printf '%s\n' "$menu_items" | rofi_cmd)"
+rofi_status=$?
+set -e
+
+case "$rofi_status" in
+	0)
+		;;
+	1)
+		exit 0
+		;;
+	10)
+		chosen="$(printf '%s\n' "$menu_items" | awk 'NR == 1 {print; exit}')"
+		;;
+	11)
+		chosen="$(printf '%s\n' "$menu_items" | awk 'NR == 2 {print; exit}')"
+		;;
+	*)
+		exit "$rofi_status"
+		;;
+esac
+
 [[ -z "$chosen" ]] && exit 0
 
 profile_dir="$(printf '%s\n' "$profiles" | awk -F '\t' -v chosen="$chosen" '$1 == chosen {print $2; exit}')"

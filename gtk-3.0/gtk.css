@@ -29,3 +29,5 @@ decoration, decoration:backdrop
 {
     box-shadow: none;
 }
+
+@import url("noctalia.css");

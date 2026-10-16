@@ -1,5 +1,5 @@
 local apps = require("apps")
-
+local ipc = "noctalia msg "
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
@@ -10,10 +10,12 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- 	mainMod .. " + M",
 -- 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
 -- )
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("/home/archie/.config/rofi/scripts/powermenu_t4"))
+-- hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("/home/archie/.config/rofi/scripts/powermenu_t4"))
+-- hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call sessionMenu toggle"))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(apps.FILE_MANAGER))
-hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("/home/archie/.config/hypr/scripts/wallpaper_rotate.sh"))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center notifications"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(ipc .. "wallpaper-random"))
 hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(
@@ -27,6 +29,7 @@ hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(apps.BROWSER))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + Y", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region --raw -z | swappy -f -"))
+hl.bind("Print", hl.dsp.exec_cmd("grim -o DP-3 - | wl-copy --type image/png"))
 hl.bind(mainMod .. " + C", hl.dsp.send_shortcut({ mods = "CTRL", key = "C" }))
 hl.bind(mainMod .. " + V", hl.dsp.send_shortcut({ mods = "CTRL", key = "V" }))
 
@@ -81,8 +84,8 @@ hl.bind(
 	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
 	{ locked = true, repeating = true }
 )
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"), { locked = true, repeating = true })
 
 -- Requires playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
